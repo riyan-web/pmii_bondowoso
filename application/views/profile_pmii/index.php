@@ -1,60 +1,48 @@
- <!-- ======= Top Bar ======= -->
- <section id="topbar" class="d-none d-lg-block">
-     <div class="container d-flex">
-         <div class="contact-info mr-auto">
-             <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@example.com</a>
-             <i class="icofont-phone"></i> +1 5589 55488 55
-         </div>
-         <div class="social-links">
-             <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-             <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-             <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-             <a href="#" class="skype"><i class="icofont-skype"></i></a>
-             <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
-         </div>
-     </div>
- </section>
-
  <!-- ======= Header ======= -->
  <header id="header">
      <div class="container d-flex">
 
          <div class="logo mr-auto">
-             <h1 class="text-light"><a href="index.html">Flattern</a></h1>
+             <!-- <h1 class="text-light"><a href="#">PMII Bondowoso</a></h1> -->
              <!-- Uncomment below if you prefer to use an image logo -->
-             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+             <a href="index.html"><img src="assets/img/logo_pmii.png" alt="" class="img-fluid"></a>
          </div>
 
          <nav class="nav-menu d-none d-lg-block">
              <ul>
                  <li class="active"><a href="index.html">Home</a></li>
-                 <li><a href="about.html">About</a></li>
-                 <li><a href="services.html">Services</a></li>
-                 <li><a href="portfolio.html">Portfolio</a></li>
-                 <li><a href="testimonials.html">Testimonials</a></li>
-                 <li><a href="pricing.html">Pricing</a></li>
-                 <li><a href="blog.html">Blog</a></li>
-                 <li class="drop-down"><a href="">Drop Down</a>
+                 <li><a href="#">Artikel</a></li>
+                 <li><a href="services.html">Program Kerja</a></li>
+                 <li><a href="portfolio.html">Berita</a></li>
+                 <li class="drop-down"><a href="">Komisariat</a>
                      <ul>
-                         <li><a href="#">Drop Down 1</a></li>
-                         <li class="drop-down"><a href="#">Drop Down 2</a>
+                         <li><a href="#">Unej Kampus Bondowoso</a></li>
+                         <li class="drop-down"><a href="#">Unibo</a>
                              <ul>
-                                 <li><a href="#">Deep Drop Down 1</a></li>
-                                 <li><a href="#">Deep Drop Down 2</a></li>
-                                 <li><a href="#">Deep Drop Down 3</a></li>
-                                 <li><a href="#">Deep Drop Down 4</a></li>
-                                 <li><a href="#">Deep Drop Down 5</a></li>
+                                 <li><a href="#">Rayon Nurut Taqwa</a></li>
                              </ul>
                          </li>
-                         <li><a href="#">Drop Down 3</a></li>
-                         <li><a href="#">Drop Down 4</a></li>
-                         <li><a href="#">Drop Down 5</a></li>
+                         <li class="drop-down"><a href="#">Raden Bagus Asra</a>
+                             <ul>
+                                 <li><a href="#">Rayon Avicenna</a></li>
+                                 <li><a href="#">Rayon Averoes</a></li>
+                             </ul>
+                         </li>
+                         <li><a href="#">Wahid Hasyim</a></li>
+                         <li><a href="#">Togo Ambarsari</a></li>
+                         <li><a href="#">Darul Falah</a></li>
+                         <li><a href="#">Abu Huzairi</a></li>
+                         <li><a href="#">Al-Usmani</a></li>
                      </ul>
                  </li>
-                 <li><a href="contact.html">Contact</a></li>
+                 <li><a href="contact.html">Struktur Pengurus</a></li>
+                 <li>
+                     <a href="<?= base_url('login/index') ?>" class="btn-primary">Login</a>
+     </div>
+     </li>
 
-             </ul>
-         </nav><!-- .nav-menu -->
+     </ul>
+     </nav><!-- .nav-menu -->
 
      </div>
  </header><!-- End Header -->
@@ -69,8 +57,8 @@
              <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
-                         <h2>Welcome to <span>Flattern</span></h2>
-                         <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                         <h2>Tujuan <span>PMII</span></h2>
+                         <p>Terbentuknya pribadi muslim Indonesia yang bertaqwa kepada Allah SWT, berbudi luhur, berilmu, cakap dan bertanggung jawab dalam mengamalkan ilmunya serta komitmen memperjuangkan cita-cita kemerdekaan Indonesia.</p>
                          <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
