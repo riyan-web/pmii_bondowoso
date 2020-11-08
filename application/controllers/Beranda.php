@@ -7,6 +7,6 @@ class Beranda extends CI_Controller
     {
         $data['title'] = 'Profile PMII Bondowoso';
         $this->load->view('profile_pmii/index');
-        $this->load->view('template/navbar', $data);
+        $this->load->view('template/frontend/navbar', $data);
     }
 }
