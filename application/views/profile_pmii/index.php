@@ -28,17 +28,14 @@
                                  <li><a href="#">Rayon Averoes</a></li>
                              </ul>
                          </li>
-                         <li><a href="#">Wahid Hasyim</a></li>
+                         <li><a href="#">Polije Kampus Bondowoso - Wahid Hasyim</a></li>
                          <li><a href="#">Togo Ambarsari</a></li>
                          <li><a href="#">Darul Falah</a></li>
-                         <li><a href="#">Abu Huzairi</a></li>
-                         <li><a href="#">Al-Usmani</a></li>
                      </ul>
                  </li>
                  <li><a href="contact.html">Struktur Pengurus</a></li>
                  <li>
-                     <button type="button" class="btn btn-primary">Primary</button>
-                     <a href="<?= base_url('login') ?>" class="btn btn-primary">Login</a>
+                     <a href="<?= base_url('login_admin') ?>">Login</a>
      </div>
      </li>
 
@@ -123,6 +120,7 @@
          </div>
      </section><!-- End Cta Section -->
 
+
      <!-- ======= Services Section ======= -->
      <section id="services" class="services">
          <div class="container">
@@ -175,6 +173,7 @@
                      </div>
                  </div>
              </div>
+             
 
          </div>
      </section><!-- End Services Section -->
