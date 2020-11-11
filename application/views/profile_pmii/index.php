@@ -38,7 +38,7 @@
                  <li><a href="contact.html">Struktur Pengurus</a></li>
                  <li>
                      <button type="button" class="btn btn-primary">Primary</button>
-                     <a href="<?= base_url('login_admin') ?>" class="btn btn-primary">Login</a>
+                     <a href="<?= base_url('login') ?>" class="btn btn-primary">Login</a>
      </div>
      </li>
 
