@@ -8,8 +8,7 @@ class Beranda extends CI_Controller
         $data['title'] = 'Profile PMII Bondowoso';
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('profile_pmii/index');
-       
-        
+        $this->load->view('template/frontend/footer', $data);
     }
 
     public function artikel()
@@ -18,6 +17,5 @@ class Beranda extends CI_Controller
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('profile_pmii/artikel');
         $this->load->view('template/frontend/footer', $data);
-       
     }
 }

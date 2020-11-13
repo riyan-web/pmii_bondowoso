@@ -1,14 +1,23 @@
-<main id="main">
+<?php
+$query_artikel = "SELECT *
+                FROM  `tb_konten` 
+                JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
+                JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
+                WHERE`tb_konten`.`status` = 2
+                ";
+$artikel = $this->db->query($query_artikel)->row_array();
+?>
 
+<main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Testimonials</h2>
+                <h2>Artikel</h2>
                 <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li>Testimonials</li>
+                    <li><a href="<?= base_url('beranda') ?>">Beranda</a></li>
+                    <li>Artikel</li>
                 </ol>
             </div>
 
@@ -24,11 +33,11 @@
                 <div class="col-lg-6" data-aos="fade-up">
                     <div class="testimonial-item">
                         <img src="<?php echo base_url() ?>assets/frontend/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                        <h3>Saul Goodman</h3>
-                        <h4>Ceo &amp; Founder</h4>
+                        <h3><?php echo $artikel['judul']; ?></h3>
+                        <h4>Dibuat : <?php echo $artikel['tgl_buat']; ?> &amp; Oleh : <?php echo $artikel['username']; ?></h4>
                         <p>
                             <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <?php echo substr($artikel['isi_konten'], 0, 150) . "..."; ?>
                             <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                     </div>
