@@ -61,12 +61,13 @@
       <div class="logo mr-auto">
         <!-- <h1 class="text-light"><a href="#">PMII Bondowoso</a></h1> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="index.html"><img src="<?php echo base_url() ?>assets/frontend/img/logo_pmii.png" alt="" class="img-fluid"></a>
+        <a href="index.html"><img src="<?php echo base_url() ?>assets/frontend/img/log_pmii.png" alt="" class="img-fluid"></a>
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class=""><a href="<?= base_url('beranda') ?>">Home</a></li>
+          <li class=""><a href="<?= base_url('beranda/about') ?>">Tentang Kami</a></li>
           <li><a href="<?= base_url('beranda/artikel') ?>">Artikel</a></li>
           <li><a href="services.html">Program Kerja</a></li>
           <li><a href="<?= base_url('beranda/berita') ?>">Berita</a></li>
@@ -91,7 +92,7 @@
               <li><a href="#">Al-Usmani</a></li>
             </ul>
           </li>
-          <li><a href="contact.html">Struktur Pengurus</a></li>
+          <li><a href="<?= base_url('beranda/struktur') ?>">Struktur Pengurus</a></li>
           <li>
           <li><a href="<?= base_url('login') ?>">Login</a></li>
     </div>

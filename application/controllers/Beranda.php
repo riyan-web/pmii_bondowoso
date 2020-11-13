@@ -11,6 +11,14 @@ class Beranda extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
+    public function about()
+    {
+        $data['title'] = 'Tentang Kami';
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('profile_pmii/about');
+        $this->load->view('template/frontend/footer', $data);
+    }
+
     public function artikel()
     {
         $data['title'] = 'Artikel';
@@ -24,6 +32,14 @@ class Beranda extends CI_Controller
         $data['title'] = 'Berita';
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('profile_pmii/berita');
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function struktur()
+    {
+        $data['title'] = 'Struktur Pengurus';
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('profile_pmii/struktur');
         $this->load->view('template/frontend/footer', $data);
     }
 }
