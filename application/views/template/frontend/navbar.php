@@ -69,7 +69,7 @@
           <li class=""><a href="<?= base_url('beranda') ?>">Home</a></li>
           <li><a href="<?= base_url('beranda/artikel') ?>">Artikel</a></li>
           <li><a href="services.html">Program Kerja</a></li>
-          <li><a href="portfolio.html">Berita</a></li>
+          <li><a href="<?= base_url('beranda/artikel') ?>">Berita</a></li>
           <li class="drop-down"><a href="">Komisariat</a>
             <ul>
               <li><a href="#">Unej Kampus Bondowoso</a></li>
