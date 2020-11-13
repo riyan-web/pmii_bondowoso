@@ -3,7 +3,8 @@ $query_artikel = "SELECT *
                 FROM  `tb_konten` 
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
                 JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
-                WHERE`tb_konten`.`status` = 2
+                WHERE`tb_konten`.`status` = 2 AND `tb_konten`.`jeniskonten_id` = 2
+                ORDER BY RAND() LIMIT 6
                 ";
 $artikel = $this->db->query($query_artikel)->result();
 ?>

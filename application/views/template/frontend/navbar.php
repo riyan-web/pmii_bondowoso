@@ -88,8 +88,6 @@
               <li><a href="#">Wahid Hasyim</a></li>
               <li><a href="#">Togo Ambarsari</a></li>
               <li><a href="#">Darul Falah</a></li>
-              <li><a href="#">Abu Huzairi</a></li>
-              <li><a href="#">Al-Usmani</a></li>
             </ul>
           </li>
           <li><a href="<?= base_url('beranda/struktur') ?>">Struktur Pengurus</a></li>
