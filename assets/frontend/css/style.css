@@ -1255,7 +1255,7 @@ section {
 --------------------------------------------------------------*/
 .testimonials .testimonial-item {
 	box-sizing: content-box;
-	padding: 40px;
+	padding: 60px;
 	box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
 	position: relative;
 	background: #fff;
