@@ -23,7 +23,7 @@ class Beranda extends CI_Controller
     {
         $data['title'] = 'Berita';
         $this->load->view('template/frontend/navbar', $data);
-        $this->load->view('profile_pmii/artikel');
+        $this->load->view('profile_pmii/berita');
         $this->load->view('template/frontend/footer', $data);
     }
 }
