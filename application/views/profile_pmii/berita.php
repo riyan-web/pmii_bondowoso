@@ -3,15 +3,21 @@ $query_berita = "SELECT *
                 FROM  `tb_konten` 
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
                 JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
-                WHERE`tb_konten`.`status` = 2 AND `tb_konten`.`jeniskonten_id` = 1
+                JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
                 ORDER BY RAND() LIMIT 3
                 ";
 $berita = $this->db->query($query_berita)->result();
+$query_recentpost = "SELECT *
+                FROM  `tb_konten` 
+                JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
+                JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
+                JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
+                ORDER BY RAND() LIMIT 6
+                ";
+$recent_post = $this->db->query($query_recentpost)->result();
 
-$query_subjeniskonten = "SELECT *
-                        FROM `subjeniskonten`
-                        JOIN `jeniskonten` ON `subjeniskonten`.`jeniskonten_id` = `jeniskonten`.`id`
-                        ";
 ?>
 <main id="main">
 
@@ -96,68 +102,70 @@ $query_subjeniskonten = "SELECT *
             <h3 class="sidebar-title">Categories</h3>
             <div class="sidebar-item categories">
               <ul>
-                <li><a href="#">General <span>(25)</span></a></li>
-                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                <li><a href="#">Travel <span>(5)</span></a></li>
-                <li><a href="#">Design <span>(22)</span></a></li>
-                <li><a href="#">Creative <span>(8)</span></a></li>
-                <li><a href="#">Educaion <span>(14)</span></a></li>
+                <li><a href="#">Opini <span>
+                      <?php
+                      $jum_opini = "SELECT COUNT(*) AS jumlah
+                            FROM `tb_konten`
+                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
+                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'opini'
+                            ";
+                      $opini = $this->db->query($jum_opini)->row_array();
+                      echo "(" . $opini['jumlah'] . ")";
+                      ?>
+                    </span></a></li>
+                <li><a href="#">Investigasi <span>
+                      <?php
+                      $jum_investigasi = "SELECT COUNT(*) AS jumlah
+                            FROM `tb_konten`
+                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
+                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'investigasi'
+                            ";
+                      $investigasi = $this->db->query($jum_investigasi)->row_array();
+                      echo "(" . $investigasi['jumlah'] . ")";
+                      ?>
+                    </span></a></li>
+                <li><a href="#">Interpretative <span>
+                      <?php
+                      $jum_interpretative = "SELECT COUNT(*) AS jumlah
+                            FROM `tb_konten`
+                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
+                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'interpretative'
+                            ";
+                      $interpretative = $this->db->query($jum_interpretative)->row_array();
+                      echo "(" . $interpretative['jumlah'] . ")";
+                      ?>
+                    </span></a></li>
+                <li><a href="#">Depth <span>
+                      <?php
+                      $jum_depth = "SELECT COUNT(*) AS jumlah
+                            FROM `tb_konten`
+                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
+                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'depth'
+                            ";
+                      $depth = $this->db->query($jum_depth)->row_array();
+                      echo "(" . $depth['jumlah'] . ")";
+                      ?>
+                    </span></a></li>
               </ul>
-
             </div><!-- End sidebar categories-->
 
             <h3 class="sidebar-title">Recent Posts</h3>
             <div class="sidebar-item recent-posts">
-              <div class="post-item clearfix">
-                <img src="<?php echo base_url() ?>assets/frontend/img/blog-recent-posts-1.jpg" alt="">
-                <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?php echo base_url() ?>assets/frontend/img/blog-recent-posts-2.jpg" alt="">
-                <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?php echo base_url() ?>assets/frontend/img/blog-recent-posts-3.jpg" alt="">
-                <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?php echo base_url() ?>assets/frontend/img/blog-recent-posts-4.jpg" alt="">
-                <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?php echo base_url() ?>assets/frontend/img/blog-recent-posts-5.jpg" alt="">
-                <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
+              <?php foreach ($recent_post as $post) { ?>
+                <div class="post-item clearfix">
+                  <img src="" alt="" class="img-fluid">
+                  <img src="<?php echo base_url('assets/frontend/img/img_berita/') . $post->foto_artikel; ?>" alt="">
+                  <h4><a href="blog-single.html"><?php echo $post->judul; ?></a></h4>
+                  <time datetime="2020-01-01"><?php echo $post->tgl_buat; ?></time>
+                </div>
+              <?php } ?>
             </div><!-- End sidebar recent posts-->
 
-            <h3 class="sidebar-title">Tags</h3>
-            <div class="sidebar-item tags">
-              <ul>
-                <li><a href="#">App</a></li>
-                <li><a href="#">IT</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Mac</a></li>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">Office</a></li>
-                <li><a href="#">Creative</a></li>
-                <li><a href="#">Studio</a></li>
-                <li><a href="#">Smart</a></li>
-                <li><a href="#">Tips</a></li>
-                <li><a href="#">Marketing</a></li>
-              </ul>
 
-            </div><!-- End sidebar tags-->
 
           </div><!-- End sidebar -->
 
