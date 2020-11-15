@@ -61,7 +61,7 @@
       <div class="logo mr-auto">
         <!-- <h1 class="text-light"><a href="#">PMII Bondowoso</a></h1> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="index.html"><img src="<?php echo base_url() ?>assets/frontend/img/log_pmii.png" alt="" class="img-fluid"></a>
+        <a href="index.html"><img src="<?php echo base_url() ?>assets/frontend/img/new.png" alt="" class="img"></a>
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
