@@ -5,7 +5,7 @@
          <div class="carousel-inner" role="listbox">
 
              <!-- Slide 1 -->
-             <div class="carousel-item active" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide-1.jpg);">
+             <div class="carousel-item active" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide1.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Tujuan <span>PMII</span></h2>
@@ -16,7 +16,7 @@
              </div>
 
              <!-- Slide 2 -->
-             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide-2.jpg);">
+             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide2.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Lorem Ipsum Dolor</h2>
@@ -27,7 +27,7 @@
              </div>
 
              <!-- Slide 3 -->
-             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide-3.jpg);">
+             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide3.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Sequi ea ut et est quaerat</h2>
@@ -73,7 +73,7 @@
          </div>
      </section><!-- End Cta Section -->
 
-    
+
 
      <!-- ======= Services Section ======= -->
      <section id="services" class="services">
