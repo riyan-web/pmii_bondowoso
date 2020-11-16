@@ -5,7 +5,13 @@ class Login extends CI_Controller
 {
     public function index()
     {
-        if ($this->session->userdata('username')) {
+        if ($this->session->userdata('username') and $this->session->userdata('jenis') == 4) {
+            redirect('profile_cabang');
+        } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 3) {
+            redirect('profile_komisariat');
+        } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 2) {
+            redirect('profile_rayon');
+        } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 1) {
             redirect('profile_anggota');
         }
 

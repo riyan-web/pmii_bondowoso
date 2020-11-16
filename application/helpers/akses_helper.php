@@ -14,7 +14,6 @@ function cek_akses()
         $userAccess = $ci->db->get_where('user_access_menu', [
             'id_jenis' => $jenis,
             'id_menu' => $menu_id
-
         ]);
 
         if ($userAccess->num_rows() < 1) {
