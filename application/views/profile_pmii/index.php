@@ -5,34 +5,35 @@
          <div class="carousel-inner" role="listbox">
 
              <!-- Slide 1 -->
-             <div class="carousel-item active" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide-1.jpg);">
+             <div class="carousel-item active" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/satu.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
-                         <h2>Tujuan <span>PMII</span></h2>
-                         <p>Terbentuknya pribadi muslim Indonesia yang bertaqwa kepada Allah SWT, berbudi luhur, berilmu, cakap dan bertanggung jawab dalam mengamalkan ilmunya serta komitmen memperjuangkan cita-cita kemerdekaan Indonesia.</p>
-                         <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                         <h2>Sejarah <span>PMII</span></h2>
+                         <p>Pergerakan Mahasiswa Islam Indonesia merupakan salah satu organisasi kemahasiswaan yang bersandar atas komitmen keislaman dan keindonesiaan. PMII didirikan di Surabaya pada tanggal 21 syawal 1379 H beretepatan dengan 17 April 1960. Kini PMII telah memiliki lebih dari 200 Cabang yang tersebar di seluruh penjuru Nusantara. Termasuk PMII Bondowoso.</p>
+                         <div class="text-center"><a href="<?php echo base_url('beranda/about') ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
 
              <!-- Slide 2 -->
-             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide-2.jpg);">
+             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/dua.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
-                         <h2>Lorem Ipsum Dolor</h2>
-                         <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                         <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                         <h2>Tujuan <span>PMII</span></h2>
+                         <p>Terbentuknya pribadi muslim Indonesia yang bertaqwa kepada Allah SWT, berbudi luhur, berilmu, cakap dan bertanggung jawab dalam mengamalkan ilmunya serta komitmen memperjuangkan cita-cita kemerdekaan Indonesia.</p>
+                         <div class="text-center"><a href="<?php echo base_url('beranda/about') ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
 
              <!-- Slide 3 -->
-             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/slide-3.jpg);">
+             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/tiga.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
-                         <h2>Sequi ea ut et est quaerat</h2>
-                         <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                         <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                         <h2>Visi & Misi <span>PMII</span></h2>
+                         <p>Visi PMII yaitu, dikembangkan dari dua landasan utama, yakni visi ke-Islaman dan visi kebangsaan. Sedangkan, </p>
+                         <p>Misi PMII Merupakan manifestasi dari komitmen ke-Islaman dan ke-Indonesiaan, dan sebagai perwujudan kesadaran beragama, berbangsa, dan bernegara.</p>
+                         <div class="text-center"><a href="<?php echo base_url('beranda/about') ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
@@ -73,7 +74,7 @@
          </div>
      </section><!-- End Cta Section -->
 
-    
+
 
      <!-- ======= Services Section ======= -->
      <section id="services" class="services">
