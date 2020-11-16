@@ -10,7 +10,7 @@
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Sejarah <span>PMII</span></h2>
                          <p>Pergerakan Mahasiswa Islam Indonesia merupakan salah satu organisasi kemahasiswaan yang bersandar atas komitmen keislaman dan keindonesiaan. PMII didirikan di Surabaya pada tanggal 21 syawal 1379 H beretepatan dengan 17 April 1960. Kini PMII telah memiliki lebih dari 200 Cabang yang tersebar di seluruh penjuru Nusantara. Termasuk PMII Bondowoso.</p>
-                         <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                         <div class="text-center"><a href="<?php echo base_url('beranda/about') ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
@@ -21,7 +21,7 @@
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Tujuan <span>PMII</span></h2>
                          <p>Terbentuknya pribadi muslim Indonesia yang bertaqwa kepada Allah SWT, berbudi luhur, berilmu, cakap dan bertanggung jawab dalam mengamalkan ilmunya serta komitmen memperjuangkan cita-cita kemerdekaan Indonesia.</p>
-                         <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                         <div class="text-center"><a href="<?php echo base_url('beranda/about') ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
@@ -33,7 +33,7 @@
                          <h2>Visi & Misi <span>PMII</span></h2>
                          <p>Visi PMII yaitu, dikembangkan dari dua landasan utama, yakni visi ke-Islaman dan visi kebangsaan. Sedangkan, </p>
                          <p>Misi PMII Merupakan manifestasi dari komitmen ke-Islaman dan ke-Indonesiaan, dan sebagai perwujudan kesadaran beragama, berbangsa, dan bernegara.</p>
-                         <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                         <div class="text-center"><a href="<?php echo base_url('beranda/about') ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
