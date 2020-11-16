@@ -1,41 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Flattern Bootstrap Template - Index</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="<?php echo base_url() ?>assets/frontend/img/favicon.png" rel="icon">
-  <link href="<?php echo base_url() ?>assets/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/frontend/vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="<?php echo base_url() ?>assets/frontend/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Flattern - v2.1.0
-  * Template URL: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
 <body>
 
   <!-- ======= Top Bar ======= -->
@@ -73,21 +35,21 @@
           <li><a href="<?= base_url('beranda/berita') ?>">Berita</a></li>
           <li class="drop-down"><a href="">Komisariat</a>
             <ul>
-              <li><a href="#">Unej Kampus Bondowoso</a></li>
-              <li class="drop-down"><a href="#">Unibo</a>
+              <li><a href="<?= base_url('komisariat/unej_bondowoso'); ?>">Unej Kampus Bondowoso</a></li>
+              <li class="drop-down"><a href="<?= base_url('komisariat/unibo'); ?>">Unibo</a>
                 <ul>
-                  <li><a href="#">Rayon Nurut Taqwa</a></li>
+                  <li><a href="<?= base_url('komisariat/unibo/nurut_taqwa'); ?>">Rayon Nurut Taqwa</a></li>
                 </ul>
               </li>
-              <li class="drop-down"><a href="#">Raden Bagus Asra</a>
+              <li class="drop-down"><a href="<?= base_url('komisariat/rba'); ?>">Raden Bagus Asra</a>
                 <ul>
-                  <li><a href="#">Rayon Avicenna</a></li>
-                  <li><a href="#">Rayon Averoes</a></li>
+                  <li><a href="<?= base_url('komisariat/rba/avicenna'); ?>">Rayon Avicenna</a></li>
+                  <li><a href="<?= base_url('komisariat/rba/averoes'); ?>">Rayon Averoes</a></li>
                 </ul>
               </li>
-              <li><a href="#">Wahid Hasyim</a></li>
-              <li><a href="#">Togo Ambarsari</a></li>
-              <li><a href="#">Darul Falah</a></li>
+              <li><a href="<?= base_url('komisariat/wahid_hasyim'); ?>">Wahid Hasyim</a></li>
+              <li><a href="<?= base_url('komisariat/togo_ambarsari'); ?>">Togo Ambarsari</a></li>
+              <li><a href="<?= base_url('komisariat/darul_falah'); ?>">Darul Falah</a></li>
             </ul>
           </li>
           <li><a href="<?= base_url('beranda/struktur') ?>">Struktur Pengurus</a></li>
