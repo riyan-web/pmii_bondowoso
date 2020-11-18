@@ -6,13 +6,12 @@
     <div class="row">
 
       <div class="col-lg-3 col-md-6 footer-contact">
-        <h3>Alamat</h3>
-        <p>
-          A108 Adam Street <br>
-          New York, NY 535022<br>
-          United States <br><br>
-          <strong>Phone:</strong> +1 5589 55488 55<br>
-          <strong>Email:</strong> info@example.com<br>
+        <h3>Alamat GRAHA PERGERAKAN PMII BONDOWOSO</h3>
+        <p>Poncogati, Curahdami,  <br>
+        Kabupaten Bondowoso,<br>
+        Jawa Timur 68251 <br><br>
+          <strong>Phone:</strong> +62 822-3496-9860<br>
+          <strong>Email:</strong> pmiicabangbondowoso@gmail.com<br>
         </p>
       </div>
     </div>

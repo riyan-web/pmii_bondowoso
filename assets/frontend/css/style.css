@@ -144,10 +144,10 @@ h6 {
 	text-decoration: none;
 }
 
-#header .logo pmii{
+#header .logo img{
 	padding: 0;
 	margin: 0;
-	max-height: 80px;
+	max-width: 60px;
 }
 
 /*--------------------------------------------------------------

@@ -1,21 +1,4 @@
 <body>
-
-  <!-- ======= Top Bar ======= -->
-  <section id="topbar" class="d-none d-lg-block">
-    <div class="container d-flex">
-      <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="icofont-phone"></i> +1 5589 55488 55
-      </div>
-      <div class="social-links">
-        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-        <a href="#" class="skype"><i class="icofont-skype"></i></a>
-        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
-      </div>
-    </div>
-  </section>
   <!-- ======= Header ======= -->
   <header id="header">
     <div class="container d-flex">
@@ -23,7 +6,7 @@
       <div class="logo mr-auto">
         <!-- <h1 class="text-light"><a href="#">PMII Bondowoso</a></h1> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="index.html"><img src="<?php echo base_url() ?>assets/frontend/img/log_pmii.png" alt="" class="pmii"></a>
+        <a href="index.html"><img src="<?php echo base_url() ?>assets/frontend/img/logo_pmi.png" alt="" class="img"></a>
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
