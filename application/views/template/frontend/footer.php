@@ -15,19 +15,6 @@
           <strong>Email:</strong> info@example.com<br>
         </p>
       </div>
-
-      <div class="col-lg-2 col-md-6 footer-links">
-        <h4>Useful Links</h4>
-        <ul>
-        <li class=""><a href="<?= base_url('beranda') ?>">Home</a></li>
-          <li class=""><a href="<?= base_url('beranda/about') ?>">Tentang Kami</a></li>
-          <li><a href="<?= base_url('beranda/artikel') ?>">Artikel</a></li>
-          <li><a href="services.html">Program Kerja</a></li>
-          <li><a href="<?= base_url('beranda/berita') ?>">Berita</a></li>
-        </ul>
-      </div>
-
-
     </div>
   </div>
 </div>
