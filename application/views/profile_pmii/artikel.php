@@ -1,13 +1,13 @@
 <?php
-$query_artikel = "SELECT *
-                FROM  `tb_konten` 
-                JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
-                JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
-                JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel'
-                ORDER BY RAND() LIMIT 6
-                ";
-$artikel = $this->db->query($query_artikel)->result();
+// $query_artikel = "SELECT *
+//                 FROM  `tb_konten` 
+//                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
+//                 JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
+//                 JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+//                 WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel'
+//                 ORDER BY RAND() LIMIT 6
+//                 ";
+// $artikel = $this->db->query($query_artikel)->result();
 ?>
 
 <main id="main">
@@ -31,7 +31,8 @@ $artikel = $this->db->query($query_artikel)->result();
         <div class="container">
 
             <div class="row">
-                <?php foreach ($artikel as $art) { ?>
+                <?php
+                foreach ($artikel->result() as $art) { ?>
                     <div class="col-lg-6" data-aos="fade-up">
                         <div class="testimonial-item">
                             <img src="<?php echo base_url('assets/frontend/img/img_artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
@@ -47,6 +48,11 @@ $artikel = $this->db->query($query_artikel)->result();
                     </div>
                 <?php } ?>
             </div>
+        </div>
+        <div class="blog-pagination">
+            <ul class="justify-content-center">
+                <?php echo $pagination; ?>
+            </ul>
         </div>
     </section><!-- End Testimonials Section -->
 </main><!-- End #main -->
