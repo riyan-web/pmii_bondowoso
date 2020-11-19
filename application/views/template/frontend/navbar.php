@@ -1,5 +1,12 @@
 <body>
 
+  <?php
+
+  $query_komsat = "SELECT `tb_komisariat`.`id`
+                FROM `tb_komisariat` ";
+  $komisariat = $this->db->query($query_komsat)->result();
+  ?>
+
   <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-none d-lg-block">
     <div class="container d-flex">
@@ -35,21 +42,21 @@
           <li><a href="<?= base_url('beranda/berita') ?>">Berita</a></li>
           <li class="drop-down"><a href="">Komisariat</a>
             <ul>
-              <li><a href="<?= base_url('komisariat/unej_bondowoso'); ?>">Unej Kampus Bondowoso</a></li>
-              <li class="drop-down"><a href="<?= base_url('komisariat/unibo'); ?>">Unibo</a>
+              <li><a href="<?= base_url('komisariat/unej_bondowoso/'); ?>">Unej Kampus Bondowoso</a></li>
+              <li class="drop-down"><a href="<?= base_url('komisariat/unibo/'); ?>">Unibo</a>
                 <ul>
-                  <li><a href="<?= base_url('komisariat/unibo/nurut_taqwa'); ?>">Rayon Nurut Taqwa</a></li>
+                  <li><a href="<?= base_url('komisariat/unibo/nurut_taqwa/'); ?>">Rayon Nurut Taqwa</a></li>
                 </ul>
               </li>
-              <li class="drop-down"><a href="<?= base_url('komisariat/rba'); ?>">Raden Bagus Asra</a>
+              <li class="drop-down"><a href="<?= base_url('komisariat/attaqwa/'); ?>">Raden Bagus Asra</a>
                 <ul>
-                  <li><a href="<?= base_url('komisariat/rba/avicenna'); ?>">Rayon Avicenna</a></li>
-                  <li><a href="<?= base_url('komisariat/rba/averoes'); ?>">Rayon Averoes</a></li>
+                  <li><a href="<?= base_url('komisariat/attaqwa/avicenna/'); ?>">Rayon Avicenna</a></li>
+                  <li><a href="<?= base_url('komisariat/attaqwa/averoes/'); ?>">Rayon Averoes</a></li>
                 </ul>
               </li>
-              <li><a href="<?= base_url('komisariat/wahid_hasyim'); ?>">Wahid Hasyim</a></li>
-              <li><a href="<?= base_url('komisariat/togo_ambarsari'); ?>">Togo Ambarsari</a></li>
-              <li><a href="<?= base_url('komisariat/darul_falah'); ?>">Darul Falah</a></li>
+              <li><a href="<?= base_url('komisariat/wahid_hasyim/'); ?>">Wahid Hasyim</a></li>
+              <li><a href="<?= base_url('komisariat/togo_ambarsari/'); ?>">Togo Ambarsari</a></li>
+              <li><a href="<?= base_url('komisariat/darul_falah/'); ?>">Darul Falah</a></li>
             </ul>
           </li>
           <li><a href="<?= base_url('beranda/struktur') ?>">Struktur Pengurus</a></li>
