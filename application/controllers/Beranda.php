@@ -66,7 +66,7 @@ class Beranda extends CI_Controller
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
+        //panggil function get_mahasiswa_list yang ada pada model m_artikel . 
         $data['artikel'] = $this->m_artikel->get_artikel_list($config["per_page"], $data['page']);
 
         $data['pagination'] = $this->pagination->create_links();
@@ -84,7 +84,7 @@ class Beranda extends CI_Controller
         //konfigurasi pagination
         $config['base_url'] = site_url('beranda/proker'); //site url
         $config['total_rows'] = $this->db->count_all('tb_proker'); //total row
-        $config['per_page'] = 3;  //show record per halaman
+        $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -112,7 +112,7 @@ class Beranda extends CI_Controller
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
+        //panggil function get_mahasiswa_list yang ada pada model m_proker
         $data['proker'] = $this->m_proker->get_proker_list($config["per_page"], $data['page']);
 
         $data['pagination'] = $this->pagination->create_links();

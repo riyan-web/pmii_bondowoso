@@ -12,29 +12,26 @@
     </div>
 </section><!-- End Breadcrumbs -->
 <section id="cta-pricing" class="cta-pricing">
-    <div class="container">
-        <?php
-        foreach ($proker->result() as $pro) { ?>
-            <div class="col-lg col-md-6 d-flex align-items-stretch">
+    <?php
+    foreach ($proker->result() as $pro) { ?>
+        <div class="container">
+            <div class="col-lg-12 col-md-6 d-flex align-items-stretch">
                 <div class="member" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-img">
-                        <img src="<?= base_url() ?>assets/frontend/img/team/team-2.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="member-info">
-                        <h4>Sarah Jhonson</h4>
-                        <span>Product Manager</span>
+                        <img src="<?php echo base_url('assets/frontend/img/img_proker/') . $pro->foto; ?>" class="img-fluid" alt="">
                     </div>
                 </div>
                 <div class="text-center">
-                    <h3>Call To Action</h3>
+                    <h3><?php echo $pro->nama_kegiatan; ?></h3>
                     <p><?php echo $pro->isi; ?></p>
-                    <a class="cta-btn" href="#">Call To Action</a>
+                    <a class="cta-btn" href=""><?php echo $pro->penanggung_jawab; ?></a>
                 </div>
             </div>
-        <?php } ?>
-
-
-
-    </div>
-
+        </div>
+    <?php } ?>
 </section><!-- End Cta Pricing Section -->
+<div class="blog-pagination">
+    <ul class="justify-content-center">
+        <?php echo $pagination; ?>
+    </ul>
+</div>
