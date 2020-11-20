@@ -10,6 +10,7 @@ class Beranda extends CI_Controller
         $this->load->library('pagination');
 
         //load the department_model
+
         $this->load->model('m_artikel');
         $this->load->model('m_proker');
     }
