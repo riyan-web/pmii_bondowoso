@@ -6,7 +6,7 @@ function cek_akses()
         redirect('login');
     } else {
         $jenis = $ci->session->userdata('jenis');
-        $menu = $ci->uri->segment(1);
+        $menu = $ci->uri->segment(2);
 
         $queryMenu = $ci->db->get_where('user_menu', ['nama_menu' => $menu])->row_array();
         $menu_id = $queryMenu['id_menu'];

@@ -35,11 +35,15 @@ class Login extends CI_Controller
 
         //jika usernya ada
         if ($user) {
-            //cek password
-            if ($password == $user['password']) {
+             //cek password
+             if ($password == $user['password']) {
+                $komisariat_id = $user['komisariat_id'];
+                $nama_komcab = $this->db->get_where('tb_komisariat', ['id' => $komisariat_id])->row_array();
                 $data = [
                     'username' => $user['username'],
-                    'jenis' => $user['jenis']
+                    'jenis' => $user['jenis'],
+                    'nama_komcab' => $nama_komcab['nama'],
+                    'id_komisariat' => $nama_komcab['id']
                 ];
                 $this->session->set_userdata($data);
 
@@ -48,9 +52,9 @@ class Login extends CI_Controller
                 } else if ($user['jenis'] == 2) {
                     redirect('profile_rayon');
                 } else if ($user['jenis'] == 3) {
-                    redirect('profile_komisariat');
+                    redirect('admin/profile_komisariat');
                 } else {
-                    redirect('profile_cabang');
+                    redirect('admin/profile_cabang');
                 }
             } else {
                 $this->session->set_flashdata(
