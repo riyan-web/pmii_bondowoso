@@ -154,13 +154,13 @@
                 ?>
                 <tr>
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo $ktn->judul ?></td>
-                    <td><?php echo $ktn->isi_konten ?></td>
-                    <td><?php echo $ktn->jeniskonten_id ?></td>
-                    <td><?php echo $ktn->pembuat ?></td>
-                    <td><?php echo $ktn->foto_artikel ?></td>
-                    <td><?php echo $ktn->tgl_buat ?></td>
-                    <td><?php echo $ktn->status ?></td>
+                    <td><?php echo $ktn["judul"] ?></td>
+                    <td><?php echo $ktn["isi_konten"] ?></td>
+                    <td><?php echo $ktn["jeniskonten_id"] ?></td>
+                    <td><?php echo $ktn["pembuat"] ?></td>
+                    <td><?php echo $ktn["foto_artikel"] ?></td>
+                    <td><?php echo $ktn["tgl_buat"] ?></td>
+                    <td><?php echo $ktn["status"] ?></td>
                 </tr>
 
                 <?php endforeach; ?>
