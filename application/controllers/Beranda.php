@@ -13,14 +13,16 @@ class Beranda extends CI_Controller
 
         $this->load->model('m_artikel');
         $this->load->model('m_proker');
+        $this->load->model('m_struktur');
     }
 
     public function index()
     {
+        $data['struktur'] = $this->m_struktur->getStrukturCabang()->result();
         $data['title'] = 'Profile PMII Bondowoso';
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar');
-        $this->load->view('profile_pmii/index');
+        $this->load->view('profile_pmii/index', $data);
         $this->load->view('template/frontend/footer');
     }
 
@@ -136,10 +138,11 @@ class Beranda extends CI_Controller
 
     public function struktur()
     {
+        $data['struktur'] = $this->m_struktur->getStrukturCabang()->result();
         $data['title'] = 'Struktur Pengurus';
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
-        $this->load->view('profile_pmii/struktur');
+        $this->load->view('profile_pmii/struktur', $data);
         $this->load->view('template/frontend/footer', $data);
     }
 }
