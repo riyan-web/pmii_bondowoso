@@ -6,9 +6,9 @@ class Login extends CI_Controller
     public function index()
     {
         if ($this->session->userdata('username') and $this->session->userdata('jenis') == 4) {
-            redirect('profile_cabang');
+            redirect('admin/profile_cabang');
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 3) {
-            redirect('profile_komisariat');
+            redirect('admin/profile_komisariat');
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 2) {
             redirect('profile_rayon');
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 1) {
@@ -35,8 +35,8 @@ class Login extends CI_Controller
 
         //jika usernya ada
         if ($user) {
-             //cek password
-             if ($password == $user['password']) {
+            //cek password
+            if ($password == $user['password']) {
                 $komisariat_id = $user['komisariat_id'];
                 $nama_komcab = $this->db->get_where('tb_komisariat', ['id' => $komisariat_id])->row_array();
                 $data = [

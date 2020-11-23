@@ -7,8 +7,8 @@
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                  <i class="fa fa-bars"></i>
              </button>
-             <a class="navbar-brand" href="./"><img src="assets/backend/images/logo.png" alt="Logo"></a>
-             <a class="navbar-brand hidden" href="./"><img src="assets/backend/images/logo2.png" alt="Logo"></a>
+             <a class="navbar-brand" href=""><img src="<?= base_url(); ?>assets/backend/images/logo.png" alt="Logo"></a>
+             <a class="navbar-brand hidden" href=""><img src="<?= base_url(); ?>assets/backend/images/logo2.png" alt="Logo"></a>
          </div>
          <?php
             $jenis = $this->session->userdata('jenis');
@@ -39,7 +39,7 @@
                  <div id="main-menu" class="main-menu collapse navbar-collapse">
                      <ul class="nav navbar-nav">
                          <li class="nav-item">
-                             <a href="<?= base_url($sm['url']); ?>">
+                             <a href="<?= base_url("admin/" . $sm['url']); ?>">
                                  <i class="<?= $sm['icon']; ?>"></i>
                                  <?= $sm['title']; ?>
                              </a>
