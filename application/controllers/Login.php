@@ -10,9 +10,9 @@ class Login extends CI_Controller
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 3) {
             redirect('admin/profile_komisariat');
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 2) {
-            redirect('profile_rayon');
+            redirect('admin/profile_rayon');
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 1) {
-            redirect('profile_anggota');
+            redirect('admin/profile_anggota');
         }
 
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
