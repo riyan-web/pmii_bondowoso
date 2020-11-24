@@ -48,9 +48,9 @@ class Login extends CI_Controller
                 $this->session->set_userdata($data);
 
                 if ($user['jenis'] == 1) {
-                    redirect('profile_anggota');
+                    redirect('admin/profile_anggota');
                 } else if ($user['jenis'] == 2) {
-                    redirect('profile_rayon');
+                    redirect('admin/profile_rayon');
                 } else if ($user['jenis'] == 3) {
                     redirect('admin/profile_komisariat');
                 } else {
