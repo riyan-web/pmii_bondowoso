@@ -43,6 +43,7 @@
                     </a>
                 </div>
                 <div class="login-form">
+                    <?= $this->session->flashdata('message'); ?>
                     <form role="form" method="POST" action="<?= base_url('login'); ?>">
                         <div class="form-group">
                             <label>Username</label>

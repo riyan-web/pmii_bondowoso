@@ -29,7 +29,6 @@
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
         <div class="container">
-
             <div class="row">
                 <?php
                 foreach ($artikel->result() as $art) { ?>
@@ -41,9 +40,29 @@
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 <?php echo substr($art->isi_konten, 0, 150) . "..."; ?>
-                                <a href="<?php echo base_url('beranda/view_artikel') ?>" class="btn-buy">Lanjut Baca</a>
+                                <a href="<?php echo base_url('beranda/view_artikel/' . $art->id) ?>" class="btn-buy" data-toggle="modal" data-target="#myModal">Lanjut Baca</a>
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- konten modal-->
+                            <div class="modal-content">
+                                <!-- heading modal -->
+                                <div class="modal-header">
+                                    <h3 class="modal-title"><?php echo $art->judul ?></h3>
+                                </div>
+                                <!-- body modal -->
+                                <div class="modal-body">
+                                    <?php echo $art->isi_konten . "..."; ?>
+                                </div>
+                                <!-- footer modal -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>

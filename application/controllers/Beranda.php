@@ -145,4 +145,12 @@ class Beranda extends CI_Controller
         $this->load->view('profile_pmii/struktur', $data);
         $this->load->view('template/frontend/footer', $data);
     }
+    public function view_artikel()
+    {
+        $data['title'] = 'Baca Artikel';
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('profile_pmii/view_artikel', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
 }
