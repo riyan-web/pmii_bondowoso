@@ -16,13 +16,13 @@
           <div class="card-body">
             <table id="tb_berita" class="table table-striped table-bordered">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <!-- <th class="text-center"><i class="fa fa-plus"></i></th> -->
+                <tr bgcolor="aqua" align="center">
+                  <th style="width: 30px;">No.</th>
+                  <th>Judul</th>
                   <th>Judul</th>
                   <th>Deskripsi</th>
                   <th>foto</th>
-                  <th>Aksi</th>
+                  <th style="width:150px;">Action</th>
                 </tr>
               </thead>
               <tbody>
