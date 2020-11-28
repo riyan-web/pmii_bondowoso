@@ -1,13 +1,4 @@
 <?php
-$query_berita = "SELECT *
-                FROM  `tb_konten` 
-                JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
-                JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
-                JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
-                ORDER BY RAND() LIMIT 3
-                ";
-$berita = $this->db->query($query_berita)->result();
 $query_recentpost = "SELECT *
                 FROM  `tb_konten` 
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
@@ -43,7 +34,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
       <div class="row">
 
         <div class="col-lg-8 entries">
-          <?php foreach ($berita as $ber) { ?>
+          <?php foreach ($berita->result() as $ber) { ?>
             <article class="entry" data-aos="fade-up">
 
               <div class="entry-img">
@@ -74,15 +65,8 @@ $recent_post = $this->db->query($query_recentpost)->result();
             </article><!-- End blog entry -->
           <?php } ?>
 
-          <div class="blog-pagination">
-            <ul class="justify-content-center">
-              <li class="disabled"><i class="icofont-rounded-left"></i></li>
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
-            </ul>
-          </div>
+
+          <?php echo $pagination; ?>
 
         </div><!-- End blog entries list -->
 
