@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_anggota extends CI_Model {
+	private $table = "tb_kader";
     // buka cabang
     public function anggota_all() {
 		$this->db->select('tb_kader.id , kode_kartu,  tb_kader.nama, alamat, no_hp, tmp_lahir, tgl_lahir, tahun_mapaba, tahun_pkd, tahun_pkl, tb_komisariat.nama as nama_komisariat, tb_kader.foto');
@@ -13,7 +14,7 @@ class M_anggota extends CI_Model {
 
     public function anggota_all_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
 	{
-		$sql = "SELECT (@row:=@row+1) AS nomora, tb_kader.id, kode_kartu, tb_kader.nama, alamat, tmp_lahir, tgl_lahir, no_hp, tahun_mapaba, tahun_pkd, tahun_pkl, tb_komisariat.nama as nama_komisariat, tb_kader.foto FROM tb_kader join tb_komisariat on tb_komisariat.id = tb_kader.komisariat_id,(SELECT @row := 0) r WHERE 1=1 ";
+		$sql = "SELECT (@row:=@row+1) AS nomora, tb_kader.id, kode_kartu, tb_kader.nama as nama_kader, alamat, tmp_lahir, tgl_lahir, no_hp, tahun_mapaba, tahun_pkd, tahun_pkl, tb_komisariat.nama as nama_komisariat, tb_kader.foto FROM tb_kader join tb_komisariat on tb_komisariat.id = tb_kader.komisariat_id,(SELECT @row := 0) r WHERE 1=1 ";
 		
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 
@@ -21,8 +22,7 @@ class M_anggota extends CI_Model {
 		{
 			$sql .= " AND ( ";    
 			$sql .= "
-				kode_kartu LIKE '%".$this->db->escape_like_str($like_value)."%' 
-				OR nama LIKE '%".$this->db->escape_like_str($like_value)."%'
+				tb_kader.nama LIKE '%".$this->db->escape_like_str($like_value)."%'
 				OR alamat LIKE '%".$this->db->escape_like_str($like_value)."%'
 				OR no_hp LIKE '%".$this->db->escape_like_str($like_value)."%'  
 			";
@@ -33,10 +33,10 @@ class M_anggota extends CI_Model {
 		
 		$columns_order_by = array( 
 			0 => 'nomora',
-			2 => 'kode_kartu',
-			5 => 'nama',
-			7 => 'alamat',
-			6 => 'no_hp'
+			1 => 'tb_kader.nama',
+			2 => 'alamat',
+			3 => 'no_hp',
+			5 => 'tb_komisariat.nama'
 		);
 
 		$sql .= " ORDER BY ".$columns_order_by[$column_order]." ".$column_dir.", nomora ";
@@ -48,26 +48,24 @@ class M_anggota extends CI_Model {
     // tutup cabang
 
     // buka komisariat
-    public function anggota_by_kom($id_komisariat) {
-        $this->db->from('tb_kader');
-		$this->db->where('komisariat_id',$id_komisariat);
+    public function anggota_by_kom($id) {
+        $this->db->from($this->table);
+		$this->db->where('id',$id);
 		$query = $this->db->get();
 
-		return $query->result_array();
+		return $query->row();
 	}
 
 	public function anggota_by_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
 	{
-		$sql = "SELECT (@row:=@row+1) AS nomora, tb_kader.id, kode_kartu, tb_kader.nama, alamat, tmp_lahir, tgl_lahir, no_hp, tahun_mapaba, tahun_pkd, tahun_pkl, tb_komisariat.nama as nama_komisariat, tb_kader.foto FROM tb_kader join tb_komisariat on tb_komisariat.id = tb_kader.komisariat_id ,(SELECT @row := 0) r WHERE 1=1 and komisariat_id = ".$this->session->userdata['id_komisariat']."";
-		
+		$sql = "SELECT (@row:=@row+1) AS nomora, tb_kader.id, kode_kartu, tb_kader.nama as nama_kader, alamat, tmp_lahir, tgl_lahir, no_hp, tahun_mapaba, tahun_pkd, tahun_pkl, tb_komisariat.nama as nama_komisariat, tb_kader.foto FROM tb_kader join tb_komisariat on tb_komisariat.id = tb_kader.komisariat_id,(SELECT @row := 0) r WHERE 1=1 AND komisariat_id = ".$this->session->userdata['id_komisariat']."";
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 
 		if( ! empty($like_value))
 		{
 			$sql .= " AND ( ";    
 			$sql .= "
-				kode_kartu LIKE '%".$this->db->escape_like_str($like_value)."%' 
-				OR nama LIKE '%".$this->db->escape_like_str($like_value)."%'
+				tb_kader.nama LIKE '%".$this->db->escape_like_str($like_value)."%'
 				OR alamat LIKE '%".$this->db->escape_like_str($like_value)."%'
 				OR no_hp LIKE '%".$this->db->escape_like_str($like_value)."%'  
 			";
@@ -78,10 +76,8 @@ class M_anggota extends CI_Model {
 		
 		$columns_order_by = array( 
 			0 => 'nomora',
-			2 => 'kode_kartu',
-			5 => 'nama',
-			7 => 'alamat',
-			6 => 'no_hp'
+			1 => 'tb_kader.nama',
+			3 => 'no_hp'
 		);
 
 		$sql .= " ORDER BY ".$columns_order_by[$column_order]." ".$column_dir.", nomora ";
@@ -102,4 +98,24 @@ class M_anggota extends CI_Model {
 		return $this->db->query($sql)->num_rows();
 	}
 
+	public function kode_kartumax($komisariat_id) {
+		$this->db->select_max('kode_kartu','kode');
+		$this->db->where('komisariat_id', $komisariat_id);
+		return $this->db->get($this->table)->row();
+	}
+
+	public function anggota_tambah($data) {
+		$this->db->insert($this->table, $data);
+		return $this->db->affected_rows();
+	}
+
+	public function anggota_ubah($data,$id)
+    {
+        return $this->db->update($this->table, $data, array('id' => $id));
+	}
+
+	public function anggota_hapus($id) {
+		$this->db->delete($this->table, array('id' => $id));
+		return $this->db->affected_rows();
+	}
 }

@@ -1,6 +1,11 @@
         <div class="col-lg-12">
+            
             <div class="modal-header-full-width   modal-header text-center">
-            <div class="form-msg"></div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-msg"></div>
+              </div>
+            </div>
               <h3 style="text-align:center;" class="modal-title w-100">Data komisariat</h3>
               <button type="button" class="close btn-danger " data-dismiss="modal" aria-label="Close"> <span style="font-size: 1.3em;" aria-hidden="true">&times;</span><button>
 
@@ -14,7 +19,13 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label">Nama Komisariat</label>
                             <div class="col-lg-9">
-                            <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan nama Komisariat" name="nim"> <!-- onkeypress='return harusHurufPen(event)' -->
+                            <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan nama Komisariat" name="nama">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label">Singkatan</label>
+                            <div class="col-lg-9">
+                            <input type="text" id="singkatan" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan singkatan Komisariat" name="singkatan">
                             </div>
                         </div>
                         <div class="form-group row" id="foto-preview">
@@ -29,15 +40,17 @@
                             <div class="col-lg-8">
                             <input type="file" name="img" id="img" onchange="tampilkanPreview(this,'preview')">
                             <br><b>Preview Gambar</b><br>
-                                <img id="preview"  alt="" class="img-responsive" width="60%" />
+                              <div id="imgOne">
+                                <!-- <img id="preview"  alt="" class="img-responsive" width="60%" /> -->
+                              </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group row">
-                            <label class="col-lg-1 control-label">Deskripsi</label>
+                            <label class="col-lg-1 control-label"><b>Deskripsi</b></label>
                             <div class="col-lg-11">
-                            <textarea name="isi" class="ckeditor" placeholder= "deskripsi Komisariat" id="" cols="83" rows="100"></textarea>
+                            <textarea  class="ckeditor" placeholder= "deskripsi Komisariat" id="isi" cols="83" name="isi" ></textarea>
                             </div>
                         </div> 
                     </div>                  
