@@ -5,7 +5,7 @@ class M_berita extends CI_Model {
     // buka berita
     public function berita_all_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
 	{
-		$sql = "SELECT (@row:=@row+1) AS nomora, tb_konten.id, judul, foto_artikel, jeniskonten.nama_jenis as kategori, status, isi_konten FROM tb_konten join jeniskonten on jeniskonten.id = tb_konten.jeniskonten_id, (SELECT @row := 0) r WHERE 1=1 ";
+		$sql = "SELECT (@row:=@row+1) AS nomora, tb_konten.id, judul, foto_artikel, jeniskonten.nama_jenis as kategori, status, isi_konten FROM tb_konten join jeniskonten on jeniskonten.id = tb_konten.jeniskonten_id, (SELECT @row := 0) r WHERE 1=1 AND id";
 		
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 

@@ -4,11 +4,11 @@
               <h3 style="display:block; text-align:center;" class="modal-title">Data Anggota</h3>
             <br>
             <form id="form-anggota" method="POST">
-              <input type="hidden" value="" name="nama"/> 
+              <input type="hidden" name="id"/> 
               <div class="form-group row">
                 <label class="col-md-3 control-label">Nama Lengkap</label>
                 <div class="col-md-6">
-                  <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan nama anda" name="nim"> <!-- onkeypress='return harusHurufPen(event)' -->
+                  <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan nama anda" name="nama"> <!-- onkeypress='return harusHurufPen(event)' -->
                 </div>
               </div>
               <div class="form-group row">
@@ -26,11 +26,11 @@
                   <input type="text" class="form-control" maxlength="15" placeholder="Nomor Handphone" onkeypress='return harusAngka(event)' name="no_hp">
                 </div>
               </div>
-              <div class="form-group row">
               <?php if ($this->session->userdata['jenis']== 4) {?>
+              <div class="form-group row">
                 <label for="no_hp"  class="col-md-3 control-label">Komisariat</label>
                 <div class="col-md-8">
-                <select name="komisariat" class="form-control select2" >
+                <select name="komisariat_id" class="form-control select2" >
                 <?php foreach ($dataKomisariat as $kms) :?>
                     <option value="<?= $kms['id'] ?>">
                       <?= $kms['nama']; ?>
@@ -39,6 +39,9 @@
                 </select>
                 </div>
               </div>
+              <?php } ?>
+              <?php if ($this->session->userdata['jenis']== 3) {?>
+                <input type="hidden" name="komisariat_id" value="<?= $this->session->userdata['id_komisariat']?>">
               <?php } ?>
               <div class="form-group row">
                 <label for="alamat"  class="col-md-3 control-label">Alamat</label>
@@ -70,45 +73,44 @@
                 <div class="col-md-4">
                   <div class="form-group row">
                     <label for="tlp"  class="col-md-3 control-label">PKD</label>
-                    <div class="col-md-6">
-                      <select name="tahun_pkd" class="form-control select2" >
-                          <option value="0">belum</option>
-                        <?php
-                        $now=date('Y');
+                      <div class="col-md-6">
+                        <select name="tahun_pkd" class="form-control select2" >
+                            <option value="0">belum</option>
+                          <?php
+                          $now=date('Y');
 
-                        for ($a=2012;$a<=$now;$a++)
+                          for ($a=2012;$a<=$now;$a++)
 
-                        { ?>
-                          <option value="<?= $a; ?>">
-                            <?= $a ?>
-                          </option>
-                        <?php }
-                        ?>
-                      </select>
-                    </div>
+                          { ?>
+                            <option value="<?= $a; ?>">
+                              <?= $a ?>
+                            </option>
+                          <?php }
+                          ?>
+                        </select>
+                      </div>
                   </div>
                 </div>
                 <div class="col-md-3">
-                  <div class="form-group row">
-                    <label for="tahun_pkl"  class="col-md-3 control-label">PKL</label>
-                    <div class="col-md-8">
-                      <select name="tahun" class="form-control select2" >
-                          <option value="0">belum</option>
-                        <?php
-                        $now=date('Y');
+                    <div class="form-group row">
+                      <label for="tahun_pkl"  class="col-md-3 control-label">PKL</label>
+                      <div class="col-md-8">
+                        <select name="tahun_pkl" class="form-control select2" >
+                            <option value="0">belum</option>
+                          <?php
+                          $now=date('Y');
 
-                        for ($a=2012;$a<=$now;$a++)
+                          for ($a=2012;$a<=$now;$a++)
 
-                        { ?>
-                          <option value="<?= $a; ?>">
-                            <?= $a ?>
-                          </option>
-                        <?php }
-                        ?>
-                      </select>
+                          { ?>
+                            <option value="<?= $a; ?>">
+                              <?= $a ?>
+                            </option>
+                          <?php }
+                          ?>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  </div>
                 </div>
               </div>
               <div class="form-group row" id="foto-preview">
@@ -123,7 +125,8 @@
                 <div class="col-md-8">
                   <input type="file" name="img" id="img" onchange="tampilkanPreview(this,'preview')">
                   <br><b>Preview Gambar</b><br>
-                      <img id="preview"  alt="" class="img-responsive" width="40%" />
+                  <div id="imgOne">
+                  </div>
                 </div>
               </div>
               <div class="form-group row" id="keterangan">
@@ -189,3 +192,4 @@
           }
 
           </script> 
+

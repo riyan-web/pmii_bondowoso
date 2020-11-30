@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
-                                <tr bgcolor="aqua" align="center">
+                                <tr class="thead-dark" align="center">
                                     <th style="width: 30px;">No.</th>
                                     <th></th>
                                     <th></th>

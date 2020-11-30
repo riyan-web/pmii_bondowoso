@@ -94,4 +94,29 @@ function show_my_modal($content='', $id='', $data='', $size='md') {
 		}
 	}
 
+	// pesan
+	function show_my_confirm($id='', $class='', $title='Konfirmasi', $yes = 'Ya', $no = 'Tidak') {
+		$_ci = &get_instance();
+
+		if ($id != '') {
+			echo   '<div class="modal fade" id="' .$id .'" role="dialog">
+					  <div class="modal-dialog modal-lg" role="document">
+					    <div class="modal-content">
+					        <div class="col-md-12 ">
+						      <h3 style="display:block; text-align:center;">' .$title .'</h3><br>
+						      <div class="row">
+								<div class="col-md-6">
+									<button class="form-control btn btn-primary ' .$class .'"> <i class="fa fa-ok-sign"></i> ' .$yes .'</button>
+								</div>
+								<div class="col-md-6">
+									<button class="form-control btn btn-danger" data-dismiss="modal"> <i class="fa fa-remove-sign"></i> ' .$no .'</button>
+								</div>
+							  </div><br><br>
+						    </div>
+					    </div>
+					  </div>
+					</div>';
+		}
+
+	}
 ?>

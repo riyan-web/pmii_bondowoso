@@ -2,15 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_komisariat extends CI_Model {
-    // buka komisariat
+	private $table = "tb_komisariat";
+	// buka komisariat
     public function komisariat_all() {
-        return $this->db->query("SELECT * FROM tb_komisariat WHERE id != 1")->result_array();
+        return $this->db->query("SELECT * FROM ".$this->table." WHERE id != 1")->result_array();
     }
 
     public function komisariat_by_id($id_komisariat) {
-        $this->db->from('tb_komisariat');
+        $this->db->from($this->table);
 		$this->db->where('id',$id_komisariat);
 		$query = $this->db->get();
+		return $query->row();
     }
     public function komisariat_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
 	{
@@ -22,8 +24,7 @@ class M_komisariat extends CI_Model {
 		{
 			$sql .= " AND ( ";    
 			$sql .= "
-				kode_kartu LIKE '%".$this->db->escape_like_str($like_value)."%' 
-				OR nama LIKE '%".$this->db->escape_like_str($like_value)."%'
+				nama LIKE '%".$this->db->escape_like_str($like_value)."%'
 				OR isi LIKE '%".$this->db->escape_like_str($like_value)."%' 
 			";
 			$sql .= " ) ";
@@ -51,8 +52,36 @@ class M_komisariat extends CI_Model {
 		return $query->result_array();
     }
     public function jumlahKom() {
-		$sql="select * from tb_komisariat WHERE id != 1";
+		$sql="select * from ".$this->table." WHERE id != 1";
 		return $this->db->query($sql)->num_rows();
+	}
+
+	public function nama_cek($nama) {
+		return $this->db->get_where($this->table, ["nama" => $nama])->num_rows();
+	}
+
+	public function komisariat_tambah($data) {
+		// $sql = "INSERT INTO ".$this->table." VALUES('', '".$data['nama']."', '".$data['isi']."', '".$data['foto']."', '".$data['singkatan']."')";
+
+		// $this->db->query($sql);
+		$this->db->insert($this->table, $data);
+		return $this->db->affected_rows();
+	}
+
+	public function komisariat_hapus($id) {
+		$this->db->delete($this->table, array('id' => $id));
+		return $this->db->affected_rows();
+	}
+
+	public function komisariat_ubah($data,$id)
+    {
+        return $this->db->update($this->table, $data, array('id' => $id));
+	}
+	
+	public function singkatan($komisariat_id) {
+		$this->db->select('singkatan','singkatan');
+		$this->db->where('id', $komisariat_id);
+		return $this->db->get('tb_komisariat')->row();
 	}
     // tutup komisariat
 }
