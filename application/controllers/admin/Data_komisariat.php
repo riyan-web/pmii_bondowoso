@@ -13,7 +13,7 @@ class Data_komisariat extends CI_Controller
 
     public function index() {
         $data['title'] = 'Data Komisariat';
-        $data['sub_judul'] 			= "Komisariat";
+        $data['sub_judul'] 			= "Komisariat"; 
         $data['sub2_judul'] 			= "Data Komisariat";
 		$data['deskripsi'] 		= "Komisariat";
         $data['pagae']		= "model_komisariat";

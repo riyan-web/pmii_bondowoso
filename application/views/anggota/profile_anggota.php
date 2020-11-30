@@ -158,25 +158,25 @@ $row_user = $this->db->query($query_user)->row_array();
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-envelope-o"></i> <?php echo $row_user['alamat']; ?> <span class="badge badge-primary pull-right">10</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal1"> <i class="fa fa-home"> Alamat : </i> <?php echo $row_user['alamat']; ?> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-tasks"></i> <?php echo $row_user['no_hp']; ?> <span class="badge badge-danger pull-right">15</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal2"> <i class="fa fa-phone"> No Telepon : </i> <?php echo $row_user['no_hp']; ?> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-bell-o"></i> <?php echo $row_user['tmp_lahir']; ?> <span class="badge badge-success pull-right">11</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal3"> <i class="fa fa-tags"> Tempat Lahir : </i> <?php echo $row_user['tmp_lahir']; ?><span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-comments-o"></i> <?php echo $row_user['tgl_lahir']; ?> <span class="badge badge-warning pull-right r-activity">03</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal4"> <i class="fa fa-calendar"> Tanggal Lahir : </i> <?php echo $row_user['tgl_lahir']; ?> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-comments-o"></i> <?php echo $row_user['tahun_mapaba']; ?> <span class="badge badge-warning pull-right r-activity">03</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal5"> <i class="fa fa-calendar-o"> Tahun Mapaba : </i> <?php echo $row_user['tahun_mapaba']; ?> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-comments-o"></i> <?php echo $row_user['tahun_pkd']; ?> <span class="badge badge-warning pull-right r-activity">03</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal6"> <i class="fa fa-calendar-o"> Tahun PKD : </i> <?php echo $row_user['tahun_pkd']; ?> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-comments-o"></i> <?php echo $row_user['tahun_pkl']; ?> <span class="badge badge-warning pull-right r-activity">03</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#mediumModal7"> <i class="fa fa-calendar-o"> Tahun PKL : </i> <?php echo $row_user['tahun_pkl']; ?> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                 </li>
                             </ul>
 
@@ -189,5 +189,143 @@ $row_user = $this->db->query($query_user)->row_array();
 
 
 </div><!-- /#right-panel -->
-
-<!-- Right Panel -->
+<div class="modal fade" id="mediumModal1" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Alamat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Alamat</label>
+                <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mediumModal2" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Nomor Telepon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Nomor Telepon</label>
+                <input type="text" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mediumModal3" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Tempat Lahir</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Tempat Lahir</label>
+                <input type="text" name="tmp_lahir" id="tmp_lahir" placeholder="Masukkan Tempat Lahir" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mediumModal4" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Tanggal Lahir</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Tanggal Lahir</label>
+                <input type="text" name="tgl_lahir" id="tgl_lahir" placeholder="Masukkan Tanggal Lahir" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mediumModal5" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Tahun Mapaba</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Tahun Mapaba</label>
+                <input type="text" name="thn_mapaba" id="thn_mapaba" placeholder="Masukkan Tahun Mapaba" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mediumModal6" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Tahun PKD</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Tahun PKD</label>
+                <input type="text" name="thn_pkd" id="thn_pkd" placeholder="Masukkan Tahun PKD" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mediumModal7" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Tahun PKL</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Tahun PKL</label>
+                <input type="text" name="thn_pkl" id="thn_pkl" placeholder="Masukkan Tahun PKL" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
