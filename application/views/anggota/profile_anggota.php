@@ -1,11 +1,13 @@
 <?php
 
 $id_user = $user['id'];
-$query_user = "SELECT *
+$query_user = "SELECT *, `tb_kader`.`nama`, `tb_kader`.`foto`, `tb_komisariat`.`nama` AS nama_komisariat
             FROM  `tb_user` 
             JOIN `tb_kader` ON  `tb_kader`.`id` = `tb_user`.`kader_id`
+            JOIN `tb_komisariat` ON `tb_komisariat`.`id` = `tb_user`.`komisariat_id`
             WHERE `tb_user`.`id` = $id_user
             ";
+"SELECT tb_komisariat.nama FROM `tb_user` JOIN tb_komisariat ON tb_komisariat.id = tb_user.komisariat_id WHERE tb_user.id = 4";
 $row_user = $this->db->query($query_user)->row_array();
 
 ?>
@@ -144,11 +146,11 @@ $row_user = $this->db->query($query_user)->row_array();
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
                                     <a href="#">
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('assets/backend/images/') . $row_user['foto_kader']; ?>">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('assets/backend/images/') . $row_user['foto']; ?>">
                                     </a>
                                     <div class="media-body">
-                                        <h2 class="text-light display-6"><?php echo $row_user['nama_kader']; ?></h2>
-                                        <p></p>
+                                        <h2 class="text-light display-6"><?php echo $row_user['nama']; ?></h2>
+                                        <p><?php echo $row_user['nama_komisariat']; ?></p>
                                     </div>
                                 </div>
                             </div>
