@@ -10,15 +10,17 @@ class Artikel extends CI_Controller
     }
     public function index()
     {
-        $data['title'] = 'Arikel ';
-        $data['sub_judul'] 			= "artikel";
-        $data['sub2_judul'] 			= "Data Artikel";
-		$data['deskripsi'] 		= "Artikel";
-		$data['pagae']		= "artikel";
+        $data['user'] = $this->db->get_where('tb_user', ['username' =>
+        $this->session->userdata('username')])->row_array();
+        $data['title'] = 'Artikel ';
+        $data['sub_judul']             = "artikel";
+        $data['sub2_judul']             = "Data Artikel";
+        $data['deskripsi']         = "Artikel";
+        $data['pagae']        = "artikel";
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
         $this->load->view('template/backend/right');
-        $this->load->view('admin/V_artikel');
+        $this->load->view('admin/V_artikel', $data);
         $this->load->view('template/backend/footer', $data);
     }
 }
