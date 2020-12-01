@@ -1,13 +1,12 @@
 <?php
 
 $id_user = $user['id'];
-$query_user = "SELECT *, `tb_kader`.`nama`, `tb_kader`.`foto`, `tb_komisariat`.`nama` AS nama_komisariat
+$query_user = "SELECT *,`tb_kader`.`id` AS kader_id , `tb_kader`.`nama`, `tb_kader`.`foto`, `tb_komisariat`.`nama` AS nama_komisariat
             FROM  `tb_user` 
             JOIN `tb_kader` ON  `tb_kader`.`id` = `tb_user`.`kader_id`
             JOIN `tb_komisariat` ON `tb_komisariat`.`id` = `tb_user`.`komisariat_id`
             WHERE `tb_user`.`id` = $id_user
             ";
-"SELECT tb_komisariat.nama FROM `tb_user` JOIN tb_komisariat ON tb_komisariat.id = tb_user.komisariat_id WHERE tb_user.id = 4";
 $row_user = $this->db->query($query_user)->row_array();
 
 ?>
@@ -142,6 +141,7 @@ $row_user = $this->db->query($query_user)->row_array();
             <div class="row">
                 <div class="col-md-12">
                     <aside class="profile-nav alt">
+                        <?= $this->session->flashdata('message'); ?>
                         <section class="card">
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
@@ -149,7 +149,7 @@ $row_user = $this->db->query($query_user)->row_array();
                                         <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('assets/backend/images/') . $row_user['foto']; ?>">
                                     </a>
                                     <div class="media-body">
-                                        <h2 class="text-light display-6"><?php echo $row_user['nama']; ?></h2>
+                                        <h2 class="text-light display-6"><?php echo $row_user['nama']; ?></h2> <a href="#" data-toggle="modal" data-target="#mediumModal"> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
                                         <p><?php echo $row_user['nama_komisariat']; ?></p>
                                     </div>
                                 </div>
@@ -189,6 +189,39 @@ $row_user = $this->db->query($query_user)->row_array();
 
 
 </div><!-- /#right-panel -->
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Ubah Nama dan Foto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="company" class=" form-control-label">Nama</label>
+                <input type="text" name="nama" id="nama" value="<?php echo $this->input->post('nama') ?? $row_user['nama'] ?>" class="form-control">
+            </div>
+            <div class="modal-body">
+                <div class="col-4 col-form-label">Masukkan Foto</div>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="<?= base_url('assets/backend/images/') . $row_user['foto']; ?>" class="img-thumbnail">
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="file" name="image" id="image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="mediumModal1" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -198,14 +231,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Alamat</label>
-                <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_alamat'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Alamat</label>
+                    <input type="text" name="alamat" id="alamat" value="<?php echo $this->input->post('alamat') ?? $row_user['alamat'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -220,7 +256,7 @@ $row_user = $this->db->query($query_user)->row_array();
             </div>
             <div class="modal-body">
                 <label for="company" class=" form-control-label">Nomor Telepon</label>
-                <input type="text" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" class="form-control">
+                <input type="text" name="no_telp" id="no_telp" value="<?php echo $this->input->post('no_telp') ?? $row_user['no_hp'] ?>" class="form-control">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -240,7 +276,7 @@ $row_user = $this->db->query($query_user)->row_array();
             </div>
             <div class="modal-body">
                 <label for="company" class=" form-control-label">Tempat Lahir</label>
-                <input type="text" name="tmp_lahir" id="tmp_lahir" placeholder="Masukkan Tempat Lahir" class="form-control">
+                <input type="text" name="tmp_lahir" id="tmp_lahir" value="<?php echo $this->input->post('tmp_lahir') ?? $row_user['tmp_lahir'] ?>" class="form-control">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -260,7 +296,7 @@ $row_user = $this->db->query($query_user)->row_array();
             </div>
             <div class="modal-body">
                 <label for="company" class=" form-control-label">Tanggal Lahir</label>
-                <input type="text" name="tgl_lahir" id="tgl_lahir" placeholder="Masukkan Tanggal Lahir" class="form-control">
+                <input type="text" name="tgl_lahir" id="tgl_lahir" value="<?php echo $this->input->post('tgl_lahir') ?? $row_user['tgl_lahir'] ?>" class="form-control">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -280,7 +316,7 @@ $row_user = $this->db->query($query_user)->row_array();
             </div>
             <div class="modal-body">
                 <label for="company" class=" form-control-label">Tahun Mapaba</label>
-                <input type="text" name="thn_mapaba" id="thn_mapaba" placeholder="Masukkan Tahun Mapaba" class="form-control">
+                <input type="text" name="thn_mapaba" id="thn_mapaba" value="<?php echo $this->input->post('thn_mapaba') ?? $row_user['tahun_mapaba'] ?>" class="form-control">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -300,7 +336,7 @@ $row_user = $this->db->query($query_user)->row_array();
             </div>
             <div class="modal-body">
                 <label for="company" class=" form-control-label">Tahun PKD</label>
-                <input type="text" name="thn_pkd" id="thn_pkd" placeholder="Masukkan Tahun PKD" class="form-control">
+                <input type="text" name="thn_pkd" id="thn_pkd" value=" <?php echo $this->input->post('thn_pkd') ?? $row_user['tahun_pkd'] ?>" class="form-control">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -320,7 +356,7 @@ $row_user = $this->db->query($query_user)->row_array();
             </div>
             <div class="modal-body">
                 <label for="company" class=" form-control-label">Tahun PKL</label>
-                <input type="text" name="thn_pkl" id="thn_pkl" placeholder="Masukkan Tahun PKL" class="form-control">
+                <input type="text" name="thn_pkl" id="thn_pkl" value="<?php echo $this->input->post('thn_pkl') ?? $row_user['tahun_pkl'] ?>" class="form-control">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
