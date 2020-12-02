@@ -17,6 +17,7 @@ class Artikel extends CI_Controller
         $data['sub2_judul']             = "Data Artikel";
         $data['deskripsi']         = "Artikel";
         $data['pagae']        = "artikel";
+        $data['konten'] = $this->artikel_model->tampil_data();
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
         $this->load->view('template/backend/right');

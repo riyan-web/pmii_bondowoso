@@ -2,7 +2,7 @@
 class M_artikel extends CI_Model
 {
 
-    //ambil data artikel dari database
+    // ambil data artikel dari database
     function get_artikel_list($limit, $start)
     {
 
