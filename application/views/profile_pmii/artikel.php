@@ -1,15 +1,3 @@
-<?php
-// $query_artikel = "SELECT *
-//                 FROM  `tb_konten` 
-//                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
-//                 JOIN `tb_user` ON  `tb_konten`.`pembuat` = `tb_user`.`id`
-//                 JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-//                 WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel'
-//                 ORDER BY RAND() LIMIT 6
-//                 ";
-// $artikel = $this->db->query($query_artikel)->result();
-?>
-
 <main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -49,7 +37,7 @@
                     <div id="myModal<?php echo $art->id_konten; ?>" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
                             <!-- konten modal-->
-                            <div class="modal-content">
+                            <div class="modal-content"> 
                                 <!-- heading modal -->
                                 <div class="modal-header">
                                     <h3 class="modal-title"><?php echo $art->judul ?></h3>

@@ -146,7 +146,7 @@ $row_user = $this->db->query($query_user)->row_array();
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
                                     <a href="#">
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('assets/backend/images/') . $row_user['foto']; ?>">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('assets/backend/images/anggota/') . $row_user['foto']; ?>">
                                     </a>
                                     <div class="media-body">
                                         <h2 class="text-light display-6"><?php echo $row_user['nama']; ?></h2> <a href="#" data-toggle="modal" data-target="#mediumModal"> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
@@ -198,27 +198,30 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Nama</label>
-                <input type="text" name="nama" id="nama" value="<?php echo $this->input->post('nama') ?? $row_user['nama'] ?>" class="form-control">
-            </div>
-            <div class="modal-body">
-                <div class="col-4 col-form-label">Masukkan Foto</div>
-                <div class="col-sm-10">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="<?= base_url('assets/backend/images/') . $row_user['foto']; ?>" class="img-thumbnail">
-                        </div>
-                        <div class="col-sm-9">
-                            <input type="file" name="image" id="image">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_nama_foto'); ?>" role="form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Nama</label>
+                    <input type="text" name="nama" id="nama" value="<?php echo $this->input->post('nama') ?? $row_user['nama'] ?>" class="form-control">
+                </div>
+                <div class="modal-body">
+                    <div class="col-4 col-form-label">Masukkan Foto</div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="<?= base_url('assets/backend/images/anggota/') . $row_user['foto']; ?>" class="img-thumbnail">
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="file" name="image" id="image">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Confirm</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -254,14 +257,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Nomor Telepon</label>
-                <input type="text" name="no_telp" id="no_telp" value="<?php echo $this->input->post('no_telp') ?? $row_user['no_hp'] ?>" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_noTelp'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Nomor Telepon</label>
+                    <input type="text" name="no_telp" id="no_telp" value="<?php echo $this->input->post('no_telp') ?? $row_user['no_hp'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -274,14 +280,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Tempat Lahir</label>
-                <input type="text" name="tmp_lahir" id="tmp_lahir" value="<?php echo $this->input->post('tmp_lahir') ?? $row_user['tmp_lahir'] ?>" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_tmp_lahir'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Tempat Lahir</label>
+                    <input type="text" name="tmp_lahir" id="tmp_lahir" value="<?php echo $this->input->post('tmp_lahir') ?? $row_user['tmp_lahir'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -294,14 +303,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Tanggal Lahir</label>
-                <input type="text" name="tgl_lahir" id="tgl_lahir" value="<?php echo $this->input->post('tgl_lahir') ?? $row_user['tgl_lahir'] ?>" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_tgl_lahir'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Tanggal Lahir</label>
+                    <input type="date" name="tgl_lahir" id="tgl_lahir" value="<?php echo $this->input->post('tgl_lahir') ?? $row_user['tgl_lahir'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -314,14 +326,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Tahun Mapaba</label>
-                <input type="text" name="thn_mapaba" id="thn_mapaba" value="<?php echo $this->input->post('thn_mapaba') ?? $row_user['tahun_mapaba'] ?>" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_thnMapaba'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Tahun Mapaba</label>
+                    <input type="text" name="thn_mapaba" id="thn_mapaba" value="<?php echo $this->input->post('thn_mapaba') ?? $row_user['tahun_mapaba'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -334,14 +349,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Tahun PKD</label>
-                <input type="text" name="thn_pkd" id="thn_pkd" value=" <?php echo $this->input->post('thn_pkd') ?? $row_user['tahun_pkd'] ?>" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_thnPKD'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Tahun PKD</label>
+                    <input type="text" name="thn_pkd" id="thn_pkd" value=" <?php echo $this->input->post('thn_pkd') ?? $row_user['tahun_pkd'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -354,14 +372,17 @@ $row_user = $this->db->query($query_user)->row_array();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="company" class=" form-control-label">Tahun PKL</label>
-                <input type="text" name="thn_pkl" id="thn_pkl" value="<?php echo $this->input->post('thn_pkl') ?? $row_user['tahun_pkl'] ?>" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/profile_anggota/ubah_thnPKL'); ?>" role="form">
+                <div class="modal-body">
+                    <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
+                    <label for="company" class=" form-control-label">Tahun PKL</label>
+                    <input type="text" name="thn_pkl" id="thn_pkl" value="<?php echo $this->input->post('thn_pkl') ?? $row_user['tahun_pkl'] ?>" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
