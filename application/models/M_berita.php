@@ -11,6 +11,6 @@ class M_berita extends CI_Model
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
         WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
-        ORDER BY `tb_konten`.`id_konten` DESC", $limit, $start);
+        ORDER BY `tb_konten`.`id` DESC", $limit, $start);
     }
 }
