@@ -22,7 +22,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
           <li><a href=<?= base_url('beranda') ?>>Beranda</a></li>
           <li>Berita</li>
         </ol>
-      </div>
+      </div> 
 
     </div>
   </section><!-- End Breadcrumbs -->

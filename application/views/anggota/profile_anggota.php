@@ -239,6 +239,7 @@ $row_user = $this->db->query($query_user)->row_array();
                     <input type="hidden" name="kader_id" value="<?= $row_user['kader_id']; ?>">
                     <label for="company" class=" form-control-label">Alamat</label>
                     <input type="text" name="alamat" id="alamat" value="<?php echo $this->input->post('alamat') ?? $row_user['alamat'] ?>" class="form-control">
+                    <?= form_error('alamat', '<small class="text-danger pl-2">', '</small>'); ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

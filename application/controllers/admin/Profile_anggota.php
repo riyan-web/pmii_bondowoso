@@ -59,18 +59,23 @@ class Profile_anggota extends CI_Controller
     }
     public function ubah_alamat()
     {
-        $alamat = $this->input->post('alamat');
-        $id_kader = $this->input->post('kader_id');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            return false;
+        } else {
+            $alamat = $this->input->post('alamat');
+            $id_kader = $this->input->post('kader_id');
 
-        $this->db->set('alamat', $alamat);
-        $this->db->where('id', $id_kader);
-        $this->db->update('tb_kader');
+            $this->db->set('alamat', $alamat);
+            $this->db->where('id', $id_kader);
+            $this->db->update('tb_kader');
 
-        $this->session->set_flashdata(
-            'message',
-            '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
-        );
-        redirect('admin/profile_anggota');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
+            );
+            redirect('admin/profile_anggota');
+        }
     }
 
     public function ubah_noTelp()

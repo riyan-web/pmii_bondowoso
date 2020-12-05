@@ -7,6 +7,8 @@ class Artikel extends CI_Controller
     {
         parent::__construct();
         cek_akses();
+        $this->load->model('artikel_model');
+        $this->load->helper('myadmin');
     }
     public function index()
     {
@@ -18,6 +20,7 @@ class Artikel extends CI_Controller
         $data['deskripsi']         = "Artikel";
         $data['pagae']        = "artikel";
         $data['konten'] = $this->artikel_model->tampil_data();
+        $data['modal_artikel'] = show_my_modal_kustom('admin/modal/mdl_artikel', 'artikel', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
         $this->load->view('template/backend/right');

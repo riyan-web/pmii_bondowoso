@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="assets/backend/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://localhost/pmii_bondowoso/assets/backend/coba/notif.css">
 
 
 
@@ -76,7 +77,7 @@
         </div>
     </div>
 
- 
+
     <script src="assets/backend/vendors/jquery/dist/jquery.min.js"></script>
     <script src="assets/backend/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/backend/vendors/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -132,7 +132,8 @@ class Beranda extends CI_Controller
     {
         //konfigurasi pagination
         $config['base_url'] = site_url('beranda/berita'); //site url
-        $config['total_rows'] = $this->db->count_all('tb_konten'); //total row
+        $count = $this->m_berita->get_count();
+        $config['total_rows'] = $count['jumlah_berita']; //total row
         $config['per_page'] = 3;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];

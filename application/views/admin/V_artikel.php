@@ -79,9 +79,9 @@
 
                                     <?php
 
-                                        $no = 1;
-                                        foreach ($konten as $ktn) :
-                                        ?>
+                                    $no = 1;
+                                    foreach ($konten as $ktn) :
+                                    ?>
                                         <tr>
                                             <td><?php echo $no++ ?></td>
                                             <td><?php echo $ktn["judul"] ?></td>
@@ -101,3 +101,16 @@
             </div>
         </div>
     <?php } ?>
+    <?= $modal_artikel; ?>
+    <script>
+        function artikel_tambah() {
+            save_method = 'tambahAnggota';
+            $('#form-artikel')[0].reset();
+            $('#artikel').modal('show');
+            $('.form-msg').html('');
+            $('.modal-title').text('Tambah Artikel Baru');
+            $('#label-foto').text('Upload Foto'); // merubah label
+            $('#foto-preview').hide(); //menyembunyikan foto sebelumnya
+            $('#imgOne').html('<img id="preview" alt="" class="img-responsive" width="60%" />');
+        }
+    </script>
