@@ -19,22 +19,11 @@
                 <tr bgcolor="aqua" align="center">
                   <th style="width: 30px;">No.</th>
                   <th>Judul</th>
-                  <th>Judul</th>
                   <th>Deskripsi</th>
                   <th>foto</th>
                   <th style="width:150px;">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <?php foreach ($berita as $m) : ?>
-              <tr>
-                  <th style="width: 30px;">No.</th>
-                  <th><?= $m['berita']; ?></th>
-                
-                  <th style="width:150px;">Action</th>
-                </tr>
-                <?php endforeach; ?>
-              </tbody>
             </table>
           </div>
         </div>
@@ -83,7 +72,7 @@
         [10, 20, 50, 100, 150]
       ],
       "ajax": {
-        url: "<?= base_url('admin/berita/' . $namaController); ?>",
+        url: "<?= base_url('admin/berita/berita_list'); ?>",
         type: "post",
         error: function() {
           $(".my-grid-error").html("");
