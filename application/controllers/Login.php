@@ -4,7 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Login extends CI_Controller
 {
     public function index()
+
     {
+
         if ($this->session->userdata('username') and $this->session->userdata('jenis') == 4) {
             redirect('admin/profile_cabang');
         } else if ($this->session->userdata('username') and $this->session->userdata('jenis') == 3) {
@@ -19,7 +21,7 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Halaman Login';
+            $data['title'] = 'Login';
             $this->load->view('admin/login', $data);
         } else {
             //validasinya sukses

@@ -1311,17 +1311,19 @@ header.fixed-top {
 .header-menu .col-sm-7 {
   position: inherit; }
 
-.menutoggle {
-  background: #e74c3c;
-  border-radius: 50%;
-  color: #fff !important;
-  cursor: pointer;
-  font-size: 18px;
-  height: 43px;
-  line-height: 44px;
-  margin: -2px 20px 0 -57px;
-  text-align: center;
-  width: 43px; }
+.contact .icon-section {
+    font-size: 20px;
+    color: #007bff;
+    float: left;
+    width: 44px;
+    height: 44px;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
 
 .open .menutoggle i:before {
   content: "\f0a4"; }

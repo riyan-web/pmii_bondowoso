@@ -26,6 +26,14 @@
                 </tr>
               </thead>
               <tbody>
+                <?php foreach ($berita as $m) : ?>
+              <tr>
+                  <th style="width: 30px;">No.</th>
+                  <th><?= $m['berita']; ?></th>
+                
+                  <th style="width:150px;">Action</th>
+                </tr>
+                <?php endforeach; ?>
               </tbody>
             </table>
           </div>

@@ -60,5 +60,15 @@
                  </li>
              </ul>
          </div>
+         <div id="main-menu" class="main-menu collapse navbar-collapse">
+             <ul class="nav navbar-nav">
+                 <li class="nav-item">
+                     <a href="<?= base_url('beranda'); ?>">
+                         <i class="menu-icon fa fa-sign-out"></i>
+                         Home
+                     </a>
+                 </li>
+             </ul>
+         </div>
      </nav>
  </aside><!-- /#left-panel -->

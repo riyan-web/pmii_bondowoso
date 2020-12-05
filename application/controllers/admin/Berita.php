@@ -29,7 +29,10 @@ class Berita extends CI_Controller
         $data['sub_judul'] 			= "berita";
         $data['sub2_judul'] 			= "Data Berita";
 		$data['deskripsi'] 		= "Berita";
-		$data['pagae']		= "berita";
+        $data['pagae']		= "berita";
+        
+        $data['berita'] = $this->db->get('user_menu')->result_array();
+
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
         $this->load->view('template/backend/right');

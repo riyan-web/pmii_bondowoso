@@ -123,7 +123,7 @@ class Data_anggota extends CI_Controller
     // tutup komisariat
 
 	public function anggota_tambah() {
-		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('nama_kader', 'nama_kader', 'required');
 		$this->form_validation->set_rules('tmp_lahir', 'tmp_lahir', 'required');
 		$this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
 		$this->form_validation->set_rules('no_hp', 'no_hp', 'trim|required|min_length[10]|max_length[15]');
@@ -144,7 +144,7 @@ class Data_anggota extends CI_Controller
 			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir')));
 			$password = date("Ymd",strtotime($this->input->post('tgl_lahir'))); 
 			$data = array('kode_kartu' => $kode_kartu,
-							'nama' => $this->input->post('nama'),
+							'nama_kader' => $this->input->post('nama'),
 							'alamat' => $this->input->post('alamat'),
 							'no_hp' => $this->input->post('no_hp'),
 							'tmp_lahir' => $this->input->post('tmp_lahir'),
@@ -152,16 +152,16 @@ class Data_anggota extends CI_Controller
 							'tahun_mapaba' => $this->input->post('tahun_mapaba'),
 							'tahun_pkd' => $this->input->post('tahun_pkd'),
 							'tahun_pkl' => $this->input->post('tahun_pkl'),
-							'foto' => $this->input->post('img'),
+							'foto_kader' => $this->input->post('img'),
 							'komisariat_id' => $this->input->post('komisariat_id'),
 							'password' => $password
 						 );
 			// upload gambar
 			if (!empty($_FILES['img']['name'])) {
 				$upload = $this->_do_upload();
-				$data['foto'] = $upload;
+				$data['foto_kader'] = $upload;
 			}else{
-				$data['foto'] = "default.jpg";
+				$data['ffoto_kaderoto'] = "default.jpg";
 			}
 			$result = $this->model_anggota->anggota_tambah($data);
 					if ($result > 0) {
@@ -185,14 +185,14 @@ class Data_anggota extends CI_Controller
 	}
 
 	public function anggota_proses_ubah() {
-		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('nama_kader', 'nama_kader', 'required');
 		$this->form_validation->set_rules('tmp_lahir', 'tmp_lahir', 'required');
 		$this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
 		$this->form_validation->set_rules('no_hp', 'no_hp', 'trim|required|min_length[10]|max_length[15]');
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir')));
-			$data = array('nama' => $this->input->post('nama'),
+			$data = array('nama_kader' => $this->input->post('nama'),
 							'alamat' => $this->input->post('alamat'),
 							'no_hp' => $this->input->post('no_hp'),
 							'tmp_lahir' => $this->input->post('tmp_lahir'),
@@ -200,7 +200,7 @@ class Data_anggota extends CI_Controller
 							'tahun_mapaba' => $this->input->post('tahun_mapaba'),
 							'tahun_pkd' => $this->input->post('tahun_pkd'),
 							'tahun_pkl' => $this->input->post('tahun_pkl'),
-							'foto' => $this->input->post('img'),
+							'foto_kader' => $this->input->post('img'),
 							'komisariat_id' => $this->input->post('komisariat_id')
 						);
 			$remove_photo = $this->input->post('remove_photo');
@@ -208,7 +208,7 @@ class Data_anggota extends CI_Controller
 			{
 				if(file_exists('upload/kader/'.$this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo !="default.jpg")){
 					unlink('upload/kader/'.$this->input->post('remove_photo'));
-					$data['foto'] = '';
+					$data['fotfoto_kadero'] = '';
 				}
 				
 			}
@@ -221,9 +221,9 @@ class Data_anggota extends CI_Controller
 				if(file_exists('upload/kader/'.$anggota->foto) && $anggota->foto)
 					unlink('upload/kader/'.$anggota->foto);
 
-				$data['foto'] = $upload;
+				$data['foto_kader'] = $upload;
 			}else{
-				$data['foto'] = $this->input->post('foto_lama');
+				$data['foto_kader'] = $this->input->post('foto_lama');
 			}
 			$id = $this->input->post('id');
 			$result = $this->model_anggota->anggota_ubah($data, $id);
@@ -245,9 +245,9 @@ class Data_anggota extends CI_Controller
 	public function anggota_hapus() {
 		$id = $_POST['id'];
 		$ray = $this->model_anggota->anggota_by_kom($_POST['id']);
-		$data = array('foto' => $ray->foto );				
-		if (file_exists('upload/kader/'.$data['foto']) && $data['foto'] && $data['foto'] !="default.jpg") {
-			unlink('upload/kader/'.$data['foto']);
+		$data = array('foto_kader' => $ray->foto );				
+		if (file_exists('upload/kader/'.$data['foto_kader']) && $data['foto_kader'] && $data['foto'] !="default.jpg") {
+			unlink('upload/kader/'.$data['foto_kader']);
 		}
 		$result = $this->model_anggota->anggota_hapus($id);
 

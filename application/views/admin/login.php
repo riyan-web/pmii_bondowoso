@@ -9,9 +9,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
+    
+    <title><?= $title; ?></title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -58,14 +60,13 @@
                         <div class="checkbox">
 
                             <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
+                                <a href="#">Lupa Password?</a>
                             </label>
 
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-                        <div class="register-link m-t-15 text-center">
-                            <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
-                        </div>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Masuk</button>
+                        <br> <br>
+                        
                         <div class="register-link m-t-15 text-center">
                             <p> <a href="<?= base_url('beranda') ?>"> Kembali</a></p>
                         </div>

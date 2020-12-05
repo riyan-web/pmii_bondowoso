@@ -1,25 +1,6 @@
  <!-- ======= Footer ======= -->
  <footer id="footer">
 
-   <div class="footer-top">
-     <div class="container">
-       <div class="row">
-
-         <div class="col-lg-3 col-md-6 footer-contact">
-           <h3>Alamat GRAHA PERGERAKAN PMII BONDOWOSO</h3>
-           <p>Poncogati, Curahdami, <br>
-             Kabupaten Bondowoso,<br>
-             Jawa Timur 68251 <br><br>
-             <strong>Phone:</strong> +62 822-3496-9860<br>
-             <strong>Email:</strong> pmiicabangbondowoso@gmail.com<br>
-           </p>
-         </div>
-       </div>
-     </div>
-   </div>
-
-   <div class="container d-md-flex py-4">
-
      <div class="mr-md-auto text-center text-md-left">
        <div class="copyright">
          &copy; Copyright <strong><span>PMII Bondowoso</span></strong>. All Rights Reserved

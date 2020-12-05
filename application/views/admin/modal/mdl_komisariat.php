@@ -19,7 +19,7 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label">Nama Komisariat</label>
                             <div class="col-lg-9">
-                            <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan nama Komisariat" name="nama">
+                            <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="100" placeholder="masukan nama Komisariat" name="nama">
                             </div>
                         </div>
                         <div class="form-group row">

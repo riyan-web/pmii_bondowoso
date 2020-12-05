@@ -9,8 +9,8 @@
         <div class="card ">
           <div class="card-header"><div class="row">
           <!-- : sebanyak <i class="text-danger"><?= $jumlah_kader; ?></i> Kader -->
-          <strong class="col-md-10 card-title"><?=$sub2_judul?> </strong>
-          <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_anggota()"><i class="fa fa-plus-square"></i> Tambah Data(<b>F7</b>) </button>  
+          <strong class="col-md-10 card-title"><?=$sub2_judul?> </strong>   
+          <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_anggota()"><i class="fa fa-plus-square"></i> Tambah Data</button>  
           </div>
           </div>
           <div class="card-body">
