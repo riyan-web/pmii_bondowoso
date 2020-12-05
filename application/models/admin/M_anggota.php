@@ -97,7 +97,7 @@ class M_anggota extends CI_Model
 
 	public function jumlah_by_id($table, $nama_id, $id)
 	{
-		$sql = "select * from " . $table . " where " . $nama_id . $id . "";
+		$sql = "select * from " . $table . " where " . $nama_id ." = ". $id . "";
 		return $this->db->query($sql)->num_rows();
 	}
 

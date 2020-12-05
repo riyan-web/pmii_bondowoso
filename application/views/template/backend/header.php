@@ -30,10 +30,11 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- <script src="<?= base_url(); ?>assets/backend/vendors/jquery/dist/jquery.min.js"></script>
-    <script src="<?= base_url(); ?>assets/backend/vendors/popper.js/dist/umd/popper.min.js"></script>
+    
     <script src="<?= base_url(); ?>assets/backend/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?= base_url(); ?>assets/backend/js/main.js"></script> -->
     <script src="<?= base_url() . 'assets/backend/coba/js/jquery.js' ?>"></script>
+    <script src="<?= base_url(); ?>assets/backend/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="<?= base_url() . 'assets/backend/vendors/bootstrap/dist/js/bootstrap.min.js' ?>"></script>
     <script src="<?= base_url() . 'assets/backend/coba/js/jquery.dataTables.js' ?>"></script>
     <script src="<?= base_url() . 'assets/backend/vendors/ckeditor/ckeditor.js' ?>"></script>
