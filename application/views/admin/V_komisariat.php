@@ -43,7 +43,7 @@
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataKomisariat', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
 <script>
 
-var dataTable;
+var dataTable; 
 $(document).ready(function() {
     dataTable = $('#tb_komisariat').DataTable( {
       "serverSide": true,

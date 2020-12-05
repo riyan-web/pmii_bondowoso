@@ -3,7 +3,7 @@
               <button type="button" class="close btn-danger text-r" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h3 style="display:block; text-align:center;" class="modal-title">Data Anggota</h3>
             <br>
-            <form id="form-anggota" method="POST">
+            <form id="form-anggota" method="POST"> 
               <input type="hidden" name="id"/> 
               <div class="form-group row">
                 <label class="col-md-3 control-label">Nama Lengkap</label>
