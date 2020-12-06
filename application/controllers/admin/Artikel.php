@@ -20,6 +20,8 @@ class Artikel extends CI_Controller
         $data['deskripsi']         = "Artikel";
         $data['pagae']        = "artikel";
         $data['konten'] = $this->artikel_model->tampil_data();
+        $data['konten2'] = $this->db->get_where('tb_konten', ['user_id' =>
+        $this->session->userdata('user_id')])->result();
         $data['modal_artikel'] = show_my_modal_kustom('admin/modal/mdl_artikel', 'artikel', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
@@ -30,7 +32,7 @@ class Artikel extends CI_Controller
 
     public function artikel_tambah()
     {
-        $this->form_validation->set_rules('judul', 'nama', 'required');
+        $this->form_validation->set_rules('judul', 'judul', 'required');
         $this->form_validation->set_rules('isi', 'isi', 'required');
         $this->form_validation->set_rules('jenis', 'jenis', 'required');
 
@@ -42,7 +44,7 @@ class Artikel extends CI_Controller
         }
         if ($this->form_validation->run() == TRUE) {
             // cek nim ada atau tidak
-            $cek = $this->model_komisariat->nama_cek($this->input->post('nama'));
+            $cek = $this->artikel_model->nama_cek($this->input->post('judul'));
             if ($cek > 0) {
                 $out['status'] = 'form';
                 $out['msg'] = show_err_msg('Judul Artikel tersebut sudah terdaftar');
@@ -61,9 +63,9 @@ class Artikel extends CI_Controller
                 // upload gambar
                 if (!empty($_FILES['img']['name'])) {
                     $upload = $this->_do_upload();
-                    $data['foto'] = $upload;
+                    $data['foto_artikel'] = $upload;
                 } else {
-                    $data['foto'] = "default.jpg";
+                    $data['foto_artikel'] = "default.jpg";
                 }
 
                 $result = $this->artikel_model->artikel_tambah($data);
@@ -84,8 +86,8 @@ class Artikel extends CI_Controller
     }
     private function _do_upload()
     {
-        $config['upload_path']          = 'upload/komisariat';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['upload_path']          = 'upload/artikel';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 10000; //set max size allowed in Kilobyte
         $config['max_width']            = 10000; // set max width image allowed
         $config['max_height']           = 10000; // set max height allowed

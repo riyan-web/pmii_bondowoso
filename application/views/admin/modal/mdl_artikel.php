@@ -1,5 +1,11 @@
-<div class="col-lg-12">
+<?php
+$query_jenis = "SELECT * FROM `subjeniskonten`
+                JOIN `jeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                WHERE `subjeniskonten`.`nama` = 'artikel' ";
+$jenis = $this->db->query($query_jenis)->result();
 
+?>
+<div class="col-lg-12">
   <div class="modal-header-full-width   modal-header text-center">
     <div class="row">
       <div class="col-md-12">
@@ -19,13 +25,20 @@
           <div class="form-group row">
             <label class="col-lg-3 control-label">Judul Artikel</label>
             <div class="col-lg-9">
-              <input type="text" id="judul" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="Masukan Judul Artikel" name="nama">
+              <input type="text" id="judul" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="Masukan Judul Artikel" name="judul">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-3 control-label">Jenis Artikel </label>
             <div class="col-lg-9">
-              <input type="text" id="jenis" class="form-control" maxlength="10" placeholder="Masukkan jenis artikel" name="singkatan">
+              <select name="jenis" id="jenis" class="form-control">
+                <option value="">- piilih -</option>
+                <?php
+                foreach ($jenis as $jns) { ?>
+                  <option value="<?= $jns->jeniskonten_id ?>"><?= $jns->nama_jenis ?></option>
+                  <?php  ?>
+                <?php } ?>
+              </select>
             </div>
           </div>
           <div class="form-group row" id="foto-preview">
