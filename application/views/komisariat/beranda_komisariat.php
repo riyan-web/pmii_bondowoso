@@ -27,7 +27,7 @@
                         <p data-aos="fade-up">
                             <?php echo $komisariat['isi']; ?>
                         </p>
-                       
+
                     </div><!-- End .content-->
                 </div>
             </div>

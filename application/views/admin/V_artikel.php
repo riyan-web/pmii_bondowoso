@@ -26,6 +26,11 @@
                                     <p class="card-text"><?php echo $ktn->isi_konten; ?></p>
                                 </div>
                             </div>
+                            <a class="btn btn-warning btn-sm" title="Ubah" onclick="artikel_ubah(<?php echo $ktn->id_konten ?>)"><i class="fa fa-edit"></i></a>
+                            <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
+                            <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row[' id']."'".')"><i class="fa fa-user"></i></a>
+                            <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota('."'".$row[' id']."'".')"><i class="fa fa-key"></i></a>
+                            <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row[' id']."'".')"><i class="fa fa-info-circle"></i></a>
                         </div>
                     <?php endforeach; ?>
                 </div><!-- .row -->
@@ -45,40 +50,24 @@
                         <div class="card-header">
                             <div class="row">
                                 <strong class="col-md-10 card-title"><?= $sub2_judul ?></strong>
-                                <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_artikel()"><i class="fa fa-plus-square"></i> Tambah Data</button>
+                                <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_artikel()"><i class="fa fa-plus-square"></i> Tambah Artikel</button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr bgcolor="aqua" align="center">
-                                        <th style="width: 30px;">No.</th>
+                            <table id="tb_artikel" class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>No</th>
                                         <th>Judul</th>
                                         <th>Isi Konten</th>
                                         <th>Jenis Konten</th>
                                         <th>Foto Artikel</th>
-                                        <th>Tanggal Buat</th>
-                                        <th>Status</th>
-                                        <th style="width:150px;">Action</th>
+                                        <th>aksi</th>
                                     </tr>
-
-                                    <?php
-
-                                    $no = 1;
-                                    foreach ($konten as $ktn) :
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $no++ ?></td>
-                                            <td><?php echo $ktn["judul"] ?></td>
-                                            <td><?php echo $ktn["isi_konten"] ?></td>
-                                            <td><?php echo $ktn["jeniskonten_id"] ?></td>
-                                            <td><?php echo $ktn["foto_artikel"] ?></td>
-                                            <td><?php echo $ktn["tgl_buat"] ?></td>
-                                            <td><?php echo $ktn["status"] ?></td>
-                                        </tr>
-
-                                    <?php endforeach; ?>
                                 </thead>
+                                <tbody>
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -87,13 +76,12 @@
         </div>
     </div>
 <?php } ?>
-
 <?= $modal_artikel; ?>
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataKomisariat', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
 <script>
     var dataTable;
     $(document).ready(function() {
-        dataTable = $('#tb_komisariat').DataTable({
+        dataTable = $('#tb_artikel').DataTable({
             "serverSide": true,
             "stateSave": false,
             "bAutoWidth": true,
@@ -136,7 +124,7 @@
                 [10, 20, 50, 100, 150]
             ],
             "ajax": {
-                url: "<?= base_url('admin/data_komisariat/komisariat_list'); ?>",
+                url: "<?= base_url('admin/artikel/' . $namaController); ?>",
                 type: "post",
                 error: function() {
                     $(".my-grid-error").html("");
@@ -184,20 +172,20 @@
         $('#imgOne').html('<img id="preview" alt="" class="img-responsive" width="60%" />');
     }
 
-    function komisariat_ubah(id) {
-        save_method = 'ubahKomisariat';
-        $('#form-komisariat')[0].reset();
-        $('#komisariat').modal('show');
+    function artikel_ubah(id) {
+        save_method = 'ubahArtikel';
+        $('#form-artikel')[0].reset();
+        $('#artikel').modal('show');
         $('.form-msg').html('');
         $('#foto-preview').show(); //mengeluarkan foto sebelumny
-        $('.modal-title').text('Ubah Data Komisariat');
+        $('.modal-title').text('Ubah Data Artikel');
         $('#imgOne').html('<img id="preview" alt=""  width="60%" class="img-responsive" />');
         // $('#nim').attr('readonly',true);$('#prodi').hide();$('#angkatan').hide();$('#keterangan').hide();
 
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?= site_url('admin/data_komisariat/komisariat_ubah') ?>/" + id,
+            url: "<?= site_url('admin/artikel/artikel_ubah') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
