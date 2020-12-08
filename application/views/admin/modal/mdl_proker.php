@@ -7,8 +7,7 @@
               </div>
             </div>
               <h3 style="text-align:center;" class="modal-title w-100">Data Proker</h3>
-              <button type="button" class="close btn-danger " data-dismiss="modal" aria-label="Close"> <span style="font-size: 1.3em;" aria-hidden="true">&times;</span><button>
-
+              <button type="button" class="close btn-danger text-r" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <br>
             </div>
             <div class="modal-body">
