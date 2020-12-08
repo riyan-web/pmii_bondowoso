@@ -62,7 +62,7 @@ class Data_komisariat extends CI_Controller
 	public function komisariat_tambah() {
 		$this->form_validation->set_rules('nama', 'nama', 'required');
 		$this->form_validation->set_rules('isi', 'isi', 'required');
-		$this->form_validation->set_rules('singkatan', 'singkatan', 'required');
+		$this->form_validation->set_rules('singkatan', 'singkatan', 'required'); 
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			// cek nim ada atau tidak

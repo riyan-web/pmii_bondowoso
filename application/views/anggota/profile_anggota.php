@@ -1,7 +1,7 @@
 <?php
 
 $id_user = $user['id'];
-$query_user = "SELECT *,`tb_kader`.`id` AS kader_id , `tb_kader`.`nama_kader`, `tb_kader`.`foto_kader`, `tb_komisariat`.`nama` AS nama_komisariat
+$query_user = "SELECT *,`tb_kader`.`id` AS kader_id , `tb_kader`.`nama`, `tb_kader`.`foto`, `tb_komisariat`.`nama` AS nama_komisariat
             FROM  `tb_user` 
             JOIN `tb_kader` ON  `tb_kader`.`id` = `tb_user`.`kader_id`
             JOIN `tb_komisariat` ON `tb_komisariat`.`id` = `tb_user`.`komisariat_id`

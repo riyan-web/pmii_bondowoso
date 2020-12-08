@@ -1,5 +1,11 @@
-<div class="col-lg-12">
+<?php
+$query_jenis = "SELECT * FROM `subjeniskonten`
+                JOIN `jeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
+                WHERE `subjeniskonten`.`nama` = 'artikel' ";
+$jenis = $this->db->query($query_jenis)->result();
 
+?>
+<div class="col-lg-12">
   <div class="modal-header-full-width   modal-header text-center">
     <div class="row">
       <div class="col-md-12">
@@ -17,15 +23,22 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="form-group row">
-            <label class="col-lg-3 control-label">Nama Komisariat</label>
+            <label class="col-lg-3 control-label">Judul Artikel</label>
             <div class="col-lg-9">
-              <input type="text" id="nama" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan nama Komisariat" name="nama">
+              <input type="text" id="judul" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="Masukan Judul Artikel" name="judul">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-lg-3 control-label">Singkatan</label>
+            <label class="col-lg-3 control-label">Jenis Artikel </label>
             <div class="col-lg-9">
-              <input type="text" id="singkatan" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="masukan singkatan Komisariat" name="singkatan">
+              <select name="jenis" id="jenis" class="form-control">
+                <option value="">- piilih -</option>
+                <?php
+                foreach ($jenis as $jns) { ?>
+                  <option value="<?= $jns->jeniskonten_id ?>"><?= $jns->nama_jenis ?></option>
+                  <?php  ?>
+                <?php } ?>
+              </select>
             </div>
           </div>
           <div class="form-group row" id="foto-preview">
@@ -48,9 +61,9 @@
         </div>
         <div class="col-lg-8">
           <div class="form-group row">
-            <label class="col-lg-1 control-label"><b>Deskripsi</b></label>
+            <label class="col-lg-1 control-label"><b>Isi Artikel</b></label>
             <div class="col-lg-11">
-              <textarea class="ckeditor" placeholder="deskripsi Komisariat" id="isi" cols="83" name="isi"></textarea>
+              <textarea class="ckeditor" placeholder="Isi Artikel" id="isi" cols="83" name="isi"></textarea>
             </div>
           </div>
         </div>
@@ -108,29 +121,3 @@
     }
   }
 </script>
-
-<style>
-  .modal-dialog-full-width {
-    width: 100% !important;
-    height: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
-
-  }
-
-  .modal-content-full-width {
-    height: auto !important;
-    min-height: 100% !important;
-    border-radius: 0 !important;
-    background-color: #ececec !important
-  }
-
-  .modal-header-full-width {
-    border-bottom: 1px solid #9ea2a2 !important;
-  }
-
-  .modal-footer-full-width {
-    border-top: 1px solid #9ea2a2 !important;
-  }
-</style>

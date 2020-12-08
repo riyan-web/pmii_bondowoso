@@ -8,7 +8,7 @@
   <title><?= $title; ?></title>
 
   <!-- Favicons -->
-  <link href="<?php echo base_url() ?>assets/frontend/img/favicon.png" rel="icon">
+  <link href="<?php echo base_url() ?>assets/frontend/img/pmii.png" rel="icon">
   <link href="<?php echo base_url() ?>assets/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

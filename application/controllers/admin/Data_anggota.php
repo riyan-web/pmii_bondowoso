@@ -27,7 +27,7 @@ class Data_anggota extends CI_Controller
             // $data['dataAnggota'] = $this->model_anggota->anggota_by_kom($id_komisariat);
             // $data['dataKomisariat'] = $this->model_komisariat->komisariat_by_id($id_komisariat);
         }
-        $data['title'] = 'Data anggota';
+        $data['title'] = 'Data anggota'; 
         $data['sub_judul'] 			= "Anggota";
         $data['sub2_judul'] 			= "Data Anggota";
 		$data['deskripsi'] 		= "Anggota";
