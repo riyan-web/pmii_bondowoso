@@ -46,11 +46,7 @@ class Login extends CI_Controller
                     'jenis' => $user['jenis'],
                     'nama_komcab' => $nama_komcab['nama'],
                     'id_komisariat' => $nama_komcab['id'],
-<<<<<<< Updated upstream
                     'user_id' => $user['id']
-=======
-                    'user_id'       => $user['id']
->>>>>>> Stashed changes
                 ];
                 $this->session->set_userdata($data);
 

@@ -64,6 +64,17 @@
                             </div>
                         </div>
                         <div class="card-body">
+                        <form class="form-inline">
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Data Per Halaman</label>
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                <option selected>Pilih...</option>
+                                <option value="1">10</option>
+                                <option value="2">50</option>
+                                <option value="3">100</option>
+                            </select>
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr bgcolor="aqua" align="center">
