@@ -9,6 +9,7 @@ class Berita extends CI_Controller
         cek_akses();
         $this->load->model('admin/M_berita', 'data_berita');
         $this->load->model('admin/M_anggota', 'data_anggota');
+        $this->load->helper('myadmin');
     }       
     public function index()
     {
@@ -26,10 +27,12 @@ class Berita extends CI_Controller
         //     // $data['dataAnggota'] = $this->data_anggota->anggota_by_kom($id_komisariat);
         //     // $data['dataKomisariat'] = $this->data_komisariat->komisariat_by_id($id_komisariat);
         // }
+        $data['namaController'] = 'berita_list';
         $data['sub_judul'] 			= "berita";
         $data['sub2_judul'] 			= "Data Berita";
 		$data['deskripsi'] 		= "Berita";
         $data['pagae']		= "berita";
+        $data['modal_berita'] = show_my_modal_kustom('admin/modal/mdl_berita', 'berita', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
         $this->load->view('template/backend/right');
