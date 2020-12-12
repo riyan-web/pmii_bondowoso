@@ -21,7 +21,7 @@
                   <th>Judul</th>
                   <th>Deskripsi</th>
                   <th>foto</th>
-                  <th style="width:150px;">Action</th>
+                  <th style="width:150px;">Aksi</th>
                 </tr>
               </thead>
             </table>

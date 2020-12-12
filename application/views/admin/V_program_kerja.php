@@ -20,7 +20,7 @@
                   <th style="width: 30px;">No.</th>
                   <th>Nama Kegiatan</th>
                   <th>Jadwal Pelaksanaan</th>
-                  <th>Penanaggung jawab</th>
+                  <th>Penanggung jawab</th>
                   <th style="width:150px;">Action</th>
                 </tr>
               </thead>
