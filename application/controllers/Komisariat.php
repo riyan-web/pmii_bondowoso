@@ -14,6 +14,7 @@ class Komisariat  extends CI_Controller
         $this->load->model('m_artikel');
         $this->load->model('m_berita');
         $this->load->model('m_struktur');
+        $this->load->model('m_proker');
     }
 
     public function unej_bondowoso()
@@ -84,7 +85,8 @@ class Komisariat  extends CI_Controller
 
         $data['pagination'] = $this->pagination->create_links();
         $data['title'] = 'Profile Komisariat Politeknik Jember - Kampus Bondowoso';
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 2])->row_array();
+        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
+        $data['struktur'] = $this->m_struktur->getStrukturKomisariat($id_kom)->result();
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
@@ -108,5 +110,3 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 }
-
-

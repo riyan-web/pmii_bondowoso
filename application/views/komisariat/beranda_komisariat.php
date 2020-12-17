@@ -18,9 +18,8 @@
     <!-- ======= About Us Section ======= -->
     <section id="about-us" class="about-us">
         <div class="container">
-
             <div class="row no-gutters">
-                <img class="col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" src="<?php echo base_url('assets/frontend/img/img_komisariat/') . $komisariat['foto']; ?>" alt="">
+                <img class="col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" src="<?php echo base_url('upload/komisariat/') . $komisariat['foto']; ?>" alt="">
                 <div class="col-xl-7 pl-0 pl-lg-5 pr-lg-1 d-flex align-items-stretch">
                     <div class="content d-flex flex-column justify-content-center">
                         <h3 data-aos="fade-up"><?php echo $komisariat['nama']; ?></h3>
@@ -35,15 +34,44 @@
         </div>
     </section><!-- End About Us Section -->
 
-    <!-- ======= Testimonials Section ======= -->
+    <!-- ======= Program Kerja Section ======= -->
+    <section id="cta-pricing" class="cta-pricing">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Program Kerja <strong><?php echo $komisariat['nama']; ?></strong></h2>
+            </div>
+            <div class="row">
+                <?php
+                foreach ($proker->result() as $pro) { ?>
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                            <div class="text-center">
+                                <img src="<?php echo base_url('upload/proker/') . $pro->foto; ?>" style="width: 100%; height :250px;">
+                                <h3><?php echo $pro->nama_kegiatan; ?></h3>
+                                <p><?php echo $pro->isi; ?></p>
+                                <h4><?php echo "Penanggung Jawab : " . $pro->penanggung_jawab; ?></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php } ?>
+            </div>
+        </div>
+    </section><!-- End Program Kerja Section -->
+
+    <!-- ======= Artikel Section ======= -->
     <section id="testimonials" class="testimonials">
         <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Artikel <strong><?php echo $komisariat['nama']; ?></strong></h2>
+            </div>
             <div class="row">
                 <?php
                 foreach ($artikel->result() as $art) { ?>
                     <div class="col-lg-6" data-aos="fade-up">
                         <div class="testimonial-item">
-                            <img src="<?php echo base_url('assets/frontend/img/img_artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
+                            <img src="<?php echo base_url('upload/artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
                             <h3><?php echo $art->judul ?></h3>
                             <h4>Dibuat : <?php echo $art->tgl_buat ?> &amp; Oleh : <?php echo $art->username ?></h4>
                             <p>
@@ -63,7 +91,7 @@
                                 <div class="modal-header">
                                     <h3 class="modal-title"><?php echo $art->judul ?></h3>
                                 </div>
-                                <img src="<?php echo base_url('assets/frontend/img/img_artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
+                                <img src="<?php echo base_url('upload/artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
                                 <!-- body modal -->
                                 <div class="modal-body">
                                     <?php echo $art->isi_konten . "..."; ?>
@@ -88,95 +116,28 @@
                 <?php echo $pagination; ?>
             </ul>
         </div>
-    </section><!-- End Testimonials Section -->
+    </section><!-- End Artikel Section -->
 
-    <!-- ======= Our Team Section ======= -->
-    <section id="team" class="team section-bg">
+    <!-- ======= Struktur Pengurus Section ======= -->
+    <section id="services" class="services">
         <div class="container">
-
             <div class="section-title" data-aos="fade-up">
-                <h2>Struktur <strong>Kepengurusan</strong></h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <h2>Masa Khidmat <strong>2019 - 2020</strong></h2>
             </div>
-
             <div class="row">
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up">
-                        <div class="member-img">
-                            <img src="<?= base_url(); ?>assets/frontend/img/team/team-1.jpg" class="img-fluid" alt="">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>Walter White</h4>
-                            <span>Chief Executive Officer</span>
+                <?php foreach ($struktur as $struk) { ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="icon-box" data-aos="fade-up">
+                            <div><i><img src="<?php echo base_url('upload/pengurus/') . $struk->foto; ?>" class="icon" alt=""></i></div>
+                            <h4 class="title"><a href=""><?php echo $struk->tipe; ?></a></h4>
+                            <p class="description"><?php echo $struk->nama; ?></p>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up" data-aos-delay="100">
-                        <div class="member-img">
-                            <img src="<?= base_url(); ?>assets/frontend/img/team/team-2.jpg" class="img-fluid" alt="">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>Sarah Jhonson</h4>
-                            <span>Product Manager</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up" data-aos-delay="200">
-                        <div class="member-img">
-                            <img src="<?= base_url(); ?>assets/frontend/img/team/team-3.jpg" class="img-fluid" alt="">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>William Anderson</h4>
-                            <span>CTO</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up" data-aos-delay="300">
-                        <div class="member-img">
-                            <img src="<?= base_url(); ?>assets/frontend/img/team/team-4.jpg" class="img-fluid" alt="">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>Amanda Jepson</h4>
-                            <span>Accountant</span>
-                        </div>
-                    </div>
-                </div>
-
+                <?php } ?>
             </div>
 
         </div>
-    </section><!-- End Our Team Section -->
+    </section><!-- End Struktur Pengurus Section -->
 
     <!-- ======= Our Skills Section ======= -->
     <section id="skills" class="skills">

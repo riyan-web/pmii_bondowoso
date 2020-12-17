@@ -5,7 +5,7 @@
          <div class="carousel-inner" role="listbox">
 
              <!-- Slide 1 -->
-             <div class="carousel-item active" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/satu.jpg);">
+             <div class="carousel-item active" style="background-image: url(<?php echo base_url() ?>upload/slide/satu.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Sejarah <span>PMII</span></h2>
@@ -16,7 +16,7 @@
              </div>
 
              <!-- Slide 2 -->
-             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/dua.jpg);">
+             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>upload/slide/dua.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Tujuan <span>PMII</span></h2>
@@ -27,7 +27,7 @@
              </div>
 
              <!-- Slide 3 -->
-             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>assets/frontend/img/slide/tiga.jpg);">
+             <div class="carousel-item" style="background-image: url(<?php echo base_url() ?>upload/slide/tiga.jpg);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2>Visi & Misi <span>PMII</span></h2>

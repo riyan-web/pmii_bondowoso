@@ -69,7 +69,7 @@
                 foreach ($artikel->result() as $art) { ?>
                     <div class="col-lg-6" data-aos="fade-up">
                         <div class="testimonial-item">
-                            <img src="<?php echo base_url('assets/frontend/img/img_artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
+                            <img src="<?php echo base_url('upload/artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
                             <h3><?php echo $art->judul ?></h3>
                             <h4>Dibuat : <?php echo $art->tgl_buat ?> &amp; Oleh : <?php echo $art->username ?></h4>
                             <p>
@@ -89,7 +89,7 @@
                                 <div class="modal-header">
                                     <h3 class="modal-title"><?php echo $art->judul ?></h3>
                                 </div>
-                                <img src="<?php echo base_url('assets/frontend/img/img_artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
+                                <img src="<?php echo base_url('uplaod/artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
                                 <!-- body modal -->
                                 <div class="modal-body">
                                     <?php echo $art->isi_konten . "..."; ?>
