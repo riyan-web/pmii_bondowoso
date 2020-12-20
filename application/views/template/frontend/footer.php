@@ -36,8 +36,8 @@
  <script src="<?php echo base_url() ?>assets/frontend/vendor/waypoints/jquery.waypoints.min.js"></script>
  <script src="<?php echo base_url() ?>assets/frontend/vendor/owl.carousel/owl.carousel.min.js"></script>
  <script src="<?php echo base_url() ?>assets/frontend/vendor/aos/aos.js"></script>
- <script src="<?php echo base_url() ?>assets/backend/vendor/jquery/dist/jquery.js"></script>
- <script src="<?php echo base_url() ?>assets/frontend/vendor/js/bootstrap.js"></script>
+ <!-- <script src="<?php echo base_url() ?>assets/backend/vendor/jquery/dist/jquery.js"></script> -->
+ <script src="<?php echo base_url() ?>assets/frontend/vendor/bootstrap/js/bootstrap.js"></script>
 
  <!-- Template Main JS File -->
  <script src="<?php echo base_url() ?>assets/frontend/js/main.js"></script>

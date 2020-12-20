@@ -58,10 +58,10 @@ class Program_kerja extends CI_Controller
     }
 
     public function proker_tambah() {
-        $this->form_validation->set_rules('nama_kegiatan', 'nama_kegiatan', 'required');
-        $this->form_validation->set_rules('jadwal_pelaksanaan', 'jadwal_pelaksanaan', 'required');
-		$this->form_validation->set_rules('isi', 'isi', 'required');
-		$this->form_validation->set_rules('penanggung_jawab', 'penanggung_jawab', 'required');
+        $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required');
+        $this->form_validation->set_rules('jadwal_pelaksanaan', 'Jadwal Pelaksanaan', 'required');
+		$this->form_validation->set_rules('penanggung_jawab', 'Penanggung Jawab', 'required');
+		$this->form_validation->set_rules('isi', 'Deskripsi Kegiatan', 'required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			// cek nim ada atau tidak
@@ -110,10 +110,10 @@ class Program_kerja extends CI_Controller
     }
     
     public function proker_proses_ubah() {
-		$this->form_validation->set_rules('nama_kegiatan', 'nama_kegiatan', 'required');
-        $this->form_validation->set_rules('jadwal_pelaksanaan', 'jadwal_pelaksanaan', 'required');
-		$this->form_validation->set_rules('isi', 'isi', 'required');
-		$this->form_validation->set_rules('penanggung_jawab', 'penanggung_jawab', 'required');
+		$this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required');
+        $this->form_validation->set_rules('jadwal_pelaksanaan', 'Jadwal Pelaksanaan', 'required');
+		$this->form_validation->set_rules('penanggung_jawab', 'Penanggung Jawab', 'required');
+		$this->form_validation->set_rules('isi', 'Deskripsi Kegiatan', 'required');
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$jadwal_pelaksanaan = date("Y-m-d", strtotime($this->input->post('jadwal_pelaksanaan')));

@@ -57,6 +57,9 @@
 
                 
                
+            </div>    
+            </div>
+            </div>   
             </div>
             <div class="modal-footer-full-width  modal-footer">
                 <button type="button" class="btn btn-danger btn-lg btn-rounded" data-dismiss="modal">Batal</button>

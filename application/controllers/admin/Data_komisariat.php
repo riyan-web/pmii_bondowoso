@@ -15,8 +15,8 @@ class Data_komisariat extends CI_Controller
         $data['title'] = 'Data Komisariat';
         $data['sub_judul'] 			= "Komisariat"; 
         $data['sub2_judul'] 			= "Data Komisariat";
-		$data['deskripsi'] 		= "Komisariat";
-        $data['pagae']		= "model_komisariat";
+		$data['deskripsi'] 		= "";
+        $data['pagae']		= "data_komisariat";
         $data['jumlah_komisariat'] = $this->model_komisariat->jumlahKom();
         $data['modal_komisariat'] = show_my_modal_kustom('admin/modal/mdl_komisariat', 'komisariat', $data);
         $this->load->view('template/backend/header', $data);
@@ -40,11 +40,11 @@ class Data_komisariat extends CI_Controller
 			$datanya[]	= $row['nama'];
 			$datanya[]	= substr($row['isi'], 0, 150);
             if($row['foto'])
-				$datanya[] = '<a href="'.base_url('upload/komisariat/'.$row['foto']).'" target="_blank"><center><img src="'.base_url('upload/komisariat/'.$row['foto']).'" class="img-responsive" style="height:60px; width:50px" /></center></a>';
+				$datanya[] = '<a href="'.base_url('upload/komisariat/'.$row['foto']).'" title="bisa di klik,supaya besar!" target="_blank"><center><img src="'.base_url('upload/komisariat/'.$row['foto']).'" class="img-responsive" style="height:60px; width:50px" /></center></a>';
 			else
 				$datanya[] = '(No photo)'; 
 			$datanya[] = '<a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="komisariat_ubah('."'".$row['id']."'".')"><i class="fa fa-edit"></i></a>
-			  <button class="btn btn-danger btn-sm konfirmasiHapus-komisariat" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>';
+			  <button class="btn btn-danger btn-sm konfirmasiHapus-komisariat" data-id="'.$row['id'].'" title="hapus data " data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>';
 
 			$data[] = $datanya;
 		}
@@ -60,9 +60,9 @@ class Data_komisariat extends CI_Controller
 	}
 	
 	public function komisariat_tambah() {
-		$this->form_validation->set_rules('nama', 'nama', 'required');
-		$this->form_validation->set_rules('isi', 'isi', 'required');
-		$this->form_validation->set_rules('singkatan', 'singkatan', 'required'); 
+		$this->form_validation->set_rules('nama', 'Nama Komisariat', 'required');
+		$this->form_validation->set_rules('singkatan', 'Singkatan Komisariat', 'required'); 
+		$this->form_validation->set_rules('isi', 'Deskripsi Komisariat', 'required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			// cek nim ada atau tidak
@@ -109,9 +109,9 @@ class Data_komisariat extends CI_Controller
 
 
 	public function komisariat_proses_ubah() {
-		$this->form_validation->set_rules('nama', 'nama', 'required');
-		$this->form_validation->set_rules('isi', 'isi', 'required');
-		$this->form_validation->set_rules('singkatan', 'singkatan', 'required');
+		$this->form_validation->set_rules('nama', 'Nama Komisariat', 'required');
+		$this->form_validation->set_rules('singkatan', 'Singkatan Komisariat', 'required'); 
+		$this->form_validation->set_rules('isi', 'Deskripsi Komisariat', 'required');
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$data = array('nama' => $this->input->post('nama'),

@@ -1,12 +1,10 @@
-<div id="diagram"></div>
 
-  <script>
-    const diagram = new dhx.Diagram("diagram_container", {
-      type: "org",
-      defaultShapeType: "img-card",
-      scale: 0.9
-    });
-    diagram.data.load('http://localhost/pmii_bondowoso/assets/dhtmlx/data.json');
+const diagram = new dhx.Diagram("diagram_container", {
+  type: "org",
+  defaultShapeType: "img-card",
+  scale: 0.9
+});
+diagram.data.load('http://localhost/pmii_bondowoso/assets/dhtmlx/data.json');
 
 //     const template = ({ photo, name, post, phone, mail }) => (
 //     <div class="dhx-diagram-demo_personal-card">
@@ -27,5 +25,3 @@
 //       </div>
 //     </div>
 //   );
- </script>
-

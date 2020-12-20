@@ -49,15 +49,6 @@ class M_anggota extends CI_Model
 	// tutup cabang
 
 	// buka komisariat
-	public function anggota_by_kom($id)
-	{
-		$this->db->from($this->table);
-		$this->db->where('id', $id);
-		$query = $this->db->get();
-
-		return $query->row();
-	}
-
 	public function anggota_by_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
 	{
 		$sql = "SELECT (@row:=@row+1) AS nomora, tb_kader.id, kode_kartu, tb_kader.nama as nama_kader, alamat, tmp_lahir, tgl_lahir, no_hp, tahun_mapaba, tahun_pkd, tahun_pkl, tb_komisariat.nama as nama_komisariat, tb_kader.foto FROM tb_kader join tb_komisariat on tb_komisariat.id = tb_kader.komisariat_id,(SELECT @row := 0) r WHERE 1=1 AND komisariat_id = " . $this->session->userdata['id_komisariat'] . "";
@@ -111,9 +102,8 @@ class M_anggota extends CI_Model
 	public function anggota_tambah($data)
 	{
 		$this->db->insert($this->table, $data);
-		return $this->db->affected_rows();
+		return $this->db->insert_id();
 	}
-
 	public function anggota_ubah($data, $id)
 	{
 		return $this->db->update($this->table, $data, array('id' => $id));
@@ -123,5 +113,35 @@ class M_anggota extends CI_Model
 	{
 		$this->db->delete($this->table, array('id' => $id));
 		return $this->db->affected_rows();
+	}
+	public function anggota_by_id($id)
+	{
+		$this->db->from($this->table);
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	public function anggota_tambah_username($data){
+		$this->db->insert('tb_user', $data);
+		return $this->db->affected_rows();
+	}
+
+	public function cek_username($id)
+	{
+		$this->db->from('tb_user');
+		$this->db->where('kader_id', $id);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+	public function reset_user($data, $id)
+	{
+		return $this->db->update('tb_user', $data, array('kader_id' => $id));
+	}
+	public function username_hapus($id) 
+	{
+		$this->db->delete('tb_user', array('kader_id' => $id));
 	}
 }

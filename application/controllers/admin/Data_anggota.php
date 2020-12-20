@@ -18,7 +18,7 @@ class Data_anggota extends CI_Controller
             $data['jumlah_kader'] = $this->model_anggota->jumlah('tb_kader');
             $data['dataKomisariat'] = $this->model_komisariat->komisariat_all();
             $data['namaController'] = 'anggota_list';
-        }
+        } 
 
         if($this->session->userdata['jenis'] == 3) {
             $id_komisariat = $this->session->userdata['id_komisariat'];
@@ -27,11 +27,11 @@ class Data_anggota extends CI_Controller
             // $data['dataAnggota'] = $this->model_anggota->anggota_by_kom($id_komisariat);
             // $data['dataKomisariat'] = $this->model_komisariat->komisariat_by_id($id_komisariat);
         }
-        $data['title'] = 'Data anggota'; 
+        $data['title'] = 'Data anggota';
         $data['sub_judul'] 			= "Anggota";
         $data['sub2_judul'] 			= "Data Anggota";
 		$data['deskripsi'] 		= "Anggota";
-        $data['pagae']		= "model_anggota";
+        $data['pagae']		= "data_anggota";
         $data['modal_anggota'] = show_my_modal_besar('admin/modal/mdl_anggota', 'anggota', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
@@ -64,7 +64,7 @@ class Data_anggota extends CI_Controller
 			$datanya[] = '<a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="anggota_ubah('."'".$row['id']."'".')"><i class="fa fa-edit"></i></a>
 			  <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
 			  <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row['id']."'".')"><i class="fa fa-user"></i></a>
-			  <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota('."'".$row['id']."'".')"><i class="fa fa-key"></i></a>  
+			  <button class="btn btn-dark btn-sm konfirmasiReset-anggota" title="Reset Username dan password kedefault" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiReset"><i class="fa fa-key"></i></button> 
 			  <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row['id']."'".')"><i class="fa fa-info-circle"></i></a>
 			  ';
 			$data[] = $datanya;
@@ -104,7 +104,7 @@ class Data_anggota extends CI_Controller
 			$datanya[] = '<a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="anggota_ubah('."'".$row['id']."'".')"><i class="fa fa-edit"></i></a>
 			  <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
 			  <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row['id']."'".')"><i class="fa fa-user"></i></a>
-			  <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota('."'".$row['id']."'".')"><i class="fa fa-key"></i></a>  
+			  <button class="btn btn-dark btn-sm konfirmasiReset-anggota" title="Reset Username dan password kedefault" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiReset"><i class="fa fa-key"></i></button>
 			  <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row['id']."'".')"><i class="fa fa-info-circle"></i></a>
 			  ';
 
@@ -123,11 +123,11 @@ class Data_anggota extends CI_Controller
     // tutup komisariat
 
 	public function anggota_tambah() {
-		$this->form_validation->set_rules('nama_kader', 'nama_kader', 'required');
-		$this->form_validation->set_rules('tmp_lahir', 'tmp_lahir', 'required');
-		$this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
-		$this->form_validation->set_rules('no_hp', 'no_hp', 'trim|required|min_length[10]|max_length[15]');
-
+		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+		$this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required');
+		$this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('no_hp', 'Nomer HandPhone', 'trim|required|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[10]|max_length[15]');
 
 		if ($this->form_validation->run() == TRUE) {
 			$tgl =$this->input->post('tgl_lahir');
@@ -141,10 +141,9 @@ class Data_anggota extends CI_Controller
 				$maxKode = $kode + 1;
 			}		
 			$kode_kartu = $singkatan->singkatan.date("Ymd", strtotime($tgl)).sprintf("%05s",$maxKode);
-			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir')));
-			$password = date("Ymd",strtotime($this->input->post('tgl_lahir'))); 
+			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir'))); 
 			$data = array('kode_kartu' => $kode_kartu,
-							'nama_kader' => $this->input->post('nama'),
+							'nama' => $this->input->post('nama'),
 							'alamat' => $this->input->post('alamat'),
 							'no_hp' => $this->input->post('no_hp'),
 							'tmp_lahir' => $this->input->post('tmp_lahir'),
@@ -152,21 +151,36 @@ class Data_anggota extends CI_Controller
 							'tahun_mapaba' => $this->input->post('tahun_mapaba'),
 							'tahun_pkd' => $this->input->post('tahun_pkd'),
 							'tahun_pkl' => $this->input->post('tahun_pkl'),
-							'foto_kader' => $this->input->post('img'),
-							'komisariat_id' => $this->input->post('komisariat_id'),
-							'password' => $password
+							'foto' => $this->input->post('img'),
+							'komisariat_id' => $this->input->post('komisariat_id')
 						 );
-			// upload gambar
+			// upload gambar 
 			if (!empty($_FILES['img']['name'])) {
 				$upload = $this->_do_upload();
-				$data['foto_kader'] = $upload;
+				$data['foto'] = $upload;
 			}else{
-				$data['ffoto_kaderoto'] = "default.jpg";
+				$data['foto'] = "default.jpg";
 			}
-			$result = $this->model_anggota->anggota_tambah($data);
-					if ($result > 0) {
-						$out['status'] = '';
-						$out['msg'] = show_succ_msg('Kader <b>'. $this->input->post('nama').'</b> Berhasil ditambahkan', '20px');
+			$id = $this->model_anggota->anggota_tambah($data);
+					if ($id > 0) {
+						$username = $singkatan->singkatan.date("Ymd", strtotime($tgl)).sprintf("%05s",$maxKode);
+						$password = date("Ymd",strtotime($this->input->post('tgl_lahir')));
+						$up = array(
+							'username' => $username,
+							'password' => $password,
+							'tgl_update' => date('Y-m-d H:i:s'),
+							'jenis' => 1,
+							'komisariat_id' => 0,
+							'kader_id' => $id
+						);
+						$hasil = $this->model_anggota->anggota_tambah_username($up);
+						if ($hasil > 0){
+							$out['status'] = '';
+							$out['msg'] = show_succ_msg('Data Anggota dan Username Berhasil ditambahkan, silahkan cek username di tombol detail username', '20px');
+						}else{
+							$out['status'] = '';
+							$out['msg'] = show_err_msg('Data Anggota Gagal ditambahkan', '20px');
+						}
 					} else {
 						$out['status'] = '';
 						$out['msg'] = show_err_msg('Data Anggota Gagal ditambahkan', '20px');
@@ -180,19 +194,20 @@ class Data_anggota extends CI_Controller
 
 	public function anggota_ubah($id) {
 		// ini function untuk menampilkan kedalam form field 
-		$data = $this->model_anggota->anggota_by_kom($id);
+		$data = $this->model_anggota->anggota_by_id($id);
 		echo json_encode($data);
 	}
 
 	public function anggota_proses_ubah() {
-		$this->form_validation->set_rules('nama_kader', 'nama_kader', 'required');
-		$this->form_validation->set_rules('tmp_lahir', 'tmp_lahir', 'required');
-		$this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
-		$this->form_validation->set_rules('no_hp', 'no_hp', 'trim|required|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+		$this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required');
+		$this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('no_hp', 'Nomer HandPhone', 'trim|required|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[10]|max_length[15]');
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir')));
-			$data = array('nama_kader' => $this->input->post('nama'),
+			$data = array('nama' => $this->input->post('nama'),
 							'alamat' => $this->input->post('alamat'),
 							'no_hp' => $this->input->post('no_hp'),
 							'tmp_lahir' => $this->input->post('tmp_lahir'),
@@ -200,7 +215,7 @@ class Data_anggota extends CI_Controller
 							'tahun_mapaba' => $this->input->post('tahun_mapaba'),
 							'tahun_pkd' => $this->input->post('tahun_pkd'),
 							'tahun_pkl' => $this->input->post('tahun_pkl'),
-							'foto_kader' => $this->input->post('img'),
+							'foto' => $this->input->post('img'),
 							'komisariat_id' => $this->input->post('komisariat_id')
 						);
 			$remove_photo = $this->input->post('remove_photo');
@@ -208,7 +223,7 @@ class Data_anggota extends CI_Controller
 			{
 				if(file_exists('upload/kader/'.$this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo !="default.jpg")){
 					unlink('upload/kader/'.$this->input->post('remove_photo'));
-					$data['fotfoto_kadero'] = '';
+					$data['foto'] = '';
 				}
 				
 			}
@@ -221,19 +236,19 @@ class Data_anggota extends CI_Controller
 				if(file_exists('upload/kader/'.$anggota->foto) && $anggota->foto)
 					unlink('upload/kader/'.$anggota->foto);
 
-				$data['foto_kader'] = $upload;
+				$data['foto'] = $upload;
 			}else{
-				$data['foto_kader'] = $this->input->post('foto_lama');
+				$data['foto'] = $this->input->post('foto_lama');
 			}
 			$id = $this->input->post('id');
 			$result = $this->model_anggota->anggota_ubah($data, $id);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Komisariat Berhasil diubah', '20px');
+				$out['msg'] = show_succ_msg('Data Anggota Berhasil diubah', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Komisariat Gagal diubah', '20px');
+				$out['msg'] = show_succ_msg('Data Anggota Gagal diubah', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -244,27 +259,41 @@ class Data_anggota extends CI_Controller
 	}
 	public function anggota_hapus() {
 		$id = $_POST['id'];
-		$ray = $this->model_anggota->anggota_by_kom($_POST['id']);
-		$data = array('foto_kader' => $ray->foto );				
-		if (file_exists('upload/kader/'.$data['foto_kader']) && $data['foto_kader'] && $data['foto'] !="default.jpg") {
-			unlink('upload/kader/'.$data['foto_kader']);
+		$ray = $this->model_anggota->anggota_by_id($_POST['id']);
+		$data = array('foto' => $ray->foto );				
+		if (file_exists('upload/kader/'.$data['foto']) && $data['foto'] && $data['foto'] !="default.jpg") {
+			unlink('upload/kader/'.$data['foto']);
 		}
 		$result = $this->model_anggota->anggota_hapus($id);
-
+		$hapusSer = $this->model_anggota->username_hapus($_POST['id']);
 		if ($result > 0) {
 			//delete file
 			
-			echo show_succ_msg( 'Data Komisariat Berhasil dihapus', '20px');
+			echo show_succ_msg( 'Data Anggota Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg($id.'Data Komisariat Gagal dihapus', '20px');
+			echo show_err_msg($id.'Data Anggota Gagal dihapus', '20px');
 		}
 	}
 
 	public function detail_username($id){
-		$data = $this->model_anggota->anggota_by_kom($id);
+		$data = $this->model_anggota->cek_username($id);
 		echo json_encode($data);
 	}
 
+	public function reset_anggota(){
+		$id = $_POST['id'];
+		$dader = $this->model_anggota->anggota_by_id($id);
+		$data = array(
+						'username' => $dader->kode_kartu,
+						'password' => date("Ymd", strtotime($dader->tgl_lahir))
+		);
+		$result = $this->model_anggota->reset_user($data, $_POST['id']);
+		if ($result > 0) {
+			echo show_succ_msg( 'Data Username dan Password Berhasil di Reset', '20px');
+		} else {
+			echo show_err_msg($id.'Data Username dan Password  Gagal di Reset', '20px');
+		}
+	}
 	private function _do_upload()
 	{
 		$config['upload_path']          = 'upload/kader';
