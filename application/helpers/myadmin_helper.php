@@ -100,7 +100,7 @@ function show_my_modal($content='', $id='', $data='', $size='md') {
 
 		if ($id != '') {
 			echo   '<div class="modal fade" id="' .$id .'" role="dialog">
-					  <div class="modal-dialog modal-lg" role="document">
+					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
 					        <div class="col-md-12 ">
 						      <h3 style="display:block; text-align:center;">' .$title .'</h3><br>

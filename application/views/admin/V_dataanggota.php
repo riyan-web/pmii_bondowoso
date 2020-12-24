@@ -11,7 +11,7 @@
             <div class="row">
               <!-- : sebanyak <i class="text-danger"><?= $jumlah_kader; ?></i> Kader -->
               <strong class="col-md-10 card-title"><?= $sub2_judul ?> </strong>
-              <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_anggota()"><i class="fa fa-plus-square"></i> Tambah Data</button>
+              <button class="col-md-2 btn btn-sm btn-primary" title="Tambah Data Baru" onclick="tambah_anggota()"><i class="fa fa-plus-square"></i> Tambah Data</button>
             </div>
           </div>
           <div class="card-body">
@@ -46,6 +46,7 @@
 
 <?= $modal_anggota; ?>
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataAnggota', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
+<?php show_my_confirm('konfirmasiReset', 'reset-dataAnggota', 'Reset Username Dan Password Data Ini?', 'Ya, Reset Data Ini'); ?>
 <script>
   var dataTable;
   $(document).ready(function() {
@@ -80,6 +81,10 @@
         {
           "targets": [4],
           "orderable": false,
+        },
+        {
+          "targets": [2],
+          "visible": false,
         }
       ],
       "sPaginationType": "simple_numbers",
@@ -265,7 +270,7 @@
       dataType: "JSON",
       success: function(data) {
 
-        $('[name="username"]').val(data.kode_kartu);
+        $('[name="username"]').val(data.username);
         $('[name="password"]').val(data.password);
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -273,6 +278,28 @@
       }
     });
   }
+
+  // reset data
+  var id_reset;
+  $(document).on("click", ".konfirmasiReset-anggota", function() {
+    id_reset = $(this).attr("data-id");
+  })
+  $(document).on("click", ".reset-dataAnggota", function() {
+    var id_resetnya = id_reset;
+
+    $.ajax({
+        method: "POST",
+        url: "<?= base_url('admin/data_anggota/reset_anggota'); ?>",
+        data: "id=" + id_resetnya
+      })
+      .done(function(data) {
+        $('#konfirmasiReset').modal('hide');
+        $('.msg').html(data);
+        effect_msg();
+        reload_table();
+      })
+  })
+  // tutup reset
 </script>
 
 <!-- modal username -->

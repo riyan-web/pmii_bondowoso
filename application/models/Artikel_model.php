@@ -12,11 +12,12 @@ class Artikel_model extends CI_Model
 
     public function artikel_all_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
     {
-        $sql = "SELECT (@row:=@row+1) AS nomora, id_konten , judul, isi_konten , jeniskonten_id, foto_artikel, tgl_buat  , kader_id, 
+        $sql = "SELECT (@row:=@row+1) AS nomora, id_konten, judul, isi_konten, foto_artikel, tgl_buat, tb_konten.kader_id, 
         jeniskonten.nama_jenis as nama_jenis, tb_kader.nama as nama_kader 
-        FROM tb_konten join tb_kader on tb_kader.id = tb_konten.kader_id,
-        JOIN jeniskonten on jeniskonten.id = tb_konten.jeniskonten_id,
-        (SELECT @row := 0) r WHERE 1=1 ";
+        FROM tb_konten join tb_kader on tb_kader.id = tb_konten.kader_id
+        JOIN jeniskonten ON  tb_konten.jeniskonten_id = jeniskonten.id
+        JOIN subjeniskonten ON jeniskonten.id = subjeniskonten.jeniskonten_id,
+        (SELECT @row := 0) r WHERE 1=1 AND subjeniskonten.nama = 'artikel' ";
 
         $data['totalData'] = $this->db->query($sql)->num_rows();
         if (!empty($like_value)) {
@@ -27,7 +28,7 @@ class Artikel_model extends CI_Model
                 OR jeniskonten.nama_jenis LIKE '%" . $this->db->escape_like_str($like_value) . "%'  
                 OR tb_kader.nama LIKE '%" . $this->db->escape_like_str($like_value) . "%'  
 			";
-            $sql .= " ) ";
+            $sql .= " ) "; 
         }
 
         $data['totalFiltered']    = $this->db->query($sql)->num_rows();

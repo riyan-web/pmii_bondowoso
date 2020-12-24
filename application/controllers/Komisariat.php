@@ -14,6 +14,7 @@ class Komisariat  extends CI_Controller
         $this->load->model('m_artikel');
         $this->load->model('m_berita');
         $this->load->model('m_struktur');
+        $this->load->model('m_proker');
     }
 
     public function unej_bondowoso()
@@ -45,9 +46,11 @@ class Komisariat  extends CI_Controller
     }
     public function wahid_hasyim()
     {
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
+        $id_kom = 5;
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/wahid_hasyim'); //site url
-        $count = $this->m_artikel->get_count();
+        $count = $this->m_artikel->get_count_by_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_artikel']; //total row
         $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
@@ -78,12 +81,12 @@ class Komisariat  extends CI_Controller
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         //panggil function get_mahasiswa_list yang ada pada model m_artikel . 
-        $data['artikel'] = $this->m_artikel->get_artikel_list($config["per_page"], $data['page']);
+        $data['artikel'] = $this->m_artikel->get_artikel_list_by_komisariat($config["per_page"], $data['page'], $id_kom);
 
         $data['pagination'] = $this->pagination->create_links();
         $data['title'] = 'Profile Komisariat Politeknik Jember - Kampus Bondowoso';
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 2])->row_array();
+        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
+        $data['struktur'] = $this->m_struktur->getStrukturKomisariat($id_kom)->result();
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);

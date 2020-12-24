@@ -22,7 +22,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
           <li><a href=<?= base_url('beranda') ?>>Beranda</a></li>
           <li>Berita</li>
         </ol>
-      </div> 
+      </div>
 
     </div>
   </section><!-- End Breadcrumbs -->
@@ -38,7 +38,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
             <article class="entry" data-aos="fade-up">
 
               <div class="entry-img">
-                <img src="<?php echo base_url('assets/frontend/img/img_berita/') . $ber->foto_artikel; ?>" alt="" class="img-fluid">
+                <img src="<?php echo base_url('upload/berita/') . $ber->foto_artikel; ?>" alt="" class="img-fluid">
               </div>
 
               <h2 class="entry-title">
@@ -72,7 +72,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
                   <div class="modal-header">
                     <h3 class="modal-title"><?php echo $ber->judul ?></h3>
                   </div>
-                  <img src="<?php echo base_url('assets/frontend/img/img_berita/') . $ber->foto_artikel; ?>" class="img-fluid" alt="">
+                  <img src="<?php echo base_url('upload/berita/') . $ber->foto_artikel; ?>" class="img-fluid" alt="">
                   <!-- body modal -->
                   <div class="modal-body">
                     <?php echo $ber->isi_konten . "..."; ?>
@@ -168,7 +168,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
               <?php foreach ($recent_post as $post) { ?>
                 <div class="post-item clearfix">
                   <img src="" alt="" class="img-fluid">
-                  <img src="<?php echo base_url('assets/frontend/img/img_berita/') . $post->foto_artikel; ?>" alt="">
+                  <img src="<?php echo base_url('upload/berita/') . $post->foto_artikel; ?>" alt="">
                   <h4>
                     <a href="  <?php echo $post->judul; ?>" data-toggle="modal" data-target="#myModal2<?php echo $post->id_konten; ?>">
                       <?php echo $post->judul; ?></a>
@@ -194,7 +194,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
                 <div class="modal-header">
                   <h3 class="modal-title"><?php echo $modal['judul'] ?></h3>
                 </div>
-                <img src="<?php echo base_url('assets/frontend/img/img_berita/') . $modal['foto_artikel']; ?>" class="img-fluid" alt="">
+                <img src="<?php echo base_url('upload/berita') . $modal['foto_artikel']; ?>" class="img-fluid" alt="">
                 <!-- body modal -->
                 <div class="modal-body">
                   <?php echo $modal['isi_konten'] . "..."; ?>

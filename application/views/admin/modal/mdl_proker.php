@@ -3,10 +3,8 @@
             <div class="modal-header-full-width   modal-header text-center">
             <div class="row">
               <div class="col-md-12">
-                <div class="form-msg"></div>
-              </div>
-            </div>
-              <h3 style="text-align:center;" class="modal-title w-100">Data Proker</h3>
+              <div class="form-msg"></div>
+              <h3 style="display:block;text-align:center;" class="modal-title w-100">Data Proker</h3>
               <button type="button" class="close btn-danger text-r" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <br>
             </div>
@@ -62,8 +60,9 @@
                 </div>
 
 
-                
-               
+            </div>    
+            </div>
+            </div>   
             </div>
             <div class="modal-footer-full-width  modal-footer">
                 <button type="button" class="btn btn-danger btn-lg btn-rounded" data-dismiss="modal">Batal</button>
@@ -130,5 +129,3 @@
                 border-top: 1px solid #9ea2a2 !important;
             }
             </style>
-
-        </div>  

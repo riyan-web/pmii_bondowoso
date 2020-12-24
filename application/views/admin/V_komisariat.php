@@ -16,7 +16,7 @@
               <table id="tb_komisariat"  class="table table-striped table-bordered">
                 <thead class="thead-dark">
                   <tr>
-                    <th>No</th>
+                    <th width="1">No</th>
                     <!-- <th class="text-center"><i class="fa fa-plus"></i></th> -->
                     <th>Nama</th>
                     <th>Deskripsi</th>
@@ -78,6 +78,10 @@ $(document).ready(function() {
         { 
           "targets": [ -3 ],
           "orderable": false, 
+        },
+        { 
+          "targets": [ 2 ],
+          "visible": false, 
         }
           ],
       "sPaginationType": "simple_numbers", 

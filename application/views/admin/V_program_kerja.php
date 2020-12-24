@@ -18,7 +18,7 @@
               <thead>
                 <tr class="thead-dark" align="center">
                   <th style="width: 30px;">No.</th>
-                  <th>Nama Kegiatan</th>
+                  <th>Nama Kegiatan</th> 
                   <th>Jadwal Pelaksanaan</th>
                   <th>Penanggung jawab</th>
                   <th style="width:150px;">Action</th>
