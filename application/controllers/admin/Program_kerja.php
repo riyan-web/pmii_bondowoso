@@ -8,7 +8,7 @@ class Program_kerja extends CI_Controller
         parent::__construct();
         cek_akses();
         $this->load->model('admin/M_proker', 'model_proker');
-        $this->load->helper('myadmin');
+        $this->load->helper('myadmin'); 
     }
     public function index()
     {
@@ -182,7 +182,7 @@ class Program_kerja extends CI_Controller
 		}
 	}
 
-    private function _do_upload()
+    private function _do_upload() 
 		{
 			$config['upload_path']          = 'upload/proker';
 	        $config['allowed_types']        = 'gif|jpg|png|jpeg';
