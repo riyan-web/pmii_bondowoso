@@ -4,24 +4,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Artikel extends CI_Controller
 {
     public function __construct()
-    {   
+    {    
         parent::__construct();
         cek_akses();
-        $this->load->model('artikel_model');
+        $this->load->model('admin/M_artikel', 'model_artikel');
         $this->load->helper('myadmin');
     }
+    
     public function index()
     {
         $data['user'] = $this->db->get_where('tb_user', ['username' =>
         $this->session->userdata('username')])->row_array();
         $data['title'] = 'Artikel ';
-        $data['namaController'] = 'artikel_list';
         $data['sub_judul']             = "artikel";
-        $data['sub2_judul']             = "Data Artikel";
+        $data['sub2_judul']             = "Data Semua Artikel";
         $data['deskripsi']         = "Artikel";
         $data['pagae']        = "artikel";
-        $data['konten2'] = $this->db->get_where('tb_konten', ['user_id' =>
+        if($this->session->userdata['jenis'] == 1) {
+            $data['konten2'] = $this->db->get_where('tb_konten', ['user_id' =>
         $this->session->userdata('user_id')])->result();
+        }  
+        
         $data['modal_artikel'] = show_my_modal_kustom('admin/modal/mdl_artikel', 'artikel', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
@@ -33,7 +36,7 @@ class Artikel extends CI_Controller
     public function artikel_list()
     {
         $requestData    = $_REQUEST;
-        $fetch            = $this->artikel_model->artikel_all_data($requestData['search']['value'], $requestData['order'][0]['column'], $requestData['order'][0]['dir'], $requestData['start'], $requestData['length']);
+        $fetch            = $this->model_artikel->artikel_data($requestData['search']['value'], $requestData['order'][0]['column'], $requestData['order'][0]['dir'], $requestData['start'], $requestData['length']);
         $totalData        = $fetch['totalData'];
         $totalFiltered    = $fetch['totalFiltered'];
         $query            = $fetch['query'];
@@ -43,14 +46,20 @@ class Artikel extends CI_Controller
             $datanya = array();
             $datanya[]    = $row['nomora'];
             $datanya[]    = $row['judul'];
-            $datanya[]    = $row['isi_konten'];
             $datanya[]    = $row['nama_jenis'];
-            $datanya[]    = $row['tmp_lahir'];
-            $datanya[] = '<a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="anggota_ubah(' . "'" . $row['id'] . "'" . ')"><i class="fa fa-edit"></i></a>
-			  <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="' . $row['id'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
-			  <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username(' . "'" . $row['id'] . "'" . ')"><i class="fa fa-user"></i></a>
-			  <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota(' . "'" . $row['id'] . "'" . ')"><i class="fa fa-key"></i></a>  
-			  <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota(' . "'" . $row['id'] . "'" . ')"><i class="fa fa-info-circle"></i></a>
+
+            if($row['status'] == 2)
+                $datanya[]    = '<label class="badge badge-success">Aktif</label>';
+            else if($row['status'] == 1)
+                $datanya[]    = '<label class="badge badge-secondary">Menunggu</label>';
+            else
+                $datanya[]    = '<label class="badge badge-danger">Tidak Aktif</label>';
+
+            $datanya[] = '
+            <a class="btn btn-secondary btn-sm" href="javascript:void(0)" title="List Komentar artikel" onclick="listKomen(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-comments"></i></a>
+            <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel('."'".$row['id_konten']."'".')"><i class="fa fa-align-justify"></i></a>
+            <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="anggota_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
+			  <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
 			  ';
             $data[] = $datanya;
         }
@@ -65,6 +74,9 @@ class Artikel extends CI_Controller
         echo json_encode($json_data);
     }
 
+
+
+    // untuk kader
     public function artikel_tambah()
     {
         $this->form_validation->set_rules('judul', 'judul', 'required');
@@ -73,13 +85,13 @@ class Artikel extends CI_Controller
 
 
         if ($this->session->userdata['jenis'] == 1) {
-            $status = 1;
+            $status = '1';
         } else {
-            $status = 2;
+            $status = '2';
         }
         if ($this->form_validation->run() == TRUE) {
             // cek nim ada atau tidak
-            $cek = $this->artikel_model->nama_cek($this->input->post('judul'));
+            $cek = $this->model_artikel->nama_cek($this->input->post('judul'));
             if ($cek > 0) {
                 $out['status'] = 'form';
                 $out['msg'] = show_err_msg('Judul Artikel tersebut sudah terdaftar');
@@ -103,7 +115,7 @@ class Artikel extends CI_Controller
                     $data['foto_artikel'] = "default.jpg";
                 }
 
-                $result = $this->artikel_model->artikel_tambah($data);
+                $result = $this->model_artikel->artikel_tambah($data);
                 if ($result > 0) {
                     $out['status'] = '';
                     $out['msg'] = show_succ_msg('Artikel Berhasil ditambahkan, Untuk selanjutnya tunggu persetujuan admin', '20px');
@@ -194,6 +206,7 @@ class Artikel extends CI_Controller
             echo show_err_msg($id . 'Data Komisariat Gagal dihapus', '20px');
         }
     }
+    // tutup kader
     private function _do_upload()
     {
         $config['upload_path']          = 'upload/artikel';

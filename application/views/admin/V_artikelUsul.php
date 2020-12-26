@@ -1,44 +1,3 @@
-<?php if ($user['jenis'] == 1) {
-?><div class="msg" style="display:none;">
-        <?= @$this->session->flashdata('msg'); ?>
-    </div>
-    <div id="right-panel" class="right-panel">
-        <div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card ">
-                            <div class="card-header">
-                                <div class="row">
-                                    <strong class="col-md-10 card-title"><?= $sub2_judul ?></strong>
-                                    <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_artikel()"><i class="fa fa-plus-square"></i> Tambah Artikel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php foreach ($konten2 as $ktn) : ?>
-
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img class="card-img-top" src="<?php echo base_url('upload/artikel/') . $ktn->foto_artikel; ?>" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title mb-3"><?php echo $ktn->judul; ?></h4>
-                                    <p class="card-text"><?php echo $ktn->isi_konten; ?></p>
-                                    <p class="card-text"><?php if($ktn->status == 1 ) {echo "<label class='badge badge-secondary'>Menunggu Konfirmasi Admin!</label>"; } else if ($ktn->status == 2){echo "<label class='badge badge-success'>Diterbitkan!</label>";}else if($ktn->status == 3){echo "<label class='badge badge-warning'>Tidak diterbikan oleh admin</label>";} else{ echo"<label class='badge badge-danger'>Ditolak!</label>";} ?></p>
-                                </div>
-                            </div>
-                            <a class="btn btn-warning btn-sm" title="Ubah" onclick="artikel_ubah(<?php echo $ktn->id_konten ?>)"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
-                            <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row[' id']."'".')"><i class="fa fa-user"></i></a>
-                            <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota('."'".$row[' id']."'".')"><i class="fa fa-key"></i></a>
-                            <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row[' id']."'".')"><i class="fa fa-info-circle"></i></a>
-                        </div>
-                    <?php endforeach; ?>
-                </div><!-- .row -->
-            </div><!-- .animated -->
-        </div><!-- .content -->
-    </div><!-- /#right-panel -->
-<?php } else { ?>
     <div class="msg" style="display:none;">
         <?= @$this->session->flashdata('msg'); ?>
     </div>
@@ -51,11 +10,10 @@
                         <div class="card-header">
                             <div class="row">
                                 <strong class="col-md-10 card-title"><?= $sub2_judul ?></strong>
-                                <button class="col-md-2 btn btn-sm btn-primary" onclick="tambah_artikel()"><i class="fa fa-plus-square"></i> Tambah Artikel</button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="tb_artikel" class="table table-bordered table-striped">
+                            <table id="tb_artikelSul" class="table table-bordered table-striped">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>No</th>
@@ -75,13 +33,12 @@
             </div>
         </div>
     </div>
-<?php } ?>
-<?= $modal_artikel; ?>
-<?php show_my_confirm('konfirmasiHapus', 'hapus-dataKomisariat', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
+<?= $modal_artikel ?>
+<?php show_my_confirm('konfirmasiTolak', 'tolak-artikelUsulan', 'Yakin menolak Artikel Ini?', 'Ya, Tolak artikel Ini'); ?>
 <script>
     var dataTable;
     $(document).ready(function() {
-        dataTable = $('#tb_artikel').DataTable({
+        dataTable = $('#tb_artikelSul').DataTable({
             "serverSide": true,
             "stateSave": false,
             "bAutoWidth": true,
@@ -99,7 +56,7 @@
                 }
             },
             "aaSorting": [
-                [0, "desc"]
+                [3, "asc"]
             ],
             "columnDefs": [{
                     "targets": 'no-sort',
@@ -117,7 +74,7 @@
                 [10, 20, 50, 100, 150]
             ],
             "ajax": {
-                url: "<?= base_url('admin/artikel/artikel_list'); ?>",
+                url: "<?= base_url('admin/artikel_usulan/artikelSul_list'); ?>",
                 type: "post",
                 error: function() {
                     $(".my-grid-error").html("");
@@ -154,49 +111,37 @@
         dataTable.ajax.reload(null, false); //refresh table
     }
 
-    function tambah_artikel() {
-        save_method = 'tambahArtikel';
-        $('#form-artikel')[0].reset();
-        $('#usul').hide();
-        $('#artikel').modal('show');
-        $('.form-msg').html('');
-        $('.modal-title').text('Tambah Artikel Baru');
-        $('#label-foto').text('Upload Foto'); // merubah label
-        $('#foto-preview').hide(); //menyembunyikan foto sebelumnya
-        $('#imgOne').html('<img id="preview" alt="" class="img-responsive" width="60%" />');
-    }
 
-    function artikel_ubah(id) {
-        save_method = 'ubahArtikel';
+    function artikelSul_koresi(id) {
+        save_method = 'koreksi_artikel';
         $('#form-artikel')[0].reset();
         $('#artikel').modal('show');
-        $('#usul').hide();
         $('.form-msg').html('');
         $('#foto-preview').show(); //mengeluarkan foto sebelumny
-        $('.modal-title').text('Ubah Data Artikel');
+        $('.modal-title').text('Konfirmasi Artikel Usulan dari Kader');
+        $('#btnSimpan').text('Terima dan Simpan!');
         $('#imgOne').html('<img id="preview" alt=""  width="60%" class="img-responsive" />');
-        // $('#nim').attr('readonly',true);$('#prodi').hide();$('#angkatan').hide();$('#keterangan').hide();
-
+    
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?= site_url('admin/artikel/artikel_ubah') ?>/" + id,
+            url: "<?= site_url('admin/artikel_usulan/artikelSul_koresi') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
 
-                $('[name="id"]').val(data.id);
-                $('[name="nama"]').val(data.nama);
-                $('[name="singkatan"]').val(data.singkatan);
-                //  $('[name="isi"]').val(data.isi);
-                CKEDITOR.instances.isi.setData(data.isi);
-                $('[name="foto_lama"]').val(data.foto);
+                $('[name="id"]').val(data.id_konten);
+                $('[name="judul"]').val(data.judul);
+                $('[name="jenis"]').val(data.jeniskonten_id);
+                $('[name="pengusul"]').val(data.nama);
+                CKEDITOR.instances.isi.setData(data.isi_konten);
+                $('[name="foto_lama"]').val(data.foto_artikel);
                 // $('#foto-preview').show(); // show photo preview modal
 
-                if (data.foto) {
+                if (data.foto_artikel) {
                     $('#label-foto').text('Ubah foto'); // label foto upload
-                    $('#foto-preview div').html('<img src="<?= base_url() ?>upload/komisariat/' + data.foto + '" class="img-responsive">'); // show photo
-                    $('#foto-preview div').append('<input type="checkbox" name="remove_photo" value="' + data.foto + '"/> hapus foto ketika disimpan'); // remove photo
+                    $('#foto-preview div').html('<img src="<?= base_url() ?>upload/artikel/' + data.foto_artikel + '" class="img-responsive">'); // show photo
+                    $('#foto-preview div').append('<input type="checkbox" name="remove_photo" value="' + data.foto_artikel + '"/> hapus foto ketika disimpan'); // remove photo
 
                 } else {
                     $('#label-foto').text('Upload Photo'); // label photo upload
@@ -212,11 +157,9 @@
     function simpan() {
         var url;
 
-        if (save_method == 'tambahArtikel') {
-            url = "<?= site_url('admin/artikel/artikel_tambah') ?>";
-        } else {
-            url = "<?= site_url('admin/artikel/artikel_proses_ubah') ?>";
-        }
+        if (save_method == 'koreksi_artikel') {
+            url = "<?= site_url('admin/artikel_usulan/artikelSul_terima') ?>";
+        } 
         CKEDITOR.instances['isi'].updateElement();
         // for (instance in CKEDITOR.instances) 
         //   {

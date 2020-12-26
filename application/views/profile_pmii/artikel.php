@@ -89,7 +89,7 @@
                                 <div class="modal-header">
                                     <h3 class="modal-title"><?php echo $art->judul ?></h3>
                                 </div>
-                                <img src="<?php echo base_url('uplaod/artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
+                                <img src="<?php echo base_url('upload/artikel/') . $art->foto_artikel; ?>" class="testimonial-img" alt="">
                                 <!-- body modal -->
                                 <div class="modal-body">
                                     <?php echo $art->isi_konten . "..."; ?>
