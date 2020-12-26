@@ -31,7 +31,8 @@
                             <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
                             <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row[' id']."'".')"><i class="fa fa-user"></i></a>
                             <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota('."'".$row[' id']."'".')"><i class="fa fa-key"></i></a>
-                            <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row[' id']."'".')"><i class="fa fa-info-circle"></i></a>
+                            <a class="btn btn-sm-primary" href="<?php echo base_url('admin/data_anggota/pdf') ?>"> <i class="fa fa-file"></i> Export PDF</a>
+                            <!-- <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row[' id']."'".')"><i class="fa fa-info-circle"></i></a> -->
                         </div>
                     <?php endforeach; ?>
                 </div><!-- .row -->

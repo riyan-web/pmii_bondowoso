@@ -12,9 +12,9 @@ class Beranda extends CI_Controller
         //load the department_model
 
         $this->load->model('m_artikel');
-        $this->load->model('m_proker'); 
+        $this->load->model('m_proker');
         $this->load->model('m_berita');
-        $this->load->model('m_struktur'); 
+        $this->load->model('m_struktur');
     }
 
     public function index()
@@ -79,7 +79,7 @@ class Beranda extends CI_Controller
         $data['title'] = 'Artikel';
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
-        $this->load->view('profile_pmii/artikel', $data); 
+        $this->load->view('profile_pmii/artikel', $data);
         $this->load->view('template/frontend/footer', $data);
     }
 

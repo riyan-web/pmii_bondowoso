@@ -314,4 +314,21 @@ class Data_anggota extends CI_Controller
 		}
 		return $this->upload->data('file_name');
 	}
+
+	public function pdf(){
+		$this->load->library('dompdf_gen');
+
+		$data['anggota'] = $this->m_anggota->tampil_data('tb_kader')->result();
+
+		$this->load->view('laporan_pdf',$data);
+
+		$paper_size = 'A4';
+		$orientation = 'landscape';
+		$html = $this->output->get_output();
+		$this->dompdf->set_papper($paper_size, $orientation);
+
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		$this->dompdf->stream("kartu_anggota.pdf", array('Attachment' =>0));
+	}
 }
