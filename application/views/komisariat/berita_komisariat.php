@@ -17,10 +17,10 @@ $berita_baru = $this->db->query($query_berita)->result();
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Berita</h2>
+        <h2>Berita Komisariat</h2>
         <ol>
           <li><a href=<?= base_url('beranda') ?>>Beranda</a></li>
-          <li>Berita</li>
+          <li>Berita Komisariat</li>
         </ol>
       </div>
 
