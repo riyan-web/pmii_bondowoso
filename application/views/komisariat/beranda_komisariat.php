@@ -33,6 +33,48 @@
 
         </div>
     </section><!-- End About Us Section -->
+    <!-- ======= Section Menu Center======= -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="fade-up">
+                        <h3>Berita Komisariat</h3>
+                        <h4>Berisi Berita Tentang Komisariat</h4>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="fade-up">
+                        <h3>Program Kerja</h3>
+                        <h4>Berisi Program Kerja Komisariat</h4>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="fade-up">
+                        <h3>Artikel</h3>
+                        <h4>Berisi Artikel Kader komisariat</h4>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </section><!-- End Section Menu Center -->
 
     <!-- ======= Program Kerja Section ======= -->
     <section id="cta-pricing" class="cta-pricing">
