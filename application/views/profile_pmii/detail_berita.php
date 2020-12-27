@@ -51,7 +51,7 @@ $query_berita = "SELECT *
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
                 JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
                 JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
+                WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita'
                 ORDER BY `tb_konten`.`id_konten` DESC LIMIT 6
                 ";
 $berita_terbaru = $this->db->query($query_berita)->result();

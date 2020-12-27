@@ -33,7 +33,7 @@
                             </p>
                         </div>
                     </div>
-                <?php } ?>
+                <?php } ?> 
             </div>
         </div>
         <div class="blog-pagination">

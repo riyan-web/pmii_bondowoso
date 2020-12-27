@@ -10,7 +10,7 @@ class M_artikel extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel' ORDER BY RAND()", $limit, $start);
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'artikel' ORDER BY `tb_konten`.`id_konten` DESC", $limit, $start);
     }
     function get_count()
     {
@@ -18,7 +18,7 @@ class M_artikel extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel'";
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'artikel'";
 
         return $this->db->query($query_count)->row_array();
     }
@@ -29,7 +29,7 @@ class M_artikel extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel' AND `tb_user`.`komisariat_id` = $id_kom  ORDER BY RAND()", $limit, $start);
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'artikel' AND `tb_user`.`komisariat_id` = $id_kom  ORDER BY RAND()", $limit, $start);
     }
     function get_count_by_komisariat($id_kom)
     {
@@ -37,7 +37,7 @@ class M_artikel extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'artikel' AND  `tb_user`.`komisariat_id` = $id_kom";
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'artikel' AND  `tb_user`.`komisariat_id` = $id_kom";
 
         return $this->db->query($query_count)->row_array();
     }

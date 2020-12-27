@@ -44,7 +44,7 @@
                         <h3>Berita Komisariat</h3>
                         <h4>Berisi Berita Tentang Komisariat</h4>
                         <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Kunjungi</a>
+                            <a href="<?php echo base_url() ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ $query_berita = "SELECT *
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
                 JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
                 JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
+                WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita'
                 ORDER BY `tb_konten`.`id_konten` DESC LIMIT 6
                 ";
 $berita_baru = $this->db->query($query_berita)->result();
@@ -118,7 +118,7 @@ $berita_baru = $this->db->query($query_berita)->result();
                             FROM `tb_konten`
                             JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
                             JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'opini'
+                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'opini'
                             ";
                       $opini = $this->db->query($jum_opini)->row_array();
                       echo "(" . $opini['jumlah'] . ")";
@@ -130,7 +130,7 @@ $berita_baru = $this->db->query($query_berita)->result();
                             FROM `tb_konten`
                             JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
                             JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'investigasi'
+                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'investigasi'
                             ";
                       $investigasi = $this->db->query($jum_investigasi)->row_array();
                       echo "(" . $investigasi['jumlah'] . ")";
@@ -142,7 +142,7 @@ $berita_baru = $this->db->query($query_berita)->result();
                             FROM `tb_konten`
                             JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
                             JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'interpretative'
+                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'interpretative'
                             ";
                       $interpretative = $this->db->query($jum_interpretative)->row_array();
                       echo "(" . $interpretative['jumlah'] . ")";
@@ -154,7 +154,7 @@ $berita_baru = $this->db->query($query_berita)->result();
                             FROM `tb_konten`
                             JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
                             JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `subjeniskonten`.`nama` = 'berita' AND `jeniskonten`.`nama_jenis` = 'depth'
+                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'depth'
                             ";
                       $depth = $this->db->query($jum_depth)->row_array();
                       echo "(" . $depth['jumlah'] . ")";

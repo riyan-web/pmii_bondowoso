@@ -76,7 +76,7 @@ class Beranda extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         //load view artikel
-        $data['title'] = 'Artikel';
+        $data['title'] = 'Artikel'; 
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('profile_pmii/artikel', $data);
