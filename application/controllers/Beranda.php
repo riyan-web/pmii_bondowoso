@@ -67,7 +67,7 @@ class Beranda extends CI_Controller
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
 
-        $this->pagination->initialize($config);
+        $this->pagination->initialize($config); 
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         //panggil function get_mahasiswa_list yang ada pada model m_artikel . 

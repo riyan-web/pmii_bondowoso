@@ -1,13 +1,13 @@
 <?php
-$query_recentpost = "SELECT *
+$query_berita = "SELECT *
                 FROM  `tb_konten` 
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
                 JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
                 JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
                 WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
-                ORDER BY RAND() LIMIT 6
+                ORDER BY `tb_konten`.`id_konten` DESC LIMIT 6
                 ";
-$recent_post = $this->db->query($query_recentpost)->result();
+$berita_baru = $this->db->query($query_berita)->result();
 
 ?>
 <main id="main">
@@ -58,7 +58,7 @@ $recent_post = $this->db->query($query_recentpost)->result();
                   <?php echo substr($ber->isi_konten, 0, 200) . "..."; ?>
                 </p>
                 <div class="read-more">
-                  <a href="<?php echo  $ber->judul; ?>" data-toggle="modal" data-target="#myModal<?php echo $ber->id_konten; ?>">Read More</a>
+                  <a href="<?php echo base_url('Detail_konten/berita/' . $ber->id_konten) ?>" class="btn-buy">Read More</a>
                 </div>
               </div>
 
@@ -163,60 +163,26 @@ $recent_post = $this->db->query($query_recentpost)->result();
               </ul>
             </div><!-- End sidebar categories-->
 
-            <h3 class="sidebar-title">Recent Posts</h3>
+            <h3 class="sidebar-title">Berita Terbaru</h3>
             <div class="sidebar-item recent-posts">
-              <?php foreach ($recent_post as $post) { ?>
+              <?php foreach ($berita_baru as $berbar) { ?>
                 <div class="post-item clearfix">
                   <img src="" alt="" class="img-fluid">
-                  <img src="<?php echo base_url('upload/berita/') . $post->foto_artikel; ?>" alt="">
+                  <img src="<?php echo base_url('upload/berita/') . $berbar->foto_artikel; ?>" alt="">
                   <h4>
-                    <a href="  <?php echo $post->judul; ?>" data-toggle="modal" data-target="#myModal2<?php echo $post->id_konten; ?>">
-                      <?php echo $post->judul; ?></a>
+                    <a href="<?php echo base_url('Detail_konten/berita/' . $berbar->id_konten) ?>" class="btn-buy"> <?php echo $berbar->judul; ?></a>
                   </h4>
-                  <time datetime="2020-01-01"><?php echo $post->tgl_buat; ?></time>
+                  <time datetime="2020-01-01"><?php echo $berbar->tgl_buat; ?></time>
                 </div>
               <?php } ?>
             </div>
           </div><!-- End sidebar recent posts-->
           <!-- Modal -->
+        </div><!-- End sidebar -->
 
+      </div><!-- End blog sidebar -->
 
-          <div id="myModal2<?php echo $post->id_konten; ?>" class="modal fade" role="dialog">
-            <?php
-            $konten_id = $post->id_konten;
-            $query_modal = "SELECT * FROM tb_konten WHERE `tb_konten`.`id_konten` = $konten_id ";
-            $modal = $this->db->query($query_modal)->row_array();
-            ?>
-            <div class="modal-dialog modal-lg">
-              <!-- konten modal-->
-              <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                  <h3 class="modal-title"><?php echo $modal['judul'] ?></h3>
-                </div>
-                <img src="<?php echo base_url('upload/berita') . $modal['foto_artikel']; ?>" class="img-fluid" alt="">
-                <!-- body modal -->
-                <div class="modal-body">
-                  <?php echo $modal['isi_konten'] . "..."; ?>
-                  <div class="social-links">
-                    <a href="#" class="twitter"><i class="icofont-like"></i> Like </a>
-                    <a href="#" class="skype"><i class="icofont-comment"> Comment </i></a>
-                    <a href="#" class="skype"><i class="icofont-share"> Share</i></a>
-                  </div>
-                </div>
-                <!-- footer modal -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
-                </div>
-              </div>
-            </div>
-
-
-          </div><!-- End sidebar -->
-
-        </div><!-- End blog sidebar -->
-
-      </div>
+    </div>
 
     </div>
   </section><!-- End Blog Section -->

@@ -41,4 +41,14 @@ class M_artikel extends CI_Model
 
         return $this->db->query($query_count)->row_array();
     }
+
+    function detail_artikel($id_konten)
+    {
+        $detail = "SELECT * FROM `tb_konten` 
+        JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
+        JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
+        WHERE`tb_konten`.`id_konten` = $id_konten ";
+
+        return $this->db->query($detail)->row_array();
+    }
 }
