@@ -48,5 +48,17 @@ class M_artikelUsul extends CI_Model {
     public function artikelSul_simpan($data, $id)
 	{
 		return $this->db->update($this->table, $data, array('id_konten' => $id));
-	}
+    }
+    
+    public function change_status($status, $id)
+    {
+        $sql = "UPDATE ".$this->table." SET status = '".$status."' WHERE id_konten = '".$id."'";
+        return $this->db->query($sql);
+    }
+
+    public function artikelSul_hapus($id)
+    {
+        $this->db->delete($this->table, array('id_konten' => $id));
+		return $this->db->affected_rows();
+    }
 }

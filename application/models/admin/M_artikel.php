@@ -53,4 +53,28 @@ class M_artikel extends CI_Model {
         $this->db->insert($this->table, $data);
         return $this->db->affected_rows();
     }
+    public function artikel_by_id($id)
+    {
+        $this->db->from($this->table);
+		$this->db->where('id_konten', $id);
+		$query = $this->db->get();
+
+		return $query->row();
+    }
+    public function artikel_ubah($data, $id)
+	{
+		return $this->db->update($this->table, $data, array('id_konten' => $id));
+    }
+
+    public function artikel_hapus($id)
+    {
+        $this->db->delete($this->table, array('id_konten' => $id));
+		return $this->db->affected_rows();
+    }
+
+    public function change_status($status, $id)
+    {
+        $sql = "UPDATE ".$this->table." SET status = '".$status."' WHERE id_konten = '".$id."'";
+        return $this->db->query($sql);
+    }
 }
