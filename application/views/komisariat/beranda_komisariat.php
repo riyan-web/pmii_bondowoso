@@ -55,7 +55,7 @@
                         <h3>Program Kerja</h3>
                         <h4>Berisi Program Kerja Komisariat</h4>
                         <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Kunjungi</a>
+                            <a href="<?php echo base_url('komisariat/proker') ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
                 </div>
