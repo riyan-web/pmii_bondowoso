@@ -129,7 +129,7 @@ class Data_anggota extends CI_Controller
 		$this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required');
 		$this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
 		$this->form_validation->set_rules('no_hp', 'Nomer HandPhone', 'trim|required|min_length[10]|max_length[15]');
-		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[10]|max_length[128]');
 
 		if ($this->form_validation->run() == TRUE) {
 			$tgl = $this->input->post('tgl_lahir');
@@ -208,7 +208,7 @@ class Data_anggota extends CI_Controller
 		$this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required');
 		$this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
 		$this->form_validation->set_rules('no_hp', 'Nomer HandPhone', 'trim|required|min_length[10]|max_length[15]');
-		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[10]|max_length[128]');
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir')));
@@ -237,7 +237,7 @@ class Data_anggota extends CI_Controller
 				$upload = $this->_do_upload();
 
 				//delete file
-				$anggota = $this->model_anggota->anggota_by_kom($this->input->post('id'));
+				$anggota = $this->model_anggota->anggota_by_id($this->input->post('id'));
 				if (file_exists('upload/kader/' . $anggota->foto) && $anggota->foto)
 					unlink('upload/kader/' . $anggota->foto);
 

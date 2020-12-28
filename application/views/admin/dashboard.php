@@ -25,8 +25,8 @@
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-            <?php for $struktur: $struktur > 9: $strukutur++; ?>
-            <?php foreach ($struktur as $struk) { ?>
+
+            <?php foreach ($struktur as $struk) {  ?>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
