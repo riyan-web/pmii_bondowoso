@@ -34,8 +34,8 @@
               </div>
             </div>
           </div>
-
         <?php } ?>
       </div>
+      <?php echo $pagination; ?>
     </div>
   </section><!-- End Program Kerja Section -->

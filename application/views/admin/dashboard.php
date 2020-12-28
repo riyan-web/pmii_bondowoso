@@ -30,13 +30,12 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title mb-3"><?php echo $struk->nama; ?></strong>
+                            <strong class="card-title mb-3"><?php echo $struk->tipe; ?></strong>
                         </div>
                         <div class="card-body">
                             <div class="mx-auto d-block">
-                                <img class="rounded-circle mx-auto d-block" src="images/admin.jpg" alt="Card image cap">
-                                <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
-                                <div class="location text-sm-center"><i class="fa fa-map-marker"></i> California, United States</div>
+                                <img src="<?php echo base_url('upload/kader/') . $struk->foto; ?>" class="rounded-circle mx-auto d-block" style="width: 200px; height:200px;" alt="Card image cap">
+                                <h5 class="text-sm-center mt-2 mb-1"><?php echo $struk->nama; ?></h5>
                             </div>
                             <hr>
                             <div class="card-text text-sm-center">
