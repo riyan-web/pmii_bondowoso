@@ -44,7 +44,7 @@ class Artikel_usulan extends CI_Controller
             if($row['status'] == 2)
                 $datanya[]    = '<label class="badge badge-success">Aktif</label>';
             else if($row['status'] == 3)
-                $datanya[]    = '<label class="badge badge-warning">Tidak Aktif</label>';
+                $datanya[]    = '<label class="badge badge-info">Tidak Aktif</label>';
             else if($row['status'] == 1)
                 $datanya[]    = '<label class="badge badge-secondary">Menunggu</label>';
             else
@@ -65,12 +65,12 @@ class Artikel_usulan extends CI_Controller
             else if($row['status'] == 1)
                 $datanya[] = '
                 <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Koreksi " onclick="artikelSul_koresi(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
-                <button class="btn btn-danger btn-sm konfirmasiTolak-artikelSul" title="Tolak!" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-times-circle"></i></button>
+                <button class="btn btn-danger btn-sm konfirmasiTolak-artikelSul" title="Tolak!" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiTolak"><i class="fa fa-times-circle"></i></button>
                 ';
             else
                 $datanya[] = '
                 <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Koreksi " onclick="artikelSul_koresi(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
-                <button class="btn btn-danger btn-sm konfirmasiAktif-artikelSul" title="Aktifkan!" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-check-circle"></i></button>
+                <button class="btn btn-danger btn-sm konfirmasiHapus-artikelSul" title="Hapus Artikel Ini!" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
                 ';
             $data[] = $datanya;
         }
@@ -131,7 +131,7 @@ class Artikel_usulan extends CI_Controller
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('artikel usulan berhasil ditambahkan, silahkan cek di halaman <b>Artikel</b>!', '20px');
+				$out['msg'] = show_succ_msg('artikel usulan berhasil ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
 				$out['msg'] = show_succ_msg('Data artikel usulan Gagal diubah', '20px');
@@ -142,7 +142,69 @@ class Artikel_usulan extends CI_Controller
 		}
 
 		echo json_encode($out);
-	}
+    }
+    
+    public function tolak_artikelUsul() {
+        $id = $_POST['id'];
+        $status = '0';
+        $result = $this->model_artikelUsul->change_status($status, $id);
+
+        if ($result > 0) {
+            //delete file
+
+            echo show_succ_msg('Data Artikel berhasil ditolak!', '20px');
+        } else {
+            echo show_err_msg('Data Artikel Gagal ditolak!', '20px');
+        }
+    }
+
+    public function nonaktifkan_artikelUsul() {
+        $id = $_POST['id'];
+        $status = '3';
+        $result = $this->model_artikelUsul->change_status($status, $id);
+
+        if ($result > 0) {
+            //delete file
+
+            echo show_succ_msg('Data Artikel berhasil Dinonaktifkan!', '20px');
+        } else {
+            echo show_err_msg('Data Artikel Gagal Dinonaktifkan!', '20px');
+        }
+    }
+    public function aktifkan_artikelUsul() {
+        $id = $_POST['id'];
+        $status = '2';
+        $result = $this->model_artikelUsul->change_status($status, $id);
+
+        if ($result > 0) {
+            //delete file
+
+            echo show_succ_msg('Data Artikel berhasil Diaktifkan!', '20px');
+        } else {
+            echo show_err_msg('Data Artikel Gagal Diaktifkan!', '20px');
+        }
+    }
+
+    public function hapus_artikelUsul() {
+        $id = $_POST['id'];
+        $ray = $this->model_artikelUsul->artikelSul_by_id($_POST['id']);
+        $data = array('foto' => $ray->foto_artikel);
+        if (file_exists('upload/artikel/' . $data['foto']) && $data['foto'] && $data['foto'] != "default.jpg") {
+            unlink('upload/artikel/' . $data['foto']);
+        }
+        $result = $this->model_artikelUsul->artikelSul_hapus($id);
+
+        if ($result > 0) {
+            //delete file
+
+            echo show_succ_msg('Artikel Berhasil dihapus', '20px');
+        } else {
+            echo show_err_msg('Artikel Gagal dihapus', '20px');
+        }
+    }
+
+
+
     private function _do_upload()
     {
         $config['upload_path']          = 'upload/artikel';

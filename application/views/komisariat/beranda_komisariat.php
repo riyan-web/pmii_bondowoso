@@ -64,7 +64,7 @@
                         <h3>Artikel</h3>
                         <h4>Berisi Artikel Kader komisariat</h4>
                         <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Kunjungi</a>
+                            <a href="<?php echo base_url('komisariat/artikel') ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
                 </div>

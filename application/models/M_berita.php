@@ -10,7 +10,7 @@ class M_berita extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita'
         ORDER BY `tb_konten`.`id_konten` DESC", $limit, $start);
     }
 
@@ -21,7 +21,7 @@ class M_berita extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita'
         ORDER BY `tb_konten`.`id_konten` DESC", $limit, $start);
     }
 
@@ -32,7 +32,7 @@ class M_berita extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = 2 AND `subjeniskonten`.`nama` = 'berita'";
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita'";
 
         return $this->db->query($query_count)->row_array();
     }
@@ -45,6 +45,4 @@ class M_berita extends CI_Model
 
         return $this->db->query($detail)->row_array();
     }
-
-    
 }

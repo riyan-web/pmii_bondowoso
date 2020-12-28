@@ -33,8 +33,12 @@
             </div>
         </div>
     </div>
+
 <?= $modal_artikel ?>
+<?php show_my_confirm('konfirmasiNonaktif', 'nonaktifkan-artikelUsulan', 'Yakin Menonaktifkan Artikel Ini?', 'Ya, Nonaktifkan artikel Ini'); ?>
+<?php show_my_confirm('konfirmasiAktif', 'aktif-artikelUsulan', 'Yakin Mengaktifkan Artikel Ini?', 'Ya, Aktifkan artikel Ini'); ?>
 <?php show_my_confirm('konfirmasiTolak', 'tolak-artikelUsulan', 'Yakin menolak Artikel Ini?', 'Ya, Tolak artikel Ini'); ?>
+<?php show_my_confirm('konfirmasiHapus', 'hapus-artikelUsulan', 'Yakin Menhapus Artikel Ini?', 'Ya, Hapus artikel Ini'); ?>
 <script>
     var dataTable;
     $(document).ready(function() {
@@ -199,16 +203,80 @@
             }
         });
     }
-    var id;
-    $(document).on("click", ".konfirmasiHapus-komisariat", function() {
-        id = $(this).attr("data-id");
+    // tombol nonaktifkan
+    var idNon;
+    $(document).on("click", ".konfirmasiNonaktif-artikelSul", function() {
+        idNon = $(this).attr("data-id");
     })
-    $(document).on("click", ".hapus-dataKomisariat", function() {
-        var idnya = id;
+    $(document).on("click", ".nonaktifkan-artikelUsulan", function() {
+        var idnya = idNon;
 
         $.ajax({
                 method: "POST",
-                url: "<?= base_url('admin/data_komisariat/komisariat_hapus'); ?>",
+                url: "<?= base_url('admin/artikel_usulan/nonaktifkan_artikelUsul'); ?>",
+                data: "id=" + idnya
+            })
+            .done(function(data) {
+                $('#konfirmasiNonaktif').modal('hide');
+                $('.msg').html(data);
+                effect_msg();
+                reload_table();
+            })
+    })
+    // tutup tombol nonaktif
+    // buka tombol aktif
+    var idAkt;
+    $(document).on("click", ".konfirmasiAktif-artikelSul", function() {
+        idAkt = $(this).attr("data-id");
+    })
+    $(document).on("click", ".aktif-artikelUsulan", function() {
+        var idnya = idAkt;
+
+        $.ajax({
+                method: "POST",
+                url: "<?= base_url('admin/artikel_usulan/aktifkan_artikelUsul'); ?>",
+                data: "id=" + idnya
+            })
+            .done(function(data) {
+                $('#konfirmasiAktif').modal('hide');
+                $('.msg').html(data);
+                effect_msg();
+                reload_table();
+            })
+    })
+    // tutup aktif
+    // buka tolak
+    var idTol;
+    $(document).on("click", ".konfirmasiTolak-artikelSul", function() {
+        idTol = $(this).attr("data-id");
+    })
+    $(document).on("click", ".tolak-artikelUsulan", function() {
+        var idnya = idTol;
+
+        $.ajax({
+                method: "POST",
+                url: "<?= base_url('admin/artikel_usulan/tolak_artikelUsul'); ?>",
+                data: "id=" + idnya
+            })
+            .done(function(data) {
+                $('#konfirmasiTolak').modal('hide');
+                $('.msg').html(data);
+                effect_msg();
+                reload_table();
+            })
+    })
+    // tutup tolak
+    // tombol Hapus
+    var idHap;
+    $(document).on("click", ".konfirmasiHapus-artikelSul", function() {
+        idHap = $(this).attr("data-id");
+    })
+    $(document).on("click", ".hapus-artikelUsulan", function() {
+        var idnya = idHap;
+
+        $.ajax({
+                method: "POST",
+                url: "<?= base_url('admin/artikel_usulan/hapus_artikelUsul'); ?>",
                 data: "id=" + idnya
             })
             .done(function(data) {
@@ -218,16 +286,7 @@
                 reload_table();
             })
     })
-
-    $(document).on('keydown', 'body', function(e) {
-        var charCode = (e.which) ? e.which : event.keyCode;
-
-        if (charCode == 118) //F7
-        {
-            tambah_artikel();
-            return false;
-        }
-    });
+    // tutup Tombol Hapus
 </script>
 <style>
     .modal-dialog-full-width {

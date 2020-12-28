@@ -1,6 +1,7 @@
 <?php
 
 $id_user = $user['id'];
+
 $query_user = "SELECT *,`tb_kader`.`id` AS kader_id , `tb_kader`.`nama`, `tb_kader`.`foto`, `tb_komisariat`.`nama` AS nama_komisariat
             FROM  `tb_user` 
             JOIN `tb_kader` ON  `tb_kader`.`id` = `tb_user`.`kader_id`
@@ -8,6 +9,7 @@ $query_user = "SELECT *,`tb_kader`.`id` AS kader_id , `tb_kader`.`nama`, `tb_kad
             WHERE `tb_user`.`id` = $id_user
             ";
 $row_user = $this->db->query($query_user)->row_array();
+
 
 ?>
 <div id="right-panel" class="right-panel">
@@ -146,7 +148,7 @@ $row_user = $this->db->query($query_user)->row_array();
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
                                     <a href="#">
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('assets/backend/images/anggota/') . $row_user['foto']; ?>">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="<?php echo base_url('upload/kader/') . $row_user['foto']; ?>">
                                     </a>
                                     <div class="media-body">
                                         <h2 class="text-light display-6"><?php echo $row_user['nama']; ?></h2> <a href="#" data-toggle="modal" data-target="#mediumModal"> <span class="fa fa-edit badge badge-warning pull-right"> Ubah</span></a>
@@ -209,7 +211,7 @@ $row_user = $this->db->query($query_user)->row_array();
                     <div class="col-sm-10">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="<?= base_url('assets/backend/images/anggota/') . $row_user['foto']; ?>" class="img-thumbnail">
+                                <img src="<?= base_url('upload/kader/') . $row_user['foto']; ?>" class="img-thumbnail">
                             </div>
                             <div class="col-sm-9">
                                 <input type="file" name="image" id="image">

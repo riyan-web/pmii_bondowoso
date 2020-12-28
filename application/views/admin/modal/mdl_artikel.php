@@ -24,7 +24,7 @@ $jenis = $this->db->query($query_jenis)->result();
           <div class="form-group row">
             <label class="col-lg-3 control-label">Judul Artikel</label>
             <div class="col-lg-9">
-              <input type="text" id="judul" onkeypress='return harusHuruf(event)' class="form-control" maxlength="10" placeholder="Masukan Judul Artikel" name="judul">
+              <input type="text" id="judul" onkeypress='return harusHuruf(event)' class="form-control" placeholder="Masukan Judul Artikel" name="judul">
             </div>
           </div>
           <div class="form-group row" id ="usul">

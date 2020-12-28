@@ -22,11 +22,11 @@
                              <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <i class="fa fa-bell"></i>
                                  <?php
-                                 $sql1= "SELECT SUM(kader_id) as jumlah FROM `tb_konten` join tb_kader on tb_kader.id = tb_konten.kader_id WHERE tb_kader.komisariat_id = ".$this->session->userdata['id_komisariat']." AND tb_konten.status != '2' AND tb_konten.status != '3' ";
+                                 $sql1= "SELECT count(kader_id) as jumlah FROM `tb_konten` join tb_kader on tb_kader.id = tb_konten.kader_id WHERE tb_kader.komisariat_id = ".$this->session->userdata['id_komisariat']." AND tb_konten.status != '2' AND tb_konten.status != '3' AND tb_konten.status != '0' ";
                                  $jumlahSul = $this->db->query($sql1)->row();
 
                                  $ta= date('Y-m-d');
-                                 $sql2 = "SELECT SUM(id) as jumlahP FROM `pesan_pengunjung` where tanggal= '".$ta."'";
+                                 $sql2 = "SELECT count(id) as jumlahP FROM `pesan_pengunjung` where tanggal= '".$ta."'";
                                  $jumlahPes = $this->db->query($sql2)->row();
 
                                  if($this->session->userdata['jenis'] == 4){
@@ -36,7 +36,7 @@
                                     $jumlah = $jumlahSul->jumlah; 
                                 }
                                  ?>
-                                 <span class="count bg-danger"><?php if ($jumlahSul->jumlah > 0) { echo $jumlah; } else{ echo "0"; }?></span>
+                                 <span class="count bg-danger"><?php if ($jumlahSul->jumlah < 0) { echo '0'; } else{ echo $jumlah; }?></span>
                              </button>
                              <div class="dropdown-menu" aria-labelledby="notification">
                                  <p class="red">kamu memiliki <b><?= $jumlah?></b> pesan</p>
@@ -45,7 +45,7 @@
                                  </a>
                                  <?php if($this->session->userdata['jenis'] == 4) { ?>
                                  <a class="dropdown-item media bg-flat-color-5" href="#">
-                                     <p>Ada <b><?=$jumlahPes->jumlahP?></b> pengunjung mengirim pesan.</p>
+                                     <p>Ada <b><?php if ($jumlahPes->jumlahP > 0) { echo $jumlahPes->jumlahP; } else{ echo "0"; } ?></b> pengunjung mengirim pesan.</p>
                                  </a>
                                  <?php } ?>
                              </div>

@@ -50,17 +50,23 @@ class Artikel extends CI_Controller
 
             if($row['status'] == 2)
                 $datanya[]    = '<label class="badge badge-success">Aktif</label>';
-            else if($row['status'] == 1)
-                $datanya[]    = '<label class="badge badge-secondary">Menunggu</label>';
             else
                 $datanya[]    = '<label class="badge badge-danger">Tidak Aktif</label>';
 
-            $datanya[] = '
-            <a class="btn btn-secondary btn-sm" href="javascript:void(0)" title="List Komentar artikel" onclick="listKomen(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-comments"></i></a>
-            <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel('."'".$row['id_konten']."'".')"><i class="fa fa-align-justify"></i></a>
-            <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="anggota_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
-			  <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
-			  ';
+            if($row['status'] == 2)
+                $datanya[] = '
+                    <a class="btn btn-secondary btn-sm" href="javascript:void(0)" title="List Komentar artikel" onclick="listKomen(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-comments"></i></a>
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel('."'".$row['id_konten']."'".')"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="artikel_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
+                    <button class="btn btn-danger btn-sm konfirmasiNonaktif-artikel" title="Nonaktifkan Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiNonaktif"><i class="fa fa-times-circle"></i></button>
+                ';
+            else
+                $datanya[] = '
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel('."'".$row['id_konten']."'".')"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="artikel_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
+                    <button class="btn btn-success btn-sm konfirmasiAktif-artikel" title="Aktif Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiAktif"><i class="fa fa-check-circle"></i></button>
+                    <button class="btn btn-danger btn-sm konfirmasiHapus-artikel" title="Hapus Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
+                ';
             $data[] = $datanya;
         }
 
@@ -134,76 +140,106 @@ class Artikel extends CI_Controller
     public function artikel_ubah($id)
     {
         // ini function untuk menampilkan kedalam form field 
-        $data = $this->model_komisariat->komisariat_by_id($id);
+        $data = $this->model_artikel->artikel_by_id($id);
         echo json_encode($data);
     }
 
 
     public function artikel_proses_ubah()
     {
-        $this->form_validation->set_rules('nama', 'nama', 'required');
+        $this->form_validation->set_rules('judul', 'judul', 'required');
         $this->form_validation->set_rules('isi', 'isi', 'required');
-        $this->form_validation->set_rules('singkatan', 'singkatan', 'required');
-        $data = $this->input->post();
-        if ($this->form_validation->run() == TRUE) {
-            $data = array(
-                'nama' => $this->input->post('nama'),
-                'isi' => $this->input->post('isi'),
-                'foto' => $this->input->post('img')
-            );
-            if ($this->input->post('remove_photo')) // jika remove photo di centang
-            {
-                if (file_exists('upload/komisariat/' . $this->input->post('remove_photo')) && $this->input->post('remove_photo' && $data['remove_photo'] != "default.jpg")) {
-                    unlink('upload/komisariat/' . $this->input->post('remove_photo'));
-                    $data['foto'] = '';
-                }
-            }
+        $this->form_validation->set_rules('jenis', 'jenis', 'required');
+		$data = $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$data = array('judul' => $this->input->post('judul'),
+							'isi_konten' => $this->input->post('isi'),
+							'jeniskonten_id' => $this->input->post('jenis'),
+                            'foto_artikel' => $this->input->post('img'),
+                            'status' => '2'
+						);
+			$remove_photo = $this->input->post('remove_photo');
+			if($this->input->post('remove_photo')) // jika remove photo di centang
+			{
+				if(file_exists('upload/artikel/'.$this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo !="default.jpg")){
+					unlink('upload/artikel/'.$this->input->post('remove_photo'));
+					$data['foto_artikel'] = '';
+				}
+				
+			}
 
-            if (!empty($_FILES['img']['name'])) {
-                $upload = $this->_do_upload();
+			if(!empty($_FILES['img']['name'])){
+				$upload = $this->_do_upload();
+				
+				//delete file
+				$artikel = $this->model_artikel->artikel_by_id($this->input->post('id'));
+				if(file_exists('upload/artikel/'.$artikel->foto_artikel) && $artikel->foto_artikel)
+					unlink('upload/artikel/'.$artikel->foto_artikel);
 
-                //delete file
-                $komisariat = $this->model_komisariat->komisariat_by_id($this->input->post('id'));
-                if (file_exists('upload/komisariat/' . $komisariat->foto) && $komisariat->foto)
-                    unlink('upload/komisariat/' . $komisariat->foto);
+				$data['foto_artikel'] = $upload;
+			}else{
+				$data['foto_artikel'] = $this->input->post('foto_lama');
+			}
+			$id = $this->input->post('id');
+			$result = $this->model_artikel->artikel_ubah($data, $id);
 
-                $data['foto'] = $upload;
-            } else {
-                $data['foto'] = $this->input->post('foto_lama');
-            }
-            $id = $this->input->post('id');
-            $result = $this->model_komisariat->komisariat_ubah($data, $id);
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('berita usulan berhasil ditambahkan', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data berita usulan Gagal diubah', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
 
-            if ($result > 0) {
-                $out['status'] = '';
-                $out['msg'] = show_succ_msg('Data Komisariat Berhasil diubah', '20px');
-            } else {
-                $out['status'] = '';
-                $out['msg'] = show_succ_msg('Data Komisariat Gagal diubah', '20px');
-            }
-        } else {
-            $out['status'] = 'form';
-            $out['msg'] = show_err_msg(validation_errors());
-        }
-
-        echo json_encode($out);
+		echo json_encode($out);
     }
     public function artikel_hapus()
     {
         $id = $_POST['id'];
-        $ray = $this->model_komisariat->komisariat_by_id($_POST['id']);
-        $data = array('foto' => $ray->foto);
-        if (file_exists('upload/komisariat/' . $data['foto']) && $data['foto'] && $data['foto'] != "default.jpg") {
-            unlink('upload/komisariat/' . $data['foto']);
+        $ray = $this->model_artikel->artikel_by_id($_POST['id']);
+        $data = array('foto' => $ray->foto_artikel);
+        if (file_exists('upload/artikel/' . $data['foto']) && $data['foto'] && $data['foto'] != "default.jpg") {
+            unlink('upload/artikel/' . $data['foto']);
         }
-        $result = $this->model_komisariat->komisariat_hapus($id);
+        $result = $this->model_artikel->artikel_hapus($id);
 
         if ($result > 0) {
             //delete file
 
-            echo show_succ_msg('Data Komisariat Berhasil dihapus', '20px');
+            echo show_succ_msg('Artikel Berhasil dihapus', '20px');
         } else {
-            echo show_err_msg($id . 'Data Komisariat Gagal dihapus', '20px');
+            echo show_err_msg('Artikel Gagal dihapus', '20px');
+        }
+    }
+
+    public function nonaktifkan_artikel() {
+        $id = $_POST['id'];
+        $status = '3';
+        $result = $this->model_artikel->change_status($status, $id);
+
+        if ($result > 0) {
+            //delete file
+
+            echo show_succ_msg('Data Artikel berhasil Dinonaktifkan!', '20px');
+        } else {
+            echo show_err_msg('Data Artikel Gagal Dinonaktifkan!', '20px');
+        }
+    }
+    public function aktifkan_artikel() {
+        $id = $_POST['id'];
+        $status = '2';
+        $result = $this->model_artikel->change_status($status, $id);
+
+        if ($result > 0) {
+            //delete file
+
+            echo show_succ_msg('Data Artikel berhasil Diaktifkan!', '20px');
+        } else {
+            echo show_err_msg('Data Artikel Gagal Diaktifkan!', '20px');
         }
     }
     // tutup kader
