@@ -24,14 +24,13 @@
             <h4>Ana Farida</h4>
             <p>anafarida1820@gmail.com</p>
           </div>
-
-
-          <div class="col-lg-2 col-md-6 footer-links">
+          
+          <div class="col-lg-3 col-md-6 footer-links">
             <h4>Azizah Wina Sriwinarsih</h4>
-            <p>azizahwina68@gmail.com</p>
+            <p>azizahwinasriwinarsih24@gmail.com</p>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
+          <div class="col-lg-3 col-md-6 footer-links">
             <h4>Ilham Robby Sanjaya</h4>
             <p>ilhamrobbysanjaya@gmail.com</p>
           </div>
