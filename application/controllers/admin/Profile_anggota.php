@@ -28,16 +28,18 @@ class Profile_anggota extends CI_Controller
         $upload_image = $_FILES['image']['name'];
 
         if ($upload_image) {
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size']      = '2048';
-            $config['upload_path']     = './assets/backend/images/anggota';
-
+            $config['upload_path']          = 'upload/kader';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 10000; //set max size allowed in Kilobyte
+            $config['max_width']            = 10000; // set max width image allowed
+            $config['max_height']           = 10000; // set max height allowed
+            $config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique session_name()
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('image')) {
                 $old_image = $data['kader']['foto'];
                 if ($old_image != 'default.png') {
-                    unlink(FCPATH . './assets/backend/images/anggota/' . $old_image);
+                    unlink(FCPATH . './upload/kader/' . $old_image);
                 }
 
                 $new_image = $this->upload->data('file_name');

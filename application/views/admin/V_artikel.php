@@ -1,6 +1,6 @@
 <?php if ($user['jenis'] == 1) {
 ?><div class="msg" style="display:none;">
-        <?= @$this->session->flashdata('msg'); ?>
+        <?= @$this->session->flashdata('msg'); ?> 
     </div>
     <div id="right-panel" class="right-panel">
         <div class="content mt-3">
