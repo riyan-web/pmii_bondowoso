@@ -24,6 +24,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title mb-3"><?php echo $ktn->judul; ?></h4>
                                     <p class="card-text"><?php echo $ktn->isi_konten; ?></p>
+                                    <p class="card-text"><?php if($ktn->status == 1 ) {echo "<label class='badge badge-secondary'>Menunggu Konfirmasi Admin!</label>"; } else if ($ktn->status == 2){echo "<label class='badge badge-success'>Diterbitkan!</label>";}else if($ktn->status == 3){echo "<label class='badge badge-warning'>Tidak diterbikan oleh admin</label>";} else{ echo"<label class='badge badge-danger'>Ditolak!</label>";} ?></p>
                                 </div>
                             </div>
                             <a class="btn btn-warning btn-sm" title="Ubah" onclick="artikel_ubah(<?php echo $ktn->id_konten ?>)"><i class="fa fa-edit"></i></a>
@@ -59,9 +60,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Judul</th>
-                                        <th>Isi Konten</th>
-                                        <th>Jenis Konten</th>
-                                        <th>Foto Artikel</th>
+                                        <th>Jenis Artikel</th>
+                                        <th>Status</th>
                                         <th>aksi</th>
                                     </tr>
                                 </thead>
@@ -77,7 +77,9 @@
     </div>
 <?php } ?>
 <?= $modal_artikel; ?>
-<?php show_my_confirm('konfirmasiHapus', 'hapus-dataKomisariat', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
+<?php show_my_confirm('konfirmasiHapus', 'hapus-dataArtikel', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
+<?php show_my_confirm('konfirmasiNonaktif', 'nonaktifkan-artikel', 'Yakin Menonaktifkan Artikel Ini?', 'Ya, Nonaktifkan artikel Ini'); ?>
+<?php show_my_confirm('konfirmasiAktif', 'aktif-artikel', 'Yakin Mengaktifkan Artikel Ini?', 'Ya, Aktifkan artikel Ini'); ?>
 <script>
     var dataTable;
     $(document).ready(function() {
@@ -108,13 +110,6 @@
                 {
                     "targets": [-1],
                     "orderable": false,
-                }, {
-                    "targets": [-2],
-                    "orderable": false,
-                },
-                {
-                    "targets": [-3],
-                    "orderable": false,
                 }
             ],
             "sPaginationType": "simple_numbers",
@@ -124,7 +119,7 @@
                 [10, 20, 50, 100, 150]
             ],
             "ajax": {
-                url: "<?= base_url('admin/artikel/' . $namaController); ?>",
+                url: "<?= base_url('admin/artikel/artikel_list'); ?>",
                 type: "post",
                 error: function() {
                     $(".my-grid-error").html("");
@@ -164,18 +159,21 @@
     function tambah_artikel() {
         save_method = 'tambahArtikel';
         $('#form-artikel')[0].reset();
+        $('#usul').hide();
         $('#artikel').modal('show');
         $('.form-msg').html('');
         $('.modal-title').text('Tambah Artikel Baru');
         $('#label-foto').text('Upload Foto'); // merubah label
         $('#foto-preview').hide(); //menyembunyikan foto sebelumnya
         $('#imgOne').html('<img id="preview" alt="" class="img-responsive" width="60%" />');
+        CKEDITOR.instances.isi.setData('');
     }
 
     function artikel_ubah(id) {
         save_method = 'ubahArtikel';
         $('#form-artikel')[0].reset();
         $('#artikel').modal('show');
+        $('#usul').hide();
         $('.form-msg').html('');
         $('#foto-preview').show(); //mengeluarkan foto sebelumny
         $('.modal-title').text('Ubah Data Artikel');
@@ -190,18 +188,16 @@
             dataType: "JSON",
             success: function(data) {
 
-                $('[name="id"]').val(data.id);
-                $('[name="nama"]').val(data.nama);
-                $('[name="singkatan"]').val(data.singkatan);
-                //  $('[name="isi"]').val(data.isi);
-                CKEDITOR.instances.isi.setData(data.isi);
-                $('[name="foto_lama"]').val(data.foto);
+                $('[name="id"]').val(data.id_konten);
+                $('[name="judul"]').val(data.judul);
+                $('[name="jenis"]').val(data.jeniskonten_id);
+                CKEDITOR.instances.isi.setData(data.isi_konten);
+                $('[name="foto_lama"]').val(data.foto_artikel);
                 // $('#foto-preview').show(); // show photo preview modal
-
-                if (data.foto) {
+                if (data.foto_artikel) {
                     $('#label-foto').text('Ubah foto'); // label foto upload
-                    $('#foto-preview div').html('<img src="<?= base_url() ?>upload/komisariat/' + data.foto + '" class="img-responsive">'); // show photo
-                    $('#foto-preview div').append('<input type="checkbox" name="remove_photo" value="' + data.foto + '"/> hapus foto ketika disimpan'); // remove photo
+                    $('#foto-preview div').html('<img src="<?= base_url() ?>upload/artikel/' + data.foto_artikel + '" class="img-responsive">'); // show photo
+                    $('#foto-preview div').append('<input type="checkbox" name="remove_photo" value="' + data.foto_artikel + '"/> hapus foto ketika disimpan'); // remove photo
 
                 } else {
                     $('#label-foto').text('Upload Photo'); // label photo upload
@@ -261,16 +257,17 @@
             }
         });
     }
+    // tombol hapus
     var id;
-    $(document).on("click", ".konfirmasiHapus-komisariat", function() {
+    $(document).on("click", ".konfirmasiHapus-artikel", function() {
         id = $(this).attr("data-id");
     })
-    $(document).on("click", ".hapus-dataKomisariat", function() {
+    $(document).on("click", ".hapus-dataArtikel", function() {
         var idnya = id;
 
         $.ajax({
                 method: "POST",
-                url: "<?= base_url('admin/data_komisariat/komisariat_hapus'); ?>",
+                url: "<?= base_url('admin/artikel/artikel_hapus'); ?>",
                 data: "id=" + idnya
             })
             .done(function(data) {
@@ -280,7 +277,49 @@
                 reload_table();
             })
     })
+    // tutup hapus
+    // buka aktif
+    var idAkt;
+    $(document).on("click", ".konfirmasiAktif-artikel", function() {
+        idAkt = $(this).attr("data-id");
+    })
+    $(document).on("click", ".aktif-artikel", function() {
+        var idnya = idAkt;
 
+        $.ajax({
+                method: "POST",
+                url: "<?= base_url('admin/artikel/aktifkan_artikel'); ?>",
+                data: "id=" + idnya
+            })
+            .done(function(data) {
+                $('#konfirmasiAktif').modal('hide');
+                $('.msg').html(data);
+                effect_msg();
+                reload_table();
+            })
+    })
+    // tutup aktif
+    // buka nonaktif
+    var idNon;
+    $(document).on("click", ".konfirmasiNonaktif-artikel", function() {
+        idNon = $(this).attr("data-id");
+    })
+    $(document).on("click", ".nonaktifkan-artikel", function() {
+        var idnya = idNon;
+
+        $.ajax({
+                method: "POST",
+                url: "<?= base_url('admin/artikel/nonaktifkan_artikel'); ?>",
+                data: "id=" + idnya
+            })
+            .done(function(data) {
+                $('#konfirmasiNonaktif').modal('hide');
+                $('.msg').html(data);
+                effect_msg();
+                reload_table();
+            })
+    })
+    // tutup nonaktif
     $(document).on('keydown', 'body', function(e) {
         var charCode = (e.which) ? e.which : event.keyCode;
 

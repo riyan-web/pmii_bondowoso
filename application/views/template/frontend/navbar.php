@@ -3,12 +3,13 @@
   <header id="header">
     <div class="container d-flex">
 
-      <div class="logo mr-auto">
+      <div class="">
         <!-- <h1 class="text-light"><a href="#">PMII Bondowoso</a></h1> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="<?= base_url('beranda') ?>"><img src="<?php echo base_url() ?>assets/frontend/img/logo_pmi.png" alt="" class="img"></a>
-      </div>
 
+        <a href="<?= base_url('beranda') ?>"><img src="<?php echo base_url() ?>assets/frontend/img/log_pmii.png" alt="" class="img" height="52" width="200"></a>
+      </div>
+      &nbsp; &nbsp; &nbsp;
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class=""><a href="<?= base_url('beranda') ?>">Home</a></li>

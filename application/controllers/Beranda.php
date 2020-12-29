@@ -36,6 +36,27 @@ class Beranda extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
+    public function tambahPesanPengunjung()
+    {
+        $data = [
+            'nama'      => htmlspecialchars($this->input->post('name', true)),
+            'email'     => htmlspecialchars($this->input->post('email', true)),
+            'subject'   => htmlspecialchars($this->input->post('subject', true)),
+            'pesan'     => htmlspecialchars($this->input->post('pesan', true)),
+            'tanggal'   => date("Y-m-d"),
+            'status'    => '0'
+
+        ];
+
+        $this->db->insert('pesan_pengunjung', $data);
+
+        $this->session->set_flashdata(
+            'message',
+            '<div class="alert alert-success" role="alert">Terima Kasih Pesan Anda Telah Dikirim, Silahkan Tunggu Balasan Dari Admin Melalui Email</div>'
+        );
+        redirect('beranda/about');
+    }
+
     public function artikel()
     {
         //konfigurasi pagination
@@ -85,9 +106,12 @@ class Beranda extends CI_Controller
 
     public function proker()
     {
+        $id_kom = 1;
+
         //konfigurasi pagination
         $config['base_url'] = site_url('beranda/proker'); //site url
-        $config['total_rows'] = $this->db->count_all('tb_proker'); //total row
+        $count = $this->m_proker->get_count_proker_cabang();
+        $config['total_rows'] = $count['jumlah_proker']; //total row
         $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
@@ -117,7 +141,7 @@ class Beranda extends CI_Controller
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         //panggil function get_mahasiswa_list yang ada pada model m_proker
-        $data['proker'] = $this->m_proker->get_proker_list($config["per_page"], $data['page']);
+        $data['proker'] = $this->m_proker->get_proker_list_komisariat($config["per_page"], $data['page'], $id_kom);
 
         $data['pagination'] = $this->pagination->create_links();
 

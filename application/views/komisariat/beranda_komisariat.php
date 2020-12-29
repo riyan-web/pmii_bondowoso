@@ -33,32 +33,48 @@
 
         </div>
     </section><!-- End About Us Section -->
-
-    <!-- ======= Program Kerja Section ======= -->
-    <section id="cta-pricing" class="cta-pricing">
+    <!-- ======= Section Menu Center======= -->
+    <section id="pricing" class="pricing">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>Program Kerja <strong><?php echo $komisariat['nama']; ?></strong></h2>
-            </div>
-            <div class="row">
-                <?php
-                foreach ($proker->result() as $pro) { ?>
 
-                    <div class="col-lg-4 col-md-12">
-                        <div class="member" data-aos="fade-up" data-aos-delay="100">
-                            <div class="text-center">
-                                <img src="<?php echo base_url('upload/proker/') . $pro->foto; ?>" style="width: 100%; height :250px;">
-                                <h3><?php echo $pro->nama_kegiatan; ?></h3>
-                                <p><?php echo $pro->isi; ?></p>
-                                <h4><?php echo "Penanggung Jawab : " . $pro->penanggung_jawab; ?></h4>
-                            </div>
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="fade-up">
+                        <h3>Berita Komisariat</h3>
+                        <h4>Berisi Berita Tentang Komisariat</h4>
+                        <div class="btn-wrap">
+                            <a href="<?php echo base_url('komisariat/berita') ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
+                </div>
 
-                <?php } ?>
+
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="fade-up">
+                        <h3>Program Kerja</h3>
+                        <h4>Berisi Program Kerja Komisariat</h4>
+                        <div class="btn-wrap">
+                            <a href="<?php echo base_url('komisariat/proker') ?>" class="btn-buy">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="fade-up">
+                        <h3>Artikel</h3>
+                        <h4>Berisi Artikel Kader komisariat</h4>
+                        <div class="btn-wrap">
+                            <a href="<?php echo base_url('komisariat/artikel') ?>" class="btn-buy">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
+
         </div>
-    </section><!-- End Program Kerja Section -->
+    </section><!-- End Section Menu Center -->
 
     <!-- ======= Artikel Section ======= -->
     <section id="testimonials" class="testimonials">
@@ -128,7 +144,7 @@
                 <?php foreach ($struktur as $struk) { ?>
                     <div class="col-lg-4 col-md-6">
                         <div class="icon-box" data-aos="fade-up">
-                            <div><i><img src="<?php echo base_url('upload/pengurus/') . $struk->foto; ?>" class="icon" alt=""></i></div>
+                            <div><i><img src="<?php echo base_url('upload/kader/') . $struk->foto; ?>" class="icon" alt=""></i></div>
                             <h4 class="title"><a href=""><?php echo $struk->tipe; ?></a></h4>
                             <p class="description"><?php echo $struk->nama; ?></p>
                         </div>

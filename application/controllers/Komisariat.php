@@ -85,7 +85,7 @@ class Komisariat  extends CI_Controller
 
         $data['pagination'] = $this->pagination->create_links();
         $data['title'] = 'Profile Komisariat Politeknik Jember - Kampus Bondowoso';
-        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
+
         $data['struktur'] = $this->m_struktur->getStrukturKomisariat($id_kom)->result();
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
@@ -107,6 +107,152 @@ class Komisariat  extends CI_Controller
         $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 9])->row_array();
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function berita()
+    {
+        //konfigurasi pagination
+        $config['base_url'] = site_url('komisariat/berita'); //site url
+        $id_kom = 5;
+        $count = $this->m_berita->get_count_komisariat($id_kom);
+        $config['total_rows'] = $count['jumlah_berita']; //total row
+        $config['per_page'] = 3;  //show record per halaman
+        $config["uri_segment"] = 3;  // uri parameter
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = floor($choice);
+
+        // Membuat Style pagination untuk BootStrap v4
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+
+        $this->pagination->initialize($config);
+        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        //panggil function get_mahasiswa_list yang ada pada model m_artikel . 
+        $data['berita'] = $this->m_berita->get_berita_list_komisariat($config["per_page"], $data['page'], $id_kom);
+        $data['id_kom'] = 5;
+
+        $data['pagination'] = $this->pagination->create_links();
+        //load view berita
+        $data['title'] = 'Berita';
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('komisariat/berita_komisariat', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function proker()
+    {
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
+        $id_kom = 5;
+
+        //konfigurasi pagination
+        $config['base_url'] = site_url('komisariat/proker'); //site url
+        $count = $this->m_proker->get_count_by_komisariat($id_kom);
+        $config['total_rows'] = $count['jumlah_proker']; //total row
+        $config['per_page'] = 3;  //show record per halaman
+        $config["uri_segment"] = 3;  // uri parameter
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = floor($choice);
+
+        // Membuat Style pagination untuk BootStrap v4
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+
+        $this->pagination->initialize($config);
+        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        //panggil function get_proker_list_komisariat yang ada pada model m_proker . 
+        $data['proker'] = $this->m_proker->get_proker_list_komisariat($config["per_page"], $data['page'], $id_kom);
+
+        $data['pagination'] = $this->pagination->create_links();
+        //load view berita
+        $data['title'] = 'Program Kerja Komisariat';
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('komisariat/proker_komisariat', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function artikel()
+    {
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
+        $id_kom = 5;
+        //konfigurasi pagination
+        $config['base_url'] = site_url('komisariat/artikel'); //site url
+        $count = $this->m_artikel->get_count_by_komisariat($id_kom);
+        $config['total_rows'] = $count['jumlah_artikel']; //total row
+        $config['per_page'] = 3;  //show record per halaman
+        $config["uri_segment"] = 3;  // uri parameter
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = floor($choice);
+
+        // Membuat Style pagination untuk BootStrap v4
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+
+        $this->pagination->initialize($config);
+        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        //panggil function get_proker_list_komisariat yang ada pada model m_proker . 
+        $data['artikel'] = $this->m_artikel->get_artikel_list_by_komisariat($config["per_page"], $data['page'], $id_kom);
+
+
+        $data['pagination'] = $this->pagination->create_links();
+        //load view berita
+        $data['title'] = 'Proker';
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('komisariat/artikel_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
 }
