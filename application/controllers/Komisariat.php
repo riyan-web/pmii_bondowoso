@@ -159,15 +159,11 @@ class Komisariat  extends CI_Controller
 
     public function proker()
     {
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
+        $id_kom = 5;
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/wahid_hasyim'); //site url
-        $count = $this->m_artikel->get_count_by_komisariat($id_kom);
-        $config['total_rows'] = $count['jumlah_artikel']; //total row
-        $config['per_page'] = 2;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
-
+        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
         // Membuat Style pagination untuk BootStrap v4
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';

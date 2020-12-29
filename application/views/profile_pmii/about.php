@@ -57,14 +57,15 @@
              <i class="bx bx-shield"></i>
              <h4>Visi & Misi PMII</h4>
              <p>
-               <h4>Visi PMII :</h4>
+               <h4>Visi </h4>
              </p>
-             <p>Dikembangkan dari dua landasan utama, yakni visi ke-Islaman dan visi kebangsaan. Visi ke-Islaman yang dibangun PMII adalah visi ke-Islaman yang inklusif, toleran dan moderat. Sedangkan visi kebangsaan PMII mengidealkan satu kehidupan kebangsaan yang demokratis, toleran, dan dibangun di atas semangat bersama untuk mewujudkan keadilan bagi segenap elemen warga-bangsa tanpa terkecuali.</p>
-             <p>
-               <h4>Misi PMII :</h4>
+             <p>Membangun karakter kader PMII dengan Multiple Intelligences<p>
+               <h4>Misi </h4>
              </p>
-             <p>Misi PMII merupakan manifestasi dari komitmen ke-Islaman dan ke-Indonesiaan, dan sebagai perwujudan kesadaran beragama, berbangsa, dan bernegara. Dengan kesadaran ini, PMII sebagai salah satu eksponen pembaharu bangsa dan pengemban misi intelektual berkewajiban dan bertanggung jawab mengemban komitmen ke-Islaman dan ke-Indonesiaan demi meningkatkan harkat dan martabat umat manusia dan membebaskan bangsa Indonesia dari kemiskinan, kebodohan dan keterbelakangan baik spiritual maupun material dalam segala bentuk.</p>
-           </div>
+            <p>1. Melakukan pendampingan untuk mengenmbangkan aktivitas berfikir kader (Intelektual Question)</p> 
+            <p>2. Meningkatkan kemampuan daya emosional, kerjasama, disipiln, komitmen dan tanggung jawab terhadap Organisasi (Emosional Qoutient)</p>
+            <p>3. Mengansah kecerdasan jiwa kader PMII dengan meningkatkan rasa toleransi, empati sikap rendah hati kader-kader PMII (Spiritual Qoutient) </p>
+            <p>4. Meningkatkan ketaqwaan kader terhadap Allah SWT (Trancendental Qoutient)</p>          </div>
          </div>
        </div><!-- End .content-->
      </div>

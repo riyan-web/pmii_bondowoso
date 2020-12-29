@@ -1,4 +1,3 @@
- <!-- Left Panel -->
 
  <aside id="left-panel" class="left-panel">
      <nav class="navbar navbar-expand-sm navbar-default">
@@ -7,8 +6,9 @@
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                  <i class="fa fa-bars"></i>
              </button>
-             <a class="navbar-brand" href=""><img src="<?= base_url(); ?>assets/backend/images/logo.png" alt="Logo"></a>
-             <a class="navbar-brand hidden" href=""><img src="<?= base_url(); ?>assets/backend/images/logo2.png" alt="Logo"></a>
+             <a class="navbar-brand" href=""><img src="<?= base_url(); ?>assets/frontend/img/log_pmii.png" alt="Logo"></a>
+                             <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+
          </div>
          <?php
             $jenis = $this->session->userdata('jenis');

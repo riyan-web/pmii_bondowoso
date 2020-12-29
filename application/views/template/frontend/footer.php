@@ -2,7 +2,7 @@
  <footer id="footer">
  <br>
  <div class="section-title">
- <center> <h2>Tim <strong>Developmet</strong></h2>
+ <center> <h2>Team <strong>Development</strong></h2>
  <p>Prodi Teknik Informatika - Politeknik Negeri Jember</p></center>
          
         </div>
