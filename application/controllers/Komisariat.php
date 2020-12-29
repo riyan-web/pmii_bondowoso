@@ -85,7 +85,7 @@ class Komisariat  extends CI_Controller
 
         $data['pagination'] = $this->pagination->create_links();
         $data['title'] = 'Profile Komisariat Politeknik Jember - Kampus Bondowoso';
-        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
+
         $data['struktur'] = $this->m_struktur->getStrukturKomisariat($id_kom)->result();
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
@@ -113,9 +113,9 @@ class Komisariat  extends CI_Controller
     public function berita()
     {
         //konfigurasi pagination
-        $config['base_url'] = site_url('beranda/berita'); //site url
+        $config['base_url'] = site_url('komisariat/berita'); //site url
         $id_kom = 5;
-        $count = $this->m_berita->get_count();
+        $count = $this->m_berita->get_count_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_berita']; //total row
         $config['per_page'] = 3;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
@@ -147,6 +147,7 @@ class Komisariat  extends CI_Controller
 
         //panggil function get_mahasiswa_list yang ada pada model m_artikel . 
         $data['berita'] = $this->m_berita->get_berita_list_komisariat($config["per_page"], $data['page'], $id_kom);
+        $data['id_kom'] = 5;
 
         $data['pagination'] = $this->pagination->create_links();
         //load view berita
@@ -161,9 +162,16 @@ class Komisariat  extends CI_Controller
     {
         $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
         $id_kom = 5;
+
         //konfigurasi pagination
-        $config['base_url'] = site_url('komisariat/wahid_hasyim'); //site url
-        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
+        $config['base_url'] = site_url('komisariat/proker'); //site url
+        $count = $this->m_proker->get_count_by_komisariat($id_kom);
+        $config['total_rows'] = $count['jumlah_proker']; //total row
+        $config['per_page'] = 3;  //show record per halaman
+        $config["uri_segment"] = 3;  // uri parameter
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = floor($choice);
+
         // Membuat Style pagination untuk BootStrap v4
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -188,11 +196,11 @@ class Komisariat  extends CI_Controller
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         //panggil function get_proker_list_komisariat yang ada pada model m_proker . 
-        $data['proker'] = $this->m_proker->get_proker_list_komisariat($id_kom);
+        $data['proker'] = $this->m_proker->get_proker_list_komisariat($config["per_page"], $data['page'], $id_kom);
 
         $data['pagination'] = $this->pagination->create_links();
         //load view berita
-        $data['title'] = 'Proker';
+        $data['title'] = 'Program Kerja Komisariat';
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('komisariat/proker_komisariat', $data);
@@ -204,8 +212,7 @@ class Komisariat  extends CI_Controller
         $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
         $id_kom = 5;
         //konfigurasi pagination
-        $config['base_url'] = site_url('beranda/artikel'); //site url
-        $id_kom = 5;
+        $config['base_url'] = site_url('komisariat/artikel'); //site url
         $count = $this->m_artikel->get_count_by_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_artikel']; //total row
         $config['per_page'] = 3;  //show record per halaman

@@ -4,7 +4,7 @@ $query_berita = "SELECT *
                 JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
                 JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
                 JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita'
+                WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'berita' AND `tb_user`.`komisariat_id` = $id_kom
                 ORDER BY `tb_konten`.`id_konten` DESC LIMIT 6
                 ";
 $berita_baru = $this->db->query($query_berita)->result();
@@ -17,10 +17,10 @@ $berita_baru = $this->db->query($query_berita)->result();
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Berita Komisariat</h2>
+        <h2>Berita</h2>
         <ol>
           <li><a href=<?= base_url('beranda') ?>>Beranda</a></li>
-          <li>Berita Komisariat</li>
+          <li>Berita</li>
         </ol>
       </div>
 
@@ -108,60 +108,6 @@ $berita_baru = $this->db->query($query_berita)->result();
               </form>
 
             </div><!-- End sidebar search formn-->
-
-            <h3 class="sidebar-title">Categories</h3>
-            <div class="sidebar-item categories">
-              <ul>
-                <li><a href="#">Opini <span>
-                      <?php
-                      $jum_opini = "SELECT COUNT(*) AS jumlah
-                            FROM `tb_konten`
-                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
-                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'opini'
-                            ";
-                      $opini = $this->db->query($jum_opini)->row_array();
-                      echo "(" . $opini['jumlah'] . ")";
-                      ?>
-                    </span></a></li>
-                <li><a href="#">Investigasi <span>
-                      <?php
-                      $jum_investigasi = "SELECT COUNT(*) AS jumlah
-                            FROM `tb_konten`
-                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
-                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'investigasi'
-                            ";
-                      $investigasi = $this->db->query($jum_investigasi)->row_array();
-                      echo "(" . $investigasi['jumlah'] . ")";
-                      ?>
-                    </span></a></li>
-                <li><a href="#">Interpretative <span>
-                      <?php
-                      $jum_interpretative = "SELECT COUNT(*) AS jumlah
-                            FROM `tb_konten`
-                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
-                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'interpretative'
-                            ";
-                      $interpretative = $this->db->query($jum_interpretative)->row_array();
-                      echo "(" . $interpretative['jumlah'] . ")";
-                      ?>
-                    </span></a></li>
-                <li><a href="#">Depth <span>
-                      <?php
-                      $jum_depth = "SELECT COUNT(*) AS jumlah
-                            FROM `tb_konten`
-                            JOIN `jeniskonten` ON `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id` 
-                            JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-                            WHERE `tb_konten`.`status` = '2' AND `jeniskonten`.`nama_jenis` = 'depth'
-                            ";
-                      $depth = $this->db->query($jum_depth)->row_array();
-                      echo "(" . $depth['jumlah'] . ")";
-                      ?>
-                    </span></a></li>
-              </ul>
-            </div><!-- End sidebar categories-->
 
             <h3 class="sidebar-title">Berita Terbaru</h3>
             <div class="sidebar-item recent-posts">
