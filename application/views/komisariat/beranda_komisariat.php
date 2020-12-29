@@ -76,32 +76,6 @@
         </div>
     </section><!-- End Section Menu Center -->
 
-    <!-- ======= Program Kerja Section ======= -->
-    <section id="cta-pricing" class="cta-pricing">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>Program Kerja <strong><?php echo $komisariat['nama']; ?></strong></h2>
-            </div>
-            <div class="row">
-                <?php
-                foreach ($proker->result() as $pro) { ?>
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="member" data-aos="fade-up" data-aos-delay="100">
-                            <div class="text-center">
-                                <img src="<?php echo base_url('upload/proker/') . $pro->foto; ?>" style="width: 100%; height :250px;">
-                                <h3><?php echo $pro->nama_kegiatan; ?></h3>
-                                <p><?php echo $pro->isi; ?></p>
-                                <h4><?php echo "Penanggung Jawab : " . $pro->penanggung_jawab; ?></h4>
-                            </div>
-                        </div>
-                    </div>
-
-                <?php } ?>
-            </div>
-        </div>
-    </section><!-- End Program Kerja Section -->
-
     <!-- ======= Artikel Section ======= -->
     <section id="testimonials" class="testimonials">
         <div class="container">

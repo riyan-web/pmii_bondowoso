@@ -29,7 +29,8 @@ class M_artikel extends CI_Model
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
-        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'artikel' AND `tb_user`.`komisariat_id` = $id_kom  ORDER BY RAND()", $limit, $start);
+        WHERE`tb_konten`.`status` = '2' AND `subjeniskonten`.`nama` = 'artikel' AND `tb_user`.`komisariat_id` = $id_kom
+        ORDER BY `tb_konten`.`id_konten` DESC", $limit, $start);
     }
     function get_count_by_komisariat($id_kom)
     {
