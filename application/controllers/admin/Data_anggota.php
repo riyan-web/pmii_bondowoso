@@ -65,7 +65,7 @@ class Data_anggota extends CI_Controller
 			  <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
 			  <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row['id']."'".')"><i class="fa fa-user"></i></a>
 			  <button class="btn btn-dark btn-sm konfirmasiReset-anggota" title="Reset Username dan password kedefault" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiReset"><i class="fa fa-key"></i></button> 
-			  <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row['id']."'".')"><i class="fa fa-info-circle"></i></a>
+			  <a class="btn btn-info" href=" print_kader"> <i class="fa fa-info-circle"></i></a>
 			  ';
 			$data[] = $datanya;
 		}
@@ -79,7 +79,12 @@ class Data_anggota extends CI_Controller
 
 		echo json_encode($json_data);
     }
-    // tutup cabang
+	// tutup cabang
+	
+	public function print(){
+		$data['kader'] = $this->m_anggota->tampil_data("tb_kader")->result();
+		$this->load->view('print_kader', $data);
+	}
  
     // buka komisariat
     public function anggotaKom_list() {
