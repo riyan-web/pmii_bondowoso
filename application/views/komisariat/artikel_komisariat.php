@@ -15,7 +15,7 @@
                         <p>
                             <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                             <?php echo substr($art->isi_konten, 0, 150) . "..."; ?>
-                            <a href="<?php echo  $art->judul; ?>" class="btn-buy" data-toggle="modal" data-target="#myModal<?php echo $art->id_konten; ?>">Lanjut Baca</a>
+                            <a href="<?php echo base_url('komisariat/detail_artikel/' . $art->id_konten) ?>" class="btn-buy">Lanjut Baca</a>
                             <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                     </div>

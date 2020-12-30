@@ -27,7 +27,7 @@ class M_berita extends CI_Model
 
     function get_count_komisariat($id_kom)
     {
-        $query_count = "SELECT  COUNT(tb_konten.id_konten) AS jumlah_berita FROM `tb_konten` 
+        $query_count = "SELECT  COUNT(tb_konten.id_konten) AS jumlah_berita FROM `tb_konten`  
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
         JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`

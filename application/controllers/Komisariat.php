@@ -167,7 +167,7 @@ class Komisariat  extends CI_Controller
         $config['base_url'] = site_url('komisariat/proker'); //site url
         $count = $this->m_proker->get_count_by_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_proker']; //total row
-        $config['per_page'] = 3;  //show record per halaman
+        $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -215,7 +215,7 @@ class Komisariat  extends CI_Controller
         $config['base_url'] = site_url('komisariat/artikel'); //site url
         $count = $this->m_artikel->get_count_by_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_artikel']; //total row
-        $config['per_page'] = 3;  //show record per halaman
+        $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -253,6 +253,26 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('komisariat/artikel_komisariat', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function detail_artikel($id_konten)
+    {
+        $data['artikel'] = $this->m_artikel->detail_artikel($id_konten);
+        $data['title'] = "Baca Artikel";
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('komisariat/detail_artikel', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function detail_berita($id_konten)
+    {
+        $data['berita'] = $this->m_berita->detail_berita($id_konten);
+        $data['title'] = "Baca Berita";
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('komisariat/detail_berita', $data);
         $this->load->view('template/frontend/footer', $data);
     }
 }

@@ -130,7 +130,7 @@
         <div class="blog-pagination">
             <ul class="justify-content-center">
                 <?php echo $pagination; ?>
-            </ul>
+            </ul> 
         </div>
     </section><!-- End Artikel Section -->
 

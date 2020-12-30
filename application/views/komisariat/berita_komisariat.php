@@ -58,7 +58,7 @@ $berita_baru = $this->db->query($query_berita)->result();
                   <?php echo substr($ber->isi_konten, 0, 200) . "..."; ?>
                 </p>
                 <div class="read-more">
-                  <a href="<?php echo base_url('Detail_konten/berita/' . $ber->id_konten) ?>" class="btn-buy">Read More</a>
+                  <a href="<?php echo base_url('komisariat/detail_berita/' . $ber->id_konten) ?>" class="btn-buy">Read More</a>
                 </div>
               </div>
 
@@ -116,7 +116,7 @@ $berita_baru = $this->db->query($query_berita)->result();
                   <img src="" alt="" class="img-fluid">
                   <img src="<?php echo base_url('upload/berita/') . $berbar->foto_artikel; ?>" alt="">
                   <h4>
-                    <a href="<?php echo base_url('Detail_konten/berita/' . $berbar->id_konten) ?>" class="btn-buy"> <?php echo $berbar->judul; ?></a>
+                    <a href="<?php echo base_url('/komisariat/detail_berita/' . $berbar->id_konten) ?>" class="btn-buy"> <?php echo $berbar->judul; ?></a>
                   </h4>
                   <time datetime="2020-01-01"><?php echo $berbar->tgl_buat; ?></time>
                 </div>

@@ -54,22 +54,22 @@ class Berita extends CI_Controller
             $datanya[]    = $row['judul'];
             $datanya[]    = $row['nama_jenis'];
 
-            if($row['status'] == 2)
+            if ($row['status'] == 2)
                 $datanya[]    = '<label class="badge badge-success">Aktif</label>';
             else
                 $datanya[]    = '<label class="badge badge-danger">Tidak Aktif</label>';
 
-            if($row['status'] == 2)
+            if ($row['status'] == 2)
                 $datanya[] = '
                     <a class="btn btn-secondary btn-sm" href="javascript:void(0)" title="List Komentar berita" onclick="listKomen(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-comments"></i></a>
-                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Berita" onclick="detail_berita('."'".$row['id_konten']."'".')"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Berita" onclick="detail_berita(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-info"></i></a>
                     <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="berita_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
                     <button class="btn btn-danger btn-sm konfirmasiNonaktif-berita" title="Nonaktifkan Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiNonaktif"><i class="fa fa-times-circle"></i></button>
                 ';
             else
                 $datanya[] = '
                     <a class="btn btn-secondary btn-sm" href="javascript:void(0)" title="List Komentar berita" onclick="listKomen(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-comments"></i></a>
-                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Berita" onclick="detail_berita('."'".$row['id_konten']."'".')"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Berita" onclick="detail_berita(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-info"></i></a>
                     <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="berita_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
                     <button class="btn btn-success btn-sm konfirmasiAktif-berita" title="Aktif Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiAktif"><i class="fa fa-check-circle"></i></button>
                     <button class="btn btn-danger btn-sm konfirmasiHapus-berita" title="Hapus Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
@@ -154,52 +154,52 @@ class Berita extends CI_Controller
         $this->form_validation->set_rules('judul', 'judul', 'required');
         $this->form_validation->set_rules('isi', 'isi', 'required');
         $this->form_validation->set_rules('jenis', 'jenis', 'required');
-		$data = $this->input->post();
-		if ($this->form_validation->run() == TRUE) {
-			$data = array('judul' => $this->input->post('judul'),
-							'isi_konten' => $this->input->post('isi'),
-							'jeniskonten_id' => $this->input->post('jenis'),
-                            'foto_artikel' => $this->input->post('img'),
-                            'status' => '2'
-						);
-			$remove_photo = $this->input->post('remove_photo');
-			if($this->input->post('remove_photo')) // jika remove photo di centang
-			{
-				if(file_exists('upload/artikel/'.$this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo !="default.jpg")){
-					unlink('upload/artikel/'.$this->input->post('remove_photo'));
-					$data['foto_artikel'] = '';
-				}
-				
-			}
+        $data = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $data = array(
+                'judul' => $this->input->post('judul'),
+                'isi_konten' => $this->input->post('isi'),
+                'jeniskonten_id' => $this->input->post('jenis'),
+                'foto_artikel' => $this->input->post('img'),
+                'status' => '2'
+            );
+            $remove_photo = $this->input->post('remove_photo');
+            if ($this->input->post('remove_photo')) // jika remove photo di centang
+            {
+                if (file_exists('upload/artikel/' . $this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo != "default.jpg")) {
+                    unlink('upload/artikel/' . $this->input->post('remove_photo'));
+                    $data['foto_artikel'] = '';
+                }
+            }
 
-			if(!empty($_FILES['img']['name'])){
-				$upload = $this->_do_upload();
-				
-				//delete file
-				$artikel = $this->model_berita->berita_by_id($this->input->post('id'));
-				if(file_exists('upload/artikel/'.$artikel->foto_artikel) && $artikel->foto_artikel)
-					unlink('upload/artikel/'.$artikel->foto_artikel);
+            if (!empty($_FILES['img']['name'])) {
+                $upload = $this->_do_upload();
 
-				$data['foto_artikel'] = $upload;
-			}else{
-				$data['foto_artikel'] = $this->input->post('foto_lama');
-			}
-			$id = $this->input->post('id');
-			$result = $this->model_berita->berita_ubah($data, $id);
+                //delete file
+                $artikel = $this->model_berita->berita_by_id($this->input->post('id'));
+                if (file_exists('upload/artikel/' . $artikel->foto_artikel) && $artikel->foto_artikel)
+                    unlink('upload/artikel/' . $artikel->foto_artikel);
 
-			if ($result > 0) {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('artikel usulan berhasil ditambahkan', '20px');
-			} else {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data artikel usulan Gagal diubah', '20px');
-			}
-		} else {
-			$out['status'] = 'form';
-			$out['msg'] = show_err_msg(validation_errors());
-		}
+                $data['foto_artikel'] = $upload;
+            } else {
+                $data['foto_artikel'] = $this->input->post('foto_lama');
+            }
+            $id = $this->input->post('id');
+            $result = $this->model_berita->berita_ubah($data, $id);
 
-		echo json_encode($out);
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('artikel usulan berhasil ditambahkan', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Data artikel usulan Gagal diubah', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
     }
 
     public function berita_hapus()
@@ -221,7 +221,8 @@ class Berita extends CI_Controller
         }
     }
 
-    public function nonaktifkan_berita() {
+    public function nonaktifkan_berita()
+    {
         $id = $_POST['id'];
         $status = '3';
         $result = $this->model_berita->change_status($status, $id);
@@ -234,7 +235,8 @@ class Berita extends CI_Controller
             echo show_err_msg('Data Berita Gagal Dinonaktifkan!', '20px');
         }
     }
-    public function aktifkan_berita() {
+    public function aktifkan_berita()
+    {
         $id = $_POST['id'];
         $status = '2';
         $result = $this->model_berita->change_status($status, $id);
@@ -250,7 +252,7 @@ class Berita extends CI_Controller
 
     private function _do_upload()
     {
-        $config['upload_path']          = 'upload/artikel';
+        $config['upload_path']          = 'upload/berita';
         $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 10000; //set max size allowed in Kilobyte
         $config['max_width']            = 10000; // set max width image allowed
