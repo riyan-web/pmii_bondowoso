@@ -20,7 +20,7 @@ class Pesan_pengunjung extends CI_Controller
         $data['pagae']        = "pesan_pengunjung";
      
         
-        // $data['modal_pesan'] = show_my_modal_kustom('admin/modal/mdl_pesan', 'pesan', $data);
+        $data['modal_pesan'] = show_my_modal_kustom('admin/modal/mdl_pesan', 'pesan', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
         $this->load->view('template/backend/right');
@@ -43,8 +43,12 @@ class Pesan_pengunjung extends CI_Controller
             $datanya[]    = $row['nama'];
             $datanya[]    = $row['subject'];
             $datanya[]    = $row['tanggal'];
+            if($row['status'] == 1)
+                $datanya[]    = '<label class="badge badge-info"><i class="fa fa-check-square"></i> (dibaca)</label>';
+            else
+            $datanya[]    = '<label class="badge badge-secondary"><i class="fa fa-check-square-o"></i> (belum dibaca)</label>';
             $datanya[] = '
-                <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Pesan Pengunjung" onclick="detail_pesan('."'".$row['id']."'".')"><i class="fa fa-info"></i></a>
+                <a class="btn btn-success btn-sm" href="javascript:void(0)" title="Detail Pesan Pengunjung" onclick="detail_pesan('."'".$row['id']."'".')"><i class="fa fa-info"></i></a>
                 <button class="btn btn-danger btn-sm konfirmasiHapus-pesan" title="Hapus Data" data-id="' . $row['id'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
                 ';
             $data[] = $datanya;
@@ -72,6 +76,28 @@ class Pesan_pengunjung extends CI_Controller
         } else {
             echo show_err_msg('Pesan Pengunjung Gagal dihapus', '20px');
         }
+    }
+
+    public function data_pesan($id) 
+    {
+        $data = $this->model_pesan->pesan_by_id($id);
+        echo json_encode($data);
+    }
+
+    public function ubah_status()
+    {
+        $data['status'] = '1';
+        $id = $this->input->post('id');
+        $result = $this->model_pesan->ubah_status($data, $id);
+        
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data Anggota Berhasil diubah', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data Anggota Gagal diubah', '20px');
+			}
+        echo json_encode($out);
     }
 
 }

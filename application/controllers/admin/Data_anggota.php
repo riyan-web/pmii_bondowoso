@@ -14,14 +14,14 @@ class Data_anggota extends CI_Controller
 	public function index()
 	{
 
-		if ($this->session->userdata['jenis'] == 4) {
-			// $data['dataAnggota'] = $this->model_anggota->anggota_all();
-			$data['jumlah_kader'] = $this->model_anggota->jumlah('tb_kader');
-			$data['dataKomisariat'] = $this->model_komisariat->komisariat_all();
-			$data['namaController'] = 'anggota_list';
-		}
+		// if ($this->session->userdata['jenis'] == 4) {
+		// 	// $data['dataAnggota'] = $this->model_anggota->anggota_all();
+		// 	$data['jumlah_kader'] = $this->model_anggota->jumlah('tb_kader');
+		// 	$data['dataKomisariat'] = $this->model_komisariat->komisariat_all();
+		// 	$data['namaController'] = 'anggota_list';
+		// }
 
-		if ($this->session->userdata['jenis'] == 3) {
+		if ($this->session->userdata['jenis'] == 3 || $this->session->userdata['jenis'] == 4) {
 			$id_komisariat = $this->session->userdata['id_komisariat'];
 			$data['namaController'] = 'anggotaKom_list';
 			$data['jumlah_kader'] = $this->model_anggota->jumlah_by_id('tb_kader', 'komisariat_id', $id_komisariat);

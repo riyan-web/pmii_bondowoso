@@ -79,6 +79,10 @@ class Login extends CI_Controller
     {
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('jenis');
+        $this->session->unset_userdata('nama_komcab');
+        $this->session->unset_userdata('id_komisariat');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('kader_id');
 
         $this->session->set_flashdata(
             'message',

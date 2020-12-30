@@ -89,7 +89,64 @@
 
  <!-- Template Main JS File -->
  <script src="<?php echo base_url() ?>assets/frontend/js/main.js"></script>
-
+ <script> 
+    $(document).ready(function(){      
+			$('#form_komen').on('submit', function(event){
+				event.preventDefault();
+        <?php if(!isset($_SESSION["jenis"])) { ?>
+          let nama_pengirim = $('#email').val();
+        <?php } else if($this->session->userdata['jenis'] == 4 || $this->session->userdata['jenis'] == 3) { ?>
+          let nama_pengirim = <?=$this->session->userdata['username']?>;
+        <?php } else if($this->session->userdata['jenis'] == 1 ) {?>
+          let nama_pengirim = ' ';
+        <?php } else {}?>
+				let komentar = $('#komentar').val();
+				
+				if(nama_pengirim==''){
+				    alert("Email Harus disii");
+				} else if(komentar==''){
+				    alert("Komentar Harus disii");
+				} else {
+    				var form_data = $(this).serialize();
+    				$.ajax({
+    					url:"<?=base_url()?>detail_konten/tambah_komentar",
+    					method:"POST",
+    					data:form_data,
+    					success:function(data){
+    						$('#form_komen')[0].reset();
+    						$('#komentar_id').val('0');
+    						load_comment();
+    					}, error: function(data) {
+    		            	console.log(data.responseText)
+    		            }
+    				})
+				}
+			});
+ 
+			// load_comment();
+ 
+			function load_comment(){
+        <?php
+          $id = $this->uri->segment('3');
+          ?>
+				$.ajax({
+					url:"<?= site_url('detail_konten/ambil_komentar') ?>/<?= $id ?>",
+					method:"POST",
+					success:function(data){
+						$('#display_comment').html(data);
+					}, error: function(data) {
+		            	console.log(data.responseText)
+		            }
+				})
+			}
+ 
+			$(document).on('click', '.reply', function(){
+				var komentar_id = $(this).attr("id");
+				$('#komentar_id').val(komentar_id);
+				$('#nama_pengirim').focus();
+			});
+		});
+	</script>
  </body>
 
  </html>

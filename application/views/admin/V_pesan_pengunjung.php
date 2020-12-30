@@ -1,4 +1,4 @@
-<div class="msg" style="display:none;">
+<div class="msg" style="display:none;"> 
   <?= @$this->session->flashdata('msg'); ?>
 </div>
 
@@ -21,6 +21,7 @@
                   <th>Nama</th>
                   <th>Subject</th>
                   <th>Tanggal</th>
+                  <th>Status</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -33,10 +34,13 @@
     </div>
   </div>
 </div>
+<?= $modal_pesan ?>
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataPesan', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
 <script>
+
     var dataTable;
     $(document).ready(function() {
+
         dataTable = $('#tb_pesan').DataTable({
             "serverSide": true,
             "stateSave": false,
@@ -90,6 +94,74 @@
 
     });
 
+    function detail_pesan(id) {
+        save_method = 'detailPesan';
+        $('#pesan').modal('show');
+        $('#sembunyi').hide();
+        $('.form-msg').html('');
+        $('#foto-preview').show(); //mengeluarkan foto sebelumny
+        $('.modal-title').text('Pesan Pengunjung');
+        $('#imgOne').html('<img id="preview" alt=""  width="60%" class="img-responsive" />');
+        // $('#nim').attr('readonly',true);$('#prodi').hide();$('#angkatan').hide();$('#keterangan').hide();
+
+
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?= site_url('admin/pesan_pengunjung/data_pesan') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+
+                $('[name="nama"]').val(data.nama);
+                $('[name="email"]').val(data.email);
+                $('[name="subject"]').val(data.subject);
+                $('[name="isi"]').val(data.pesan);
+                $('[name="id"]').val(data.id);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('gagal menampilkan data');
+            }
+        });
+    }
+
+    function simpan() {
+        var url;
+
+        if (save_method == 'detailPesan') {
+            url = "<?= site_url('admin/pesan_pengunjung/ubah_status') ?>";
+        }
+
+        var formData = new FormData($('#form-pesan')[0]);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: "JSON",
+            success: function(data) {
+
+                if (data.status) {
+                    $('.form-msg').html(data.msg);
+                    effect_msg_form();
+                } else {
+                   
+                  $('.msg').html(data.msg);
+                    reload_table();
+                    // effect_msg();
+                    setTimeout(function() {
+                        $("[data-dismiss=modal]").trigger({
+                            type: "click"
+                        });
+                    }, 200)
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('gagal');
+            }
+        });
+    }
+
     var id;
     $(document).on("click", ".konfirmasiHapus-pesan", function() {
         id = $(this).attr("data-id");
@@ -130,3 +202,29 @@
         dataTable.ajax.reload(null, false); //refresh table
     }
 </script>
+
+<style>
+    .modal-dialog-full-width {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: none !important;
+
+    }
+
+    .modal-content-full-width {
+        height: auto !important;
+        min-height: 100% !important;
+        border-radius: 0 !important;
+        background-color: #ececec !important
+    }
+
+    .modal-header-full-width {
+        border-bottom: 1px solid #9ea2a2 !important;
+    }
+
+    .modal-footer-full-width {
+        border-top: 1px solid #9ea2a2 !important;
+    }
+</style>

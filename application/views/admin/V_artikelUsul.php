@@ -121,11 +121,57 @@
         $('#form-artikel')[0].reset();
         $('#artikel').modal('show');
         $('.form-msg').html('');
+        $('#form-tolak').hide();
+        $('#tmb_tolak').hide();
         $('#foto-preview').show(); //mengeluarkan foto sebelumny
         $('.modal-title').text('Konfirmasi Artikel Usulan dari Kader');
         $('#btnSimpan').text('Terima dan Simpan!');
         $('#imgOne').html('<img id="preview" alt=""  width="60%" class="img-responsive" />');
-    
+        
+        
+
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?= site_url('admin/artikel_usulan/artikelSul_koresi') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+
+                $('[name="id"]').val(data.id_konten);
+                $('[name="judul"]').val(data.judul);
+                $('[name="jenis"]').val(data.jeniskonten_id);
+                $('[name="pengusul"]').val(data.nama);
+                CKEDITOR.instances.isi.setData(data.isi_konten);
+                $('[name="foto_lama"]').val(data.foto_artikel);
+                // $('#foto-preview').show(); // show photo preview modal
+
+                if (data.foto_artikel) {
+                    $('#label-foto').text('Ubah foto'); // label foto upload
+                    $('#foto-preview div').html('<img src="<?= base_url() ?>upload/artikel/' + data.foto_artikel + '" class="img-responsive">'); // show photo
+                    $('#foto-preview div').append('<input type="checkbox" name="remove_photo" value="' + data.foto_artikel + '"/> hapus foto ketika disimpan'); // remove photo
+
+                } else {
+                    $('#label-foto').text('Upload Photo'); // label photo upload
+                    $('#foto-preview div').text('(No photo)');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('gagal menampilkan data');
+            }
+        });
+    }
+    function artikelSul_edit(id) {
+        save_method = 'koreksi_artikel';
+        $('#form-artikel')[0].reset();
+        $('#artikel').modal('show');
+        $('.form-msg').html('');
+        $('#form-tolak').hide();
+        $('#tmb_tolak').hide();
+        $('#btnTolak').hide();
+        $('#foto-preview').show(); //mengeluarkan foto sebelumny
+        $('.modal-title').text('Konfirmasi Artikel Usulan dari Kader');
+        $('#btnSimpan').text('Terima dan Simpan!');
+        $('#imgOne').html('<img id="preview" alt=""  width="60%" class="img-responsive" />');
 
         //Ajax Load data from ajax
         $.ajax({
@@ -165,12 +211,6 @@
             url = "<?= site_url('admin/artikel_usulan/artikelSul_terima') ?>";
         } 
         CKEDITOR.instances['isi'].updateElement();
-        // for (instance in CKEDITOR.instances) 
-        //   {
-        //       CKEDITOR.instances[instance].updateElement();
-        //   }
-        // ajax adding data to database
-
         var formData = new FormData($('#form-artikel')[0]);
         $.ajax({
             url: url,
@@ -196,12 +236,78 @@
                             type: "click"
                         });
                     }, 200)
+                    $('#form-tolak').show();
+                    $('#tmb_tolak').show();
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('gagal');
             }
         });
+    }
+
+    function simpan_tolak()
+    {
+        var url;
+
+        if (save_method == 'koreksi_artikel') {
+            url = "<?= site_url('admin/artikel_usulan/artikelSul_tolak') ?>";
+        } 
+        CKEDITOR.instances['isi'].updateElement();
+        var formData = new FormData($('#form-artikel')[0]);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: "JSON",
+            success: function(data) {
+
+                if (data.status) {
+                    $('.form-msg').html(data.msg);
+                    effect_msg_form();
+                } else {
+                    $('#imgOne').empty();
+                    // $('#imgOne').html('<img src="/Images/Flats/' + getId + '-0.png" id="preview" width="60%" alt="" class="img-responsive" />');
+                    // $('#form-komisariat').modal('hide');
+                    $('.msg').html(data.msg);
+                    reload_table();
+                    effect_msg();
+                    
+                   
+                    setTimeout(function() {
+                        $("[data-dismiss=modal]").trigger({
+                            type: "click"
+                        });
+                    }, 200)
+                    $('#atas').show();
+                    $('#tmb_terima').show();
+                    
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('gagal');
+            }
+        });
+
+    }
+
+    function tmb_tolak() {
+        $('#atas').hide();
+        $('#tmb_terima').hide(); 
+        $('#form-tolak').show();
+        $('#tmb_tolak').show();
+        $('.modal-title').text('Pesan Untuk Artikel Yang akan ditolak');
+        
+    }
+    function tmb_sebelumnya() {
+        $('#atas').show();
+        $('#tmb_terima').show(); 
+        $('#form-tolak').hide();
+        $('#tmb_tolak').hide();
+        $('.modal-title').text('Konfirmasi Artikel Usulan dari Kader');
+        
     }
     // tombol nonaktifkan
     var idNon;

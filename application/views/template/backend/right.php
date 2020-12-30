@@ -25,8 +25,7 @@
                                  $sql1= "SELECT count(kader_id) as jumlah FROM `tb_konten` join tb_kader on tb_kader.id = tb_konten.kader_id WHERE tb_kader.komisariat_id = ".$this->session->userdata['id_komisariat']." AND tb_konten.status != '2' AND tb_konten.status != '3' AND tb_konten.status != '0' ";
                                  $jumlahSul = $this->db->query($sql1)->row();
 
-                                 $ta= date('Y-m-d');
-                                 $sql2 = "SELECT count(id) as jumlahP FROM `pesan_pengunjung` where tanggal= '".$ta."'";
+                                 $sql2 = "SELECT count(id) as jumlahP FROM `pesan_pengunjung` where status= '0'";
                                  $jumlahPes = $this->db->query($sql2)->row();
 
                                  if($this->session->userdata['jenis'] == 4){
@@ -44,7 +43,7 @@
                                      <p>Ada <b><?php if ($jumlahSul->jumlah > 0) { echo $jumlahSul->jumlah; } else{ echo "0"; }?></b> Kader mengusulkan Artikel baru.</p>
                                  </a>
                                  <?php if($this->session->userdata['jenis'] == 4) { ?>
-                                 <a class="dropdown-item media bg-flat-color-5" href="#">
+                                 <a class="dropdown-item media bg-flat-color-5" href="<?= base_url('admin/pesan_pengunjung') ?>">
                                      <p>Ada <b><?php if ($jumlahPes->jumlahP > 0) { echo $jumlahPes->jumlahP; } else{ echo "0"; } ?></b> pengunjung mengirim pesan.</p>
                                  </a>
                                  <?php } ?>
@@ -110,26 +109,6 @@
                              <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
                              <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
-                         </div>
-                     </div>
-
-                     <div class="language-select dropdown" id="language-select">
-                         <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true" aria-expanded="true">
-                             <i class="flag-icon flag-icon-us"></i>
-                         </a>
-                         <div class="dropdown-menu" aria-labelledby="language">
-                             <div class="dropdown-item">
-                                 <span class="flag-icon flag-icon-fr"></span>
-                             </div>
-                             <div class="dropdown-item">
-                                 <i class="flag-icon flag-icon-es"></i>
-                             </div>
-                             <div class="dropdown-item">
-                                 <i class="flag-icon flag-icon-us"></i>
-                             </div>
-                             <div class="dropdown-item">
-                                 <i class="flag-icon flag-icon-it"></i>
-                             </div>
                          </div>
                      </div>
 
