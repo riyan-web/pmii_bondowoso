@@ -20,7 +20,7 @@
 
                         <div class="col-md-4">
                             <div class="card">
-                                <img class="card-img-top" src="<?php echo base_url('upload/artikel/') . $ktn->foto_artikel; ?>" alt="Card image cap">
+                                <img class="card-img-top mx-auto d-block" height="250" src="<?php echo base_url('upload/artikel/') . $ktn->foto_artikel; ?>" title="<?=$ktn->judul?>.png">
                                 <div class="card-body">
                                     <h4 class="card-title mb-3"><?php echo $ktn->judul; ?></h4>
                                     <p class="card-text"><?php echo $ktn->isi_konten; ?></p>
@@ -29,8 +29,6 @@
                             </div>
                             <a class="btn btn-warning btn-sm" title="Ubah" onclick="artikel_ubah(<?php echo $ktn->id_konten ?>)"><i class="fa fa-edit"></i></a>
                             <button class="btn btn-danger btn-sm konfirmasiHapus-anggota" title="Hapus Data" data-id="'.$row['id'].'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
-                            <a class="btn btn-sm btn-secondary" href="javascript:void(0)" title="Detail Username" onclick="detail_username('."'".$row[' id']."'".')"><i class="fa fa-user"></i></a>
-                            <a class="btn btn-sm btn-dark" href="javascript:void(0)" title="Reset Password" onclick="reset_anggota('."'".$row[' id']."'".')"><i class="fa fa-key"></i></a>
                             <a class="btn btn-sm btn-info" href="javascript:void(0)" title="Detail lengkap Anggota" onclick="detail_anggota('."'".$row[' id']."'".')"><i class="fa fa-info-circle"></i></a>
                         </div>
                     <?php endforeach; ?>
@@ -162,6 +160,9 @@
         $('#usul').hide();
         $('#artikel').modal('show');
         $('.form-msg').html('');
+        $('#form-tolak').hide();
+        $('#tmb_tolak').hide();
+        $('#btnTolak').hide();
         $('.modal-title').text('Tambah Artikel Baru');
         $('#label-foto').text('Upload Foto'); // merubah label
         $('#foto-preview').hide(); //menyembunyikan foto sebelumnya
@@ -175,6 +176,9 @@
         $('#artikel').modal('show');
         $('#usul').hide();
         $('.form-msg').html('');
+        $('#form-tolak').hide();
+        $('#tmb_tolak').hide();
+        $('#btnTolak').hide();
         $('#foto-preview').show(); //mengeluarkan foto sebelumny
         $('.modal-title').text('Ubah Data Artikel');
         $('#imgOne').html('<img id="preview" alt=""  width="60%" class="img-responsive" />');

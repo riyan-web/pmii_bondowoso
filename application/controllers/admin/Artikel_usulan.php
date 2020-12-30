@@ -143,6 +143,32 @@ class Artikel_usulan extends CI_Controller
 
 		echo json_encode($out);
     }
+
+    public function artikelSul_tolak() {
+        $this->form_validation->set_rules('isi_tolak', 'Pesan', 'required');
+        $data = $this->input->post();
+
+        if ($this->form_validation->run() == TRUE) {
+			$data = array(  'pesan_ditolak' => $this->input->post('isi_tolak'),
+                            'status' => '0'
+						);
+			$id = $this->input->post('id');
+			$result = $this->model_artikelUsul->artikelSul_simpan($data, $id);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('artikel usulan berhasil ditolak', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data artikel usulan Gagal ditolak', '20px');
+            }
+        }else{
+            $out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+        }
+
+		echo json_encode($out);
+    }
     
     public function tolak_artikelUsul() {
         $id = $_POST['id'];

@@ -7,7 +7,7 @@ class M_pesan extends CI_Model {
 
     public function pesan_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
     {
-        $sql = "SELECT (@row:=@row+1) AS nomora, id, nama, email, subject, pesan, tanggal
+        $sql = "SELECT (@row:=@row+1) AS nomora, id, nama, email, subject, pesan, status, tanggal
         FROM pesan_pengunjung,(SELECT @row := 0) r WHERE 1=1";
 
         $data['totalData'] = $this->db->query($sql)->num_rows();
@@ -40,6 +40,21 @@ class M_pesan extends CI_Model {
     {
         $this->db->delete($this->table, array('id' => $id));
 		return $this->db->affected_rows();
+    }
+
+    public function pesan_by_id($id)
+	{
+		$this->db->from($this->table);
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+
+		return $query->row();
+    }
+    
+    public function ubah_status($data, $id)
+    {
+		return $this->db->update($this->table, $data, array('id' => $id));
+
     }
 
 }

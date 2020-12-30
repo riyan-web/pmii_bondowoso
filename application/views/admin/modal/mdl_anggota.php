@@ -26,8 +26,8 @@
                   <input type="text" class="form-control" maxlength="15" placeholder="Nomor Handphone" onkeypress='return harusAngka(event)' name="no_hp">
                 </div>
               </div>
-              <?php if ($this->session->userdata['jenis'] == 4) { ?>
-                <div class="form-group row">
+              <!-- <?php if ($this->session->userdata['jenis'] == 4) { ?> -->
+                <!-- <div class="form-group row">
                   <label for="no_hp" class="col-md-3 control-label">Komisariat</label>
                   <div class="col-md-8">
                     <select name="komisariat_id" class="form-control select2">
@@ -38,9 +38,9 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-                </div>
-              <?php } ?>
-              <?php if ($this->session->userdata['jenis'] == 3) { ?>
+                </div> -->
+              <!-- <?php } ?> -->
+              <?php if ($this->session->userdata['jenis'] == 3 || $this->session->userdata['jenis'] == 4) { ?>
                 <input type="hidden" name="komisariat_id" value="<?= $this->session->userdata['id_komisariat'] ?>">
               <?php } ?>
               <div class="form-group row">
