@@ -60,12 +60,13 @@
                <h4>Visi </h4>
              </p>
              <p>Membangun karakter kader PMII dengan Multiple Intelligences<p>
-               <h4>Misi </h4>
-             </p>
-            <p>1. Melakukan pendampingan untuk mengenmbangkan aktivitas berfikir kader (Intelektual Question)</p> 
-            <p>2. Meningkatkan kemampuan daya emosional, kerjasama, disipiln, komitmen dan tanggung jawab terhadap Organisasi (Emosional Qoutient)</p>
-            <p>3. Mengansah kecerdasan jiwa kader PMII dengan meningkatkan rasa toleransi, empati sikap rendah hati kader-kader PMII (Spiritual Qoutient) </p>
-            <p>4. Meningkatkan ketaqwaan kader terhadap Allah SWT (Trancendental Qoutient)</p>          </div>
+                 <h4>Misi </h4>
+               </p>
+               <p>1. Melakukan pendampingan untuk mengenmbangkan aktivitas berfikir kader (Intelektual Question)</p>
+               <p>2. Meningkatkan kemampuan daya emosional, kerjasama, disipiln, komitmen dan tanggung jawab terhadap Organisasi (Emosional Qoutient)</p>
+               <p>3. Mengansah kecerdasan jiwa kader PMII dengan meningkatkan rasa toleransi, empati sikap rendah hati kader-kader PMII (Spiritual Qoutient) </p>
+               <p>4. Meningkatkan ketaqwaan kader terhadap Allah SWT (Trancendental Qoutient)</p>
+           </div>
          </div>
        </div><!-- End .content-->
      </div>
@@ -117,26 +118,26 @@
      <div class="row mt-5 justify-content-center" data-aos="fade-up">
        <div class="col-lg-10">
          <h4>PESAN PENGUNJUNG :</h4>
-         <form action="<?= base_url('beranda/tambahPesanPengunjung'); ?>" method="post" role="form" class="php-email-form">
+         <form action="<?= base_url('beranda/about'); ?>" method="post" role="form">
            <div class="form-row">
              <div class="col-md-6 form-group">
-               <input type="text" name="name" class="form-control" id="name" placeholder="Nama" data-rule="required" data-msg="Mohon Untuk Mengisikan Nama Anda" />
-               <div class="validate"></div>
+               <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" />
+               <div> <?= form_error('nama', ' <small class="text-danger pl-2">', '</small>'); ?></div>
              </div>
              <div class="col-md-6 form-group">
-               <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Masukkan Email Yang Valid Atau Email Anda Telah Digunakan Sebelumnya " />
-               <div class="validate"></div>
+               <input type="text" class="form-control" name="email" id="email" placeholder="Email" />
+               <div> <?= form_error('email', ' <small class="text-danger pl-2">', '</small>'); ?></div>
              </div>
            </div>
            <div class="form-group">
-             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjek" data-rule="required" data-msg="Mohon Untuk Mengisikan Subjek Pesan" />
-             <div class="validate"></div>
+             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjek" />
+             <div> <?= form_error('subject', ' <small class="text-danger pl-2">', '</small>'); ?></div>
            </div>
            <div class="form-group">
-             <textarea class="form-control" name="pesan" rows="5" data-rule="required" data-msg="Silahkan Masukkan Pesan Anda" placeholder="Pesan"></textarea>
-             <div class="validate"></div>
+             <textarea class="form-control" name="pesan" rows="5" placeholder="Pesan"></textarea>
+             <div> <?= form_error('pesan', ' <small class="text-danger pl-2">', '</small>'); ?></div>
            </div>
-           <div class="text-center"><button type="submit">Kirim Pesan</button></div>
+           <div class="text-center"><button class="btn btn-primary" type="submit">Kirim Pesan</button></div>
          </form>
        </div>
 

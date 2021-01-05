@@ -25,4 +25,30 @@ class Dashboard extends CI_Controller
         $this->load->view('admin/dashboard', $data);
         $this->load->view('template/backend/footer', $data);
     }
+
+    public function ubah_struktur()
+    {
+        $this->form_validation->set_rules('tipe', 'Posisi', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            $id_struk = $this->input->post('id_struk');
+            $tipe = $this->input->post('tipe');
+            $id_kader = $this->input->post('id_kader');
+
+            $this->db->set('tipe', $tipe);
+            $this->db->set('kader_id', $id_kader);
+            $this->db->where('id', $id_struk);
+            $this->db->update('tb_strukturkom');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert"> Data Struktur Berhasil Diubah</div>'
+            );
+            redirect('admin/dashboard');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Struktur Gagal Dihapus, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/dashboard');
+        }
+    }
 }

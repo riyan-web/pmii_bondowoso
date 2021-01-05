@@ -62,9 +62,7 @@ class Profile_anggota extends CI_Controller
     public function ubah_alamat()
     {
         $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
-        if ($this->form_validation->run() == false) {
-            return false;
-        } else {
+        if ($this->form_validation->run() == true) {
             $alamat = $this->input->post('alamat');
             $id_kader = $this->input->post('kader_id');
 
@@ -77,70 +75,112 @@ class Profile_anggota extends CI_Controller
                 '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
             );
             redirect('admin/profile_anggota');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Profile Gagal Dihapus, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/profile_anggota');
         }
     }
 
     public function ubah_noTelp()
     {
-        $no_telp = $this->input->post('no_telp');
-        $id_kader = $this->input->post('kader_id');
+        $this->form_validation->set_rules('no_telp', 'No Telepon', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            $no_telp = $this->input->post('no_telp');
+            $id_kader = $this->input->post('kader_id');
 
-        $this->db->set('no_hp', $no_telp);
-        $this->db->where('id', $id_kader);
-        $this->db->update('tb_kader');
+            $this->db->set('no_hp', $no_telp);
+            $this->db->where('id', $id_kader);
+            $this->db->update('tb_kader');
 
-        $this->session->set_flashdata(
-            'message',
-            '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
-        );
-        redirect('admin/profile_anggota');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
+            );
+            redirect('admin/profile_anggota');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Profile Gagal Dihapus, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/profile_anggota');
+        }
     }
 
     public function ubah_tmp_lahir()
     {
-        $tmp_lahir = $this->input->post('tmp_lahir');
-        $id_kader = $this->input->post('kader_id');
+        $this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            $tmp_lahir = $this->input->post('tmp_lahir');
+            $id_kader = $this->input->post('kader_id');
 
-        $this->db->set('tmp_lahir', $tmp_lahir);
-        $this->db->where('id', $id_kader);
-        $this->db->update('tb_kader');
+            $this->db->set('tmp_lahir', $tmp_lahir);
+            $this->db->where('id', $id_kader);
+            $this->db->update('tb_kader');
 
-        $this->session->set_flashdata(
-            'message',
-            '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
-        );
-        redirect('admin/profile_anggota');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
+            );
+            redirect('admin/profile_anggota');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Profile Gagal Dihapus, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/profile_anggota');
+        }
     }
     public function ubah_tgl_lahir()
     {
-        $tgl_lahir = $this->input->post('tgl_lahir');
-        $id_kader = $this->input->post('kader_id');
+        $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            $tgl_lahir = $this->input->post('tgl_lahir');
+            $id_kader = $this->input->post('kader_id');
 
-        $this->db->set('tgl_lahir', $tgl_lahir);
-        $this->db->where('id', $id_kader);
-        $this->db->update('tb_kader');
+            $this->db->set('tgl_lahir', $tgl_lahir);
+            $this->db->where('id', $id_kader);
+            $this->db->update('tb_kader');
 
-        $this->session->set_flashdata(
-            'message',
-            '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
-        );
-        redirect('admin/profile_anggota');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
+            );
+            redirect('admin/profile_anggota');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Profile Gagal Dihapus, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/profile_anggota');
+        }
     }
 
     public function ubah_thnMapaba()
     {
-        $thn_mapaba = $this->input->post('thn_mapaba');
-        $id_kader = $this->input->post('kader_id');
+        $this->form_validation->set_rules('thn_mapaba', 'Tahun Mapaba', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            $thn_mapaba = $this->input->post('thn_mapaba');
+            $id_kader = $this->input->post('kader_id');
 
-        $this->db->set('tahun_mapaba', $thn_mapaba);
-        $this->db->where('id', $id_kader);
-        $this->db->update('tb_kader');
+            $this->db->set('tahun_mapaba', $thn_mapaba);
+            $this->db->where('id', $id_kader);
+            $this->db->update('tb_kader');
 
-        $this->session->set_flashdata(
-            'message',
-            '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
-        );
-        redirect('admin/profile_anggota');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert">Data anda berhasil diubah</div>'
+            );
+            redirect('admin/profile_anggota');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Profile Gagal Dihapus, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/profile_anggota');
+        }
     }
 
     public function ubah_thnPKD()

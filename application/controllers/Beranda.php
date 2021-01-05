@@ -29,32 +29,38 @@ class Beranda extends CI_Controller
 
     public function about()
     {
-        $data['title'] = 'Tentang Kami';
-        $this->load->view('template/frontend/header', $data);
-        $this->load->view('template/frontend/navbar', $data);
-        $this->load->view('profile_pmii/about');
-        $this->load->view('template/frontend/footer', $data);
-    }
-
-    public function tambahPesanPengunjung()
-    {
-        $data = [
-            'nama'      => htmlspecialchars($this->input->post('name', true)),
-            'email'     => htmlspecialchars($this->input->post('email', true)),
-            'subject'   => htmlspecialchars($this->input->post('subject', true)),
-            'pesan'     => htmlspecialchars($this->input->post('pesan', true)),
-            'tanggal'   => date("Y-m-d"),
-            'status'    => '0'
-
-        ];
-
-        $this->db->insert('pesan_pengunjung', $data);
-
-        $this->session->set_flashdata(
-            'message',
-            '<div class="alert alert-success" role="alert">Terima Kasih Pesan Anda Telah Dikirim, Silahkan Tunggu Balasan Dari Admin Melalui Email</div>'
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim', ['required' => 'Nama Anda Harus Diisi']);
+        $this->form_validation->set_rules(
+            'email',
+            'Email',
+            'required|trim|valid_email|is_unique[pesan_pengunjung.email]',
+            ['required' => 'Email Anda Harus Diisi'],
+            ['valid_email' => 'Email Anda Tidak Valid'],
+            ['is_unique' => 'Email Anda Telah Digunakan Sebelumnya']
         );
-        redirect('beranda/about');
+        $this->form_validation->set_rules('subject', 'Subjek', 'required|trim', ['required' => 'Subjek anda Harus Diisi']);
+        $this->form_validation->set_rules('pesan', 'Pesan', 'required|trim', ['required' => 'Silahkan Isikan Pesan Anda']);
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tentang Kami';
+            $this->load->view('template/frontend/header', $data);
+            $this->load->view('template/frontend/navbar', $data);
+            $this->load->view('profile_pmii/about');
+            $this->load->view('template/frontend/footer', $data);
+        } else {
+            $data = [
+                'nama'      => htmlspecialchars($this->input->post('nama', true)),
+                'email'     => htmlspecialchars($this->input->post('email', true)),
+                'subject'   => htmlspecialchars($this->input->post('subject', true)),
+                'pesan'     => htmlspecialchars($this->input->post('pesan', true)),
+                'tanggal'   => date("Y-m-d"),
+                'status'    => '0'
+
+            ];
+
+            $this->db->insert('pesan_pengunjung', $data);
+            echo "<script>alert('Pesan Anda Dikirimkan');window.location='about';</script>";
+        }
     }
 
     public function artikel()

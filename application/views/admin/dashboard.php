@@ -1,11 +1,21 @@
+<?php
+$id_kom = $this->session->userdata['id_komisariat'];
+$query_kader = "SELECT `tb_kader`.`id`, `tb_kader`.`nama`, `tb_kader`.`komisariat_id`
+                              FROM  `tb_kader`
+                              WHERE`tb_kader`.`komisariat_id` = $id_kom
+                            ";
+
+$kader = $this->db->query($query_kader)->result();
+
+?>
+
 <div class="msg" style="display:none;">
     <?= @$this->session->flashdata('msg'); ?>
 </div>
-
-
-
-<div class="content mt-3">
-    <div class="animated fadeIn">
+<?= $this->session->flashdata('message'); ?>
+<!-- ======= Artikel Section ======= -->
+<section id="testimonials" class="testimonials">
+    <div class="container">
         <div class="row">
             <?php foreach ($struktur as $struk) {  ?>
                 <div class="col-md-4">
@@ -20,13 +30,13 @@
                             </div>
                             <hr>
                             <div class="card-text text-sm-center">
-                                <a href="<?php echo  $struk->tipe; ?>" data-toggle="modal" data-target="#myModal<?php echo $struk->id; ?>"> <span class="fa fa-edit badge badge-warning"> Ubah</span></a>
+                                <a href="<?php echo  $struk->tipe; ?>" data-toggle="modal" data-target="#myModal<?php echo $struk->id_struk; ?>"> <span class="fa fa-edit badge badge-warning"> Ubah</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div id="myModal<?php echo $struk->id; ?>" class="modal fade" role="dialog">
+                <div id="myModal<?php echo $struk->id_struk; ?>" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <!-- konten modal-->
                         <div class="modal-content">
@@ -39,17 +49,17 @@
                             </div>
                             <form class="form-horizontal" method="POST" action="<?php echo base_url('admin/dashboard/ubah_struktur'); ?>" role="form" enctype="multipart/form-data">
                                 <div class="modal-body">
-                                    <input type="hidden" name="id_struk" value="<?= $struk->id; ?>">
+                                    <input type="hidden" name="id_struk" value="<?= $struk->id_struk; ?>">
                                     <label for="company" class=" form-control-label">Tipe</label>
                                     <input type="text" name="tipe" id="tipe" value="<?php echo $this->input->post('tipe') ?? $struk->tipe; ?>" class="form-control">
+                                    <?= form_error('tipe', '<small class="text-danger pl-2">', '</small>'); ?>
                                 </div>
-                                <label>Nama Konsumen</label>
-                                <select name="id_konsumen" class="form-control select2" style="width: 100%;">
-                                    <option value="">- pilih -</option>
+                                <label>Nama Kader</label>
+                                <select name="id_kader" class="form-control select2" style="width: 100%;">
+                                    <option value="<?php echo $this->input->post('id_kader') ?? $struk->id_kader; ?>">- pilih -</option>
                                     <?php
-                                    foreach ($konsumen as $konsum) { ?>
-                                        <option value="<?= $konsum->id_konsumen ?>"><?= $konsum->nama_konsumen ?></option>
-
+                                    foreach ($kader as $kad) { ?>
+                                        <option value="<?= $kad->id ?>"><?= $kad->nama ?></option>
                                     <?php } ?>
                                 </select>
                                 <div class="modal-footer">
@@ -63,4 +73,4 @@
             <?php } ?>
         </div>
     </div>
-</div>
+</section><!-- End Artikel Section -->
