@@ -17,6 +17,7 @@
           <li><a href="<?= base_url('beranda/artikel') ?>">Artikel</a></li>
           <li><a href="<?= base_url('beranda/proker') ?>">Program Kerja</a></li>
           <li><a href="<?= base_url('beranda/berita') ?>">Berita</a></li>
+          <li><a href="<?= base_url('beranda/materi_pmii') ?>">Materi PMII</a></li>
           <li class="drop-down"><a href="">Komisariat</a>
             <ul>
               <li><a href="<?= base_url('komisariat/unej_bondowoso/'); ?>">Unej Kampus Bondowoso</a></li>

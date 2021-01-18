@@ -19,72 +19,43 @@ class Komisariat  extends CI_Controller
 
     public function unej_bondowoso()
     {
+        $id_kom = 2;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
+
         $data['title'] = 'Profile Komisariat Universitas Jember - Kampus Bondowoso';
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 2])->row_array();
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 5])->row_array();
+
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat');
         $this->load->view('template/frontend/footer', $data);
     }
     public function unibo()
     {
+        $id_kom = 3;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
+
         $data['title'] = 'Profile Komisariat Universitas Bondowoso';
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 3])->row_array();
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 6])->row_array();
+
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
     public function attaqwa()
     {
+        $id_kom = 4;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
+
         $data['title'] = 'Profile Komisariat Raden Bagus Asra - STAI At-taqwa';
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 4])->row_array();
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 7])->row_array();
+
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
     public function wahid_hasyim()
     {
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
         $id_kom = 5;
-        //konfigurasi pagination
-        $config['base_url'] = site_url('komisariat/wahid_hasyim'); //site url
-        $count = $this->m_artikel->get_count_by_komisariat($id_kom);
-        $config['total_rows'] = $count['jumlah_artikel']; //total row
-        $config['per_page'] = 2;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
 
-        // Membuat Style pagination untuk BootStrap v4
-        $config['first_link']       = 'First';
-        $config['last_link']        = 'Last';
-        $config['next_link']        = 'Next';
-        $config['prev_link']        = 'Prev';
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close']  = '</span>Next</li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close']  = '</span></li>';
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        //panggil function get_mahasiswa_list yang ada pada model m_artikel . 
-        $data['artikel'] = $this->m_artikel->get_artikel_list_by_komisariat($config["per_page"], $data['page'], $id_kom);
-
-        $data['pagination'] = $this->pagination->create_links();
-        $data['title'] = 'Profile Komisariat Politeknik Jember - Kampus Bondowoso';
+        $data['title'] = 'Profile Komisariat Politeknik Jember Kampus II';
 
         $data['struktur'] = $this->m_struktur->getStrukturKomisariat($id_kom)->result();
         $this->load->view('template/frontend/header', $data);
@@ -93,28 +64,31 @@ class Komisariat  extends CI_Controller
     }
     public function togo_ambarsari()
     {
+        $id_kom = 6;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
+
         $data['title'] = 'Profile Komisariat Togo Ambarsari - STITA';
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 6])->row_array();
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 9])->row_array();
+
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
     public function darul_falah()
     {
+        $id_kom = 7;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
+
         $data['title'] = 'Profile Komisariat Darul Falah - STIS Darul Falah';
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 7])->row_array();
-        $data['proker'] = $this->db->get_where('tb_proker', ['user_id' => 9])->row_array();
+
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function berita()
+    public function berita($id_kom)
     {
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/berita'); //site url
-        $id_kom = 5;
         $count = $this->m_berita->get_count_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_berita']; //total row
         $config['per_page'] = 3;  //show record per halaman
@@ -145,23 +119,22 @@ class Komisariat  extends CI_Controller
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        //panggil function get_mahasiswa_list yang ada pada model m_artikel . 
+        //panggil function get_proker_list_komisariat yang ada pada model m_proker . 
         $data['berita'] = $this->m_berita->get_berita_list_komisariat($config["per_page"], $data['page'], $id_kom);
-        $data['id_kom'] = 5;
+        $data['id_kom'] = $id_kom;
 
         $data['pagination'] = $this->pagination->create_links();
         //load view berita
-        $data['title'] = 'Berita';
+        $data['title'] = 'berita';
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('komisariat/berita_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function proker()
+    public function proker($id_kom)
     {
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
-        $id_kom = 5;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
 
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/proker'); //site url
@@ -207,10 +180,9 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function artikel()
+    public function artikel($id_kom)
     {
-        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => 5])->row_array();
-        $id_kom = 5;
+        $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/artikel'); //site url
         $count = $this->m_artikel->get_count_by_komisariat($id_kom);
@@ -249,7 +221,7 @@ class Komisariat  extends CI_Controller
 
         $data['pagination'] = $this->pagination->create_links();
         //load view berita
-        $data['title'] = 'Proker';
+        $data['title'] = 'artikel';
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('komisariat/artikel_komisariat', $data);

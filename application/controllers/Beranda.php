@@ -7,18 +7,21 @@ class Beranda extends CI_Controller
     {
         parent::__construct();
         //load libary pagination
-        $this->load->library('pagination');
+        $this->load->helper('download');
+        $this->load->library('pagination', 'encrypt');
 
         //load the department_model
 
         $this->load->model('m_artikel');
+        $this->load->model('m_materi');
         $this->load->model('m_proker');
         $this->load->model('m_berita');
         $this->load->model('m_struktur');
     }
 
-    public function index()
+    public function index() 
     {
+        $data['berita'] = $this->m_berita->get_berita_beranda()->result();
         $data['struktur'] = $this->m_struktur->getStrukturCabang()->result();
         $data['title'] = 'Profile PMII Bondowoso';
         $this->load->view('template/frontend/header', $data);
@@ -205,6 +208,24 @@ class Beranda extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
+    public function materi_pmii()
+    {
+        $data['materi_pmii'] = $this->m_materi->getMateriPmii()->result();
+
+        $data['title'] = 'Materi PMII';
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('template/frontend/navbar', $data);
+        $this->load->view('profile_pmii/materi_pmii', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function download_materi($link)
+    {
+
+
+        force_download('upload/materi_pmii/' . $link, NULL);
+    }
+
     public function struktur()
     {
         $data['struktur'] = $this->m_struktur->getStrukturCabang()->result();
@@ -213,5 +234,10 @@ class Beranda extends CI_Controller
         $this->load->view('template/frontend/navbar', $data);
         $this->load->view('profile_pmii/struktur', $data);
         $this->load->view('template/frontend/footer', $data);
+    }
+
+    public function lakukan_download()
+    {
+        force_download('upload/materi_pmii/', NULL);
     }
 }

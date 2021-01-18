@@ -34,7 +34,9 @@ $berita_baru = $this->db->query($query_berita)->result();
       <div class="row">
 
         <div class="col-lg-8 entries">
-          <?php foreach ($berita->result() as $ber) { ?>
+          <?php foreach ($berita->result() as $ber) {  ?>
+
+
             <article class="entry" data-aos="fade-up">
 
               <div class="entry-img">
