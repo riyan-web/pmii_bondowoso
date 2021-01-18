@@ -65,32 +65,6 @@ $berita_baru = $this->db->query($query_berita)->result();
               </div>
 
             </article><!-- End blog entry -->
-            <!-- Modal -->
-            <div id="myModal<?php echo $ber->id_konten; ?>" class="modal fade" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <!-- konten modal-->
-                <div class="modal-content">
-                  <!-- heading modal -->
-                  <div class="modal-header">
-                    <h3 class="modal-title"><?php echo $ber->judul ?></h3>
-                  </div>
-                  <img src="<?php echo base_url('upload/berita/') . $ber->foto_artikel; ?>" class="img-fluid" alt="">
-                  <!-- body modal -->
-                  <div class="modal-body">
-                    <?php echo $ber->isi_konten . "..."; ?>
-                    <div class="social-links">
-                      <a href="#" class="twitter"><i class="icofont-like"></i> Like </a>
-                      <a href="#" class="skype"><i class="icofont-comment"> Comment </i></a>
-                      <a href="#" class="skype"><i class="icofont-share"> Share</i></a>
-                    </div>
-                  </div>
-                  <!-- footer modal -->
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
-                  </div>
-                </div>
-              </div>
-            </div>
           <?php } ?>
 
 

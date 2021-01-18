@@ -87,8 +87,8 @@ $berita_terbaru = $this->db->query($query_berita)->result();
                     <div>
                         <form>
                             <fieldset>
-                                <legend><a href="#" class="twitter"><i class="icofont-like"></i>Like</a>
-                                    <span class="twitter" style="margin-right: 25px;">25</span>
+                                <legend><a href="#" class="twitter"><i class="icofont-eyes"></i>View</a>
+                                    <span class="twitter" style="margin-right: 25px;">33</span>
                                 </legend>
                                 <legend><a href="#" class="twitter"><i class="icofont-comment"></i>Comment</a></legend>
                                 <p>

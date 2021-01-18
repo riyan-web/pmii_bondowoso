@@ -19,9 +19,9 @@ class Beranda extends CI_Controller
         $this->load->model('m_struktur');
     }
 
-    public function index() 
+    public function index()
     {
-        $data['berita'] = $this->m_berita->get_berita_beranda()->result();
+        $data['berita'] = $this->m_berita->get_berita_beranda()->row_array();
         $data['struktur'] = $this->m_struktur->getStrukturCabang()->result();
         $data['title'] = 'Profile PMII Bondowoso';
         $this->load->view('template/frontend/header', $data);

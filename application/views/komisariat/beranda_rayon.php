@@ -5,10 +5,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Profile Komisariat</h2>
+                <h2>Profile Rayon</h2>
                 <ol>
                     <li><a href="<?= base_url('beranda') ?>">Home</a></li>
-                    <li>Komisariat</li>
+                    <li>Rayon</li>
                 </ol>
             </div>
 

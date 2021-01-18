@@ -39,6 +39,17 @@ class Komisariat  extends CI_Controller
         $this->load->view('komisariat/beranda_komisariat', $data);
         $this->load->view('template/frontend/footer', $data);
     }
+    public function unibo_nurut_taqwa()
+    {
+        $id_kom = 3;
+        $data['komisariat'] = $this->db->get_where('tb_rayon', ['id' => $id_kom])->row_array();
+
+        $data['title'] = 'Profile Rayon Nurut Taqwa Universitas Bondowoso';
+        $data['struktur'] = $this->m_struktur->getStrukturRayon($id_kom)->result();
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('komisariat/beranda_rayon', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
     public function attaqwa()
     {
         $id_kom = 4;
@@ -48,6 +59,28 @@ class Komisariat  extends CI_Controller
 
         $this->load->view('template/frontend/header', $data);
         $this->load->view('komisariat/beranda_komisariat', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+    public function attaqwa_avicenna()
+    {
+        $id_kom = 4;
+        $data['komisariat'] = $this->db->get_where('tb_rayon', ['id' => $id_kom])->row_array();
+
+        $data['title'] = 'Profile Rayon Avicenna STAI At-Taqwa';
+        $data['struktur'] = $this->m_struktur->getStrukturRayon($id_kom)->result();
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('komisariat/beranda_rayon', $data);
+        $this->load->view('template/frontend/footer', $data);
+    }
+    public function attaqwa_averoes()
+    {
+        $id_kom = 5;
+        $data['komisariat'] = $this->db->get_where('tb_rayon', ['id' => $id_kom])->row_array();
+
+        $data['title'] = 'Profile Rayon Averoes STAI At-Taqwa';
+        $data['struktur'] = $this->m_struktur->getStrukturRayon($id_kom)->result();
+        $this->load->view('template/frontend/header', $data);
+        $this->load->view('komisariat/beranda_rayon', $data);
         $this->load->view('template/frontend/footer', $data);
     }
     public function wahid_hasyim()
@@ -85,8 +118,9 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function berita($id_kom)
+    public function berita()
     {
+        $id_kom = $this->input->post('id_komisariat', true);
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/berita'); //site url
         $count = $this->m_berita->get_count_komisariat($id_kom);
@@ -132,10 +166,10 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function proker($id_kom)
+    public function proker()
     {
+        $id_kom = $this->input->post('id_komisariat', true);
         $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
-
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/proker'); //site url
         $count = $this->m_proker->get_count_by_komisariat($id_kom);
@@ -180,8 +214,9 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function artikel($id_kom)
+    public function artikel()
     {
+        $id_kom = $this->input->post('id_komisariat', true);
         $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/artikel'); //site url

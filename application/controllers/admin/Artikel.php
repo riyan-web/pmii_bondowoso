@@ -17,7 +17,7 @@ class Artikel extends CI_Controller
         $this->session->userdata('username')])->row_array();
         $data['title'] = 'Artikel ';
         $data['sub_judul']             = "artikel";
-        $data['sub2_judul']             = "Data Semua Artikel";
+        $data['sub2_judul']             = "Data Semua Artikel"; 
         $data['deskripsi']         = "Artikel";
         $data['pagae']        = "artikel";
         if($this->session->userdata['jenis'] == 1) {

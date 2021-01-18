@@ -23,13 +23,13 @@
               <li><a href="<?= base_url('komisariat/unej_bondowoso/'); ?>">Unej Kampus Bondowoso</a></li>
               <li class="drop-down"><a href="<?= base_url('komisariat/unibo/'); ?>">Unibo</a>
                 <ul>
-                  <li><a href="<?= base_url('komisariat/unibo/nurut_taqwa/'); ?>">Rayon Nurut Taqwa</a></li>
+                  <li><a href="<?= base_url('komisariat/unibo_nurut_taqwa/'); ?>">Rayon Nurut Taqwa</a></li>
                 </ul>
               </li>
               <li class="drop-down"><a href="<?= base_url('komisariat/attaqwa/'); ?>">Raden Bagus Asra</a>
                 <ul>
-                  <li><a href="<?= base_url('komisariat/attaqwa/avicenna/'); ?>">Rayon Avicenna</a></li>
-                  <li><a href="<?= base_url('komisariat/attaqwa/averoes/'); ?>">Rayon Averoes</a></li>
+                  <li><a href="<?= base_url('komisariat/attaqwa_avicenna/'); ?>">Rayon Avicenna</a></li>
+                  <li><a href="<?= base_url('komisariat/attaqwa_averoes/'); ?>">Rayon Averoes</a></li>
                 </ul>
               </li>
               <li><a href="<?= base_url('komisariat/wahid_hasyim/'); ?>">Wahid Hasyim</a></li>

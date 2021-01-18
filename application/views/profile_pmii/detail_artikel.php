@@ -88,15 +88,15 @@ $artikel_terbaru = $this->db->query($query_artbar)->result();
                     <div>
                         <form method="post" id="form_komen">
                             <fieldset>
-                                <legend><a href="#" class="twitter"><i class="icofont-like"></i>Like</a>
+                                <legend><a href="#" class="twitter"><i class="icofont-eyes"></i>View</a>
                                     <span class="twitter" style="margin-right: 25px;">25</span>
                                 </legend>
                                 <legend><a href="#" class="twitter"><i class="icofont-comment"></i>Comment</a></legend>
-                                <?php if($this->session->userdata['user_id'] == '') { ?>
-                                <p>
-                                    <label for="email" style="margin-right: 33px;">Email : </label>
-                                    <input placeholder="Email" id="email" name="email" type="email" />
-                                </p>
+                                <?php if ($this->session->userdata['user_id'] == '') { ?>
+                                    <p>
+                                        <label for="email" style="margin-right: 33px;">Email : </label>
+                                        <input placeholder="Email" id="email" name="email" type="email" />
+                                    </p>
                                 <?php } ?>
                                 <p>
                                     <label for="full-name" style="margin-right: 1px;">komentar : </label>
@@ -111,23 +111,23 @@ $artikel_terbaru = $this->db->query($query_artbar)->result();
                         </form>
                         <hr>
                         <h4 class="mb-3">Komentar :</h4>
-                        
+
                         <span id="message"></span>
-                    
+
                         <!-- <div id="display_comment"></div> -->
                         <div class="media border p-3 mb-2">
-                        <img src="http://localhost/pmii_bondowoso/upload/komen/avatar1.png" alt="foto-user" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                        <div class="row">
-                            <div class="col-sm-10">
-                            <h4><b>Yudistiono</b> <small> Posted on <i>2020-12-30 02:31:32</i></small></h4>
-                            <p>siap mantap</p>
+                            <img src="http://localhost/pmii_bondowoso/upload/komen/avatar1.png" alt="foto-user" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                            <div class="media-body">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h4><b>Yudistiono</b> <small> Posted on <i>2020-12-30 02:31:32</i></small></h4>
+                                        <p>siap mantap</p>
+                                    </div>
+                                    <div class="col-sm-2" align="right">
+                                        <button type="button" class="btn btn-primary btn-sm text-center reply" id="id">Reply</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-2" align="right">
-                            <button type="button" class="btn btn-primary btn-sm text-center reply" id="id">Reply</button>
-                            </div>
-                        </div>
-                        </div>
                         </div>
                     </div>
                 </div>
