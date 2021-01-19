@@ -300,7 +300,25 @@
       })
   })
   // tutup reset
+  // buka detail anggota
+  function detail_anggota(id) {
+    $('#detailAnggota').modal('show');
+    $.ajax({
+      url: "<?= site_url('admin/data_anggota/detail_anggota') ?>/" + id,
+      type: "GET",
+      dataType: "JSON",
+      success: function(data) {
+        $("#isi_detail").html('<table width="100%" style="font-size:14px"><tr><td rowspan="7"><img width="180px" src="<?= base_url() ?>upload/kader/'+data.foto+'" class="rounded img-thumbnail"></td></tr><tr><td width="150">Nama Lengkap</td><td width="10">:</td><td>'+data.nama_kader+'</td></tr><tr><td>Tempat, Tanggal  Lahir</td><td>:</td><td>'+data.tmp_lahir+', '+data.tgl_lahir+'</td></tr><tr><td>Alamat</td><td>:</td><td>'+data.alamat+'</td></tr><tr><td>No Hp</td><td>:</td><td>'+data.no_hp+'</td></tr><tr><td>Komisariat</td><td>:</td><td>'+data.nama+'</td></tr><tr><td>Mapaba</td><td>:</td><td>'+data.tahun_mapaba+'</td></tr><tr><tr><td rowspan="7"></td></tr><td>PKD</td><td>:</td><td>'+data.tahun_pkd+'</td></tr><tr><td>PKL</td><td>:</td><td>'+data.tahun_pkl+'</td></tr></tr></table>');
+        $("#id_tele").html('<input type="hidden" name="id" value="'+data.id+'">');
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('gagal menampilkan data');
+      }
+    });
+  }
+  // tutup detail
 </script>
+
 
 <!-- modal username -->
 <div class="modal fade" id="anggotauser" role="dialog">
@@ -327,6 +345,30 @@
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailAnggota" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+			  <h4 class="modal-title" id="myModalLabel"><span class="fa fa-user"></span>&nbsp;Detail Kader</h4>
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  </div>
+			  <div class="modal-body" id="isi_detail">
+          
+			  </div>
+			  <div class="modal-footer">
+        <form action="<?= base_url('admin/data_anggota/cetak')?>" method="post" target="_blank" >
+        <div id="id_tele"></div>
+				<button type="submit" class="btn btn-danger btn-sm"><span class="fa fa-print"></span>  <b>Cetak</b></button>   
+				</form>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><span class="fa fa-close"></span>  <b>Tutup</b></button>    
+        </div>
+			</div>
     </div>
   </div>
 </div>

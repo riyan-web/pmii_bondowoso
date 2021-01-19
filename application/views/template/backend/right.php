@@ -17,7 +17,7 @@
                                  <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                              </form>
                          </div>
-                        <?php  if($this->session->userdata['jenis'] != 1) {?>
+                        <?php  if($this->session->userdata['jenis'] != 1 AND $this->session->userdata['jenis'] != 2) {?>
                          <div class="dropdown for-notification">
                              <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <i class="fa fa-bell"></i>

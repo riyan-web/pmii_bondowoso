@@ -16,7 +16,7 @@
           <div class="card-body">
             <table id="tb_berita" class="table table-striped table-bordered">
               <thead>
-                <tr bgcolor="aqua" align="center">
+                <tr class="thead-dark" align="center">
                   <th style="width: 30px;">No.</th>
                   <th>Judul</th>
                   <th>Jenis Berita</th>

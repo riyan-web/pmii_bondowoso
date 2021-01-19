@@ -144,4 +144,15 @@ class M_anggota extends CI_Model
 	{
 		$this->db->delete('tb_user', array('kader_id' => $id));
 	}
+
+	public function detail_by_id($id)
+	{
+		$this->db->select('tb_kader.id, tb_kader.kode_kartu, tb_kader.nama as nama_kader, tb_kader.alamat, tb_kader.no_hp, tb_kader.tmp_lahir, tb_kader.tgl_lahir, tb_kader.tahun_mapaba, tb_kader.tahun_pkd, tb_kader.tahun_pkl, tb_kader.foto, tb_komisariat.nama');
+		$this->db->from($this->table);
+		$this->db->join('tb_komisariat', 'tb_komisariat.id = tb_kader.komisariat_id');
+		$this->db->where('tb_kader.id', $id);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
 }

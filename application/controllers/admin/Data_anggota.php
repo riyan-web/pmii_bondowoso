@@ -10,6 +10,7 @@ class Data_anggota extends CI_Controller
 		$this->load->model('admin/M_anggota', 'model_anggota');
 		$this->load->model('admin/M_komisariat', 'model_komisariat');
 		$this->load->helper('myadmin');
+		$this->load->library('cetak_pdf');
 	}
 	public function index()
 	{
@@ -302,6 +303,14 @@ class Data_anggota extends CI_Controller
 			echo show_err_msg($id . 'Data Username dan Password  Gagal di Reset', '20px');
 		}
 	}
+
+	public function detail_anggota($id)
+	{
+		// ini function untuk menampilkan kedalam form field 
+		$data = $this->model_anggota->detail_by_id($id);
+		echo json_encode($data);
+	}
+
 	private function _do_upload()
 	{
 		$config['upload_path']          = 'upload/kader';
@@ -338,6 +347,59 @@ class Data_anggota extends CI_Controller
 
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
+	
+	
 		$this->dompdf->stream("kartu_anggota.pdf", array('Attachment' => 0));
 	}
+
+	public function cetak()
+	{
+		$data = $this->model_anggota->detail_by_id($_POST['id']);
+        $pdf = new FPDF('L', 'mm',array(168, 252));
+
+        $pdf->AddPage();
+		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/pdf.jpg', 0, 0);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/komisariat/default.png',235,1,15);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/'.$data->foto,25,54,70,75);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/barcode.png',25,129,71);
+		$pdf->Ln(12);
+		$pdf->SetFont('Arial','B',16);
+		$pdf->SetTextColor(225,255,255);
+		$pdf->Cell(150);
+		$pdf->Cell(30,10,'No. Kartu : '.$data->kode_kartu,0,'C');
+		$pdf->Ln(28);
+		$pdf->SetFont('Arial','',13);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->Cell(100);
+		$pdf->Cell(30,10,'Nama       : '.$data->nama_kader,0,'1');
+		$pdf->Cell(100);
+		$pdf->Cell(30,10,'Alamat     :  '.$data->alamat,0,'1');
+		$pdf->Cell(100);
+		$pdf->Cell(30,10,'Tempat & : '.$data->tmp_lahir,0,'1');
+		$pdf->Cell(100);
+		$pdf->Cell(30,10,'Tgl Lahir   : '.date("d-m-Y", strtotime($data->tgl_lahir)),0,'1');
+		$pdf->Cell(100);
+		$pdf->Cell(30,10,'No Telp     : '.$data->no_hp,0,'1');
+		$pdf->Cell(100);
+		$pdf->Cell(30,10,'Mapaba    : '.$data->tahun_mapaba,0,'0');
+		$pdf->Cell(10);
+		$pdf->Cell(30,10,'PKD    : '.$data->tahun_pkd,0,'0');
+		$pdf->Cell(10);
+		$pdf->Cell(30,10,'PKL    : '.$data->tahun_pkl,0,'0');
+		$pdf->Ln(6);
+		$pdf->Cell(125);
+		$pdf->Cell(30,10,'Bondowoso, '.date('d-m-Y'),0,'0');
+		$pdf->Ln(5);
+		$pdf->Cell(125);
+		$pdf->Cell(30,10,'KETUA UMUM',0,'1');
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/cnt_ttd.jpg',140,120,25);
+		$pdf->Ln(15);
+		$pdf->Cell(125);
+		$pdf->Cell(30,10,'SAIFUL KHOIR',0,'L');
+        $pdf->Output();
+	}
+
+
+
+
 }
