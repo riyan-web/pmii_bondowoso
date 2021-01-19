@@ -17,23 +17,41 @@ $kader = $this->db->query($query_kader)->result();
 <section id="testimonials" class="testimonials">
     <div class="container">
         <div class="row">
-            <?php foreach ($struktur as $struk) {  ?>
+            <?php foreach ($struktur as $struk) { ?>
                 <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title mb-3"><?php echo $struk->tipe; ?></strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="mx-auto d-block">
-                                <img src="<?php echo base_url('upload/kader/') . $struk->foto; ?>" class="rounded-circle mx-auto d-block" style="width: 200px; height:200px;" alt="Card image cap">
-                                <h5 class="text-sm-center mt-2 mb-1"><?php echo $struk->nama; ?></h5>
+                    <?php if ($struk->kader_id == NULL) { ?>
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title mb-3"><?php echo $struk->tipe; ?></strong>
                             </div>
-                            <hr>
-                            <div class="card-text text-sm-center">
-                                <a href="<?php echo  $struk->tipe; ?>" data-toggle="modal" data-target="#myModal<?php echo $struk->id_struk; ?>"> <span class="fa fa-edit badge badge-warning"> Ubah</span></a>
+                            <div class="card-body">
+                                <div class="mx-auto d-block">
+                                    <img src="<?php echo base_url('upload/kader/default.jpg'); ?>" class="rounded-circle mx-auto d-block" style="width: 200px; height:200px;" alt="Card image cap">
+                                    <h5 class="text-sm-center mt-2 mb-1"><?php 'tidak ada data'; ?></h5>
+                                </div>
+                                <hr>
+                                <div class="card-text text-sm-center">
+                                    <a href="<?php echo  $struk->tipe; ?>" data-toggle="modal" data-target="#myModal<?php echo $struk->id_struk; ?>"> <span class="fa fa-edit badge badge-warning"> Ubah</span></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } else { ?>
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title mb-3"><?php echo $struk->tipe; ?></strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="mx-auto d-block">
+                                    <img src="<?php echo base_url('upload/kader/') . $struk->foto; ?>" class="rounded-circle mx-auto d-block" style="width: 200px; height:200px;" alt="Card image cap">
+                                    <h5 class="text-sm-center mt-2 mb-1"><?php echo $struk->nama; ?></h5>
+                                </div>
+                                <hr>
+                                <div class="card-text text-sm-center">
+                                    <a href="<?php echo  $struk->tipe; ?>" data-toggle="modal" data-target="#myModal<?php echo $struk->id_struk; ?>"> <span class="fa fa-edit badge badge-warning"> Ubah</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
                 <!-- Modal -->
                 <div id="myModal<?php echo $struk->id_struk; ?>" class="modal fade" role="dialog">
