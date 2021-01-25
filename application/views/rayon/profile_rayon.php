@@ -1,5 +1,4 @@
 <body>
-
     <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
@@ -89,7 +88,7 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="assets/backend/images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="<?php echo base_url() ?>upload/komisariat/default.png" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -102,34 +101,38 @@
                             <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
-
-                    <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true" aria-expanded="true">
-                            <i class="flag-icon flag-icon-us"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="language">
-                            <div class="dropdown-item">
-                                <span class="flag-icon flag-icon-fr"></span>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-es"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-us"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-it"></i>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
 
         </header><!-- /header -->
         <!-- Header-->
+        <?php
+        $query_ray = "SELECT *
+FROM  `tb_rayon`
+WHERE`tb_rayon`.`id` = 4
+";
+        $rayon = $this->db->query($query_ray)->row_array();
+        ?>
 
-        <h1>Profile Rayon</h1>
+        <div class="msg" style="display:none;">
+            <?= @$this->session->flashdata('msg'); ?>
+        </div>
+        <div class="col sm-5">
+            <div class="card mb-12" style="max-width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="<?php echo base_url('upload/komisariat/') . $rayon['foto']; ?>" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $rayon['nama']; ?></h5>
+                            <h4 class="card-title">Deskripsi Rayon : </h4>
+                            <p class="card-text"><?php echo $rayon['isi']; ?></p>
+                            <button class="col-md-4 btn btn-sm btn-warning" title="Ubah" onclick="komisariat_ubah(<?php echo $rayon['id']; ?>)"><i class="fa fa-edit"></i> Ubah Profile Rayon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div> <!-- .content -->

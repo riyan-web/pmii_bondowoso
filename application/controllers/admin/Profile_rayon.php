@@ -17,3 +17,4 @@ class Profile_rayon extends CI_Controller
         $this->load->view('template/backend/footer', $data);
     }
 }
+ 

@@ -1,5 +1,12 @@
+     <?php
+        $id_kom = $this->session->userdata['id_komisariat'];
+        $query_kom = "SELECT *
+     FROM  `tb_komisariat`
+     WHERE`tb_komisariat`.`id` = $id_kom
+     ";
+        $komisariat = $this->db->query($query_kom)->row_array();
+        ?>
      <!-- Right Panel -->
-
      <div id="right-panel" class="right-panel">
 
          <!-- Header-->
@@ -17,39 +24,51 @@
                                  <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                              </form>
                          </div>
-                        <?php  if($this->session->userdata['jenis'] != 1 AND $this->session->userdata['jenis'] != 2) {?>
-                         <div class="dropdown for-notification">
-                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <i class="fa fa-bell"></i>
-                                 <?php
-                                 $sql1= "SELECT count(kader_id) as jumlah FROM `tb_konten` join tb_kader on tb_kader.id = tb_konten.kader_id WHERE tb_kader.komisariat_id = ".$this->session->userdata['id_komisariat']." AND tb_konten.status != '2' AND tb_konten.status != '3' AND tb_konten.status != '0' ";
-                                 $jumlahSul = $this->db->query($sql1)->row();
+                         <?php if ($this->session->userdata['jenis'] != 1 and $this->session->userdata['jenis'] != 2) { ?>
+                             <div class="dropdown for-notification">
+                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     <i class="fa fa-bell"></i>
+                                     <?php
+                                        $sql1 = "SELECT count(kader_id) as jumlah FROM `tb_konten` join tb_kader on tb_kader.id = tb_konten.kader_id WHERE tb_kader.komisariat_id = " . $this->session->userdata['id_komisariat'] . " AND tb_konten.status != '2' AND tb_konten.status != '3' AND tb_konten.status != '0' ";
+                                        $jumlahSul = $this->db->query($sql1)->row();
 
-                                 $sql2 = "SELECT count(id) as jumlahP FROM `pesan_pengunjung` where status= '0'";
-                                 $jumlahPes = $this->db->query($sql2)->row();
+                                        $sql2 = "SELECT count(id) as jumlahP FROM `pesan_pengunjung` where status= '0'";
+                                        $jumlahPes = $this->db->query($sql2)->row();
 
-                                 if($this->session->userdata['jenis'] == 4){
-                                     $jumlah = $jumlahSul->jumlah + $jumlahPes->jumlahP; 
-                                 }
-                                 if($this->session->userdata['jenis'] == 3){
-                                    $jumlah = $jumlahSul->jumlah; 
-                                }
-                                 ?>
-                                 <span class="count bg-danger"><?php if ($jumlahSul->jumlah < 0) { echo '0'; } else{ echo $jumlah; }?></span>
-                             </button>
-                             <div class="dropdown-menu" aria-labelledby="notification">
-                                 <p class="red">kamu memiliki <b><?= $jumlah?></b> pesan</p>
-                                 <a class="dropdown-item media bg-flat-color-1" href="<?= base_url('admin/artikel_usulan') ?>">
-                                     <p>Ada <b><?php if ($jumlahSul->jumlah > 0) { echo $jumlahSul->jumlah; } else{ echo "0"; }?></b> Kader mengusulkan Artikel baru.</p>
-                                 </a>
-                                 <?php if($this->session->userdata['jenis'] == 4) { ?>
-                                 <a class="dropdown-item media bg-flat-color-5" href="<?= base_url('admin/pesan_pengunjung') ?>">
-                                     <p>Ada <b><?php if ($jumlahPes->jumlahP > 0) { echo $jumlahPes->jumlahP; } else{ echo "0"; } ?></b> pengunjung mengirim pesan.</p>
-                                 </a>
-                                 <?php } ?>
+                                        if ($this->session->userdata['jenis'] == 4) {
+                                            $jumlah = $jumlahSul->jumlah + $jumlahPes->jumlahP;
+                                        }
+                                        if ($this->session->userdata['jenis'] == 3) {
+                                            $jumlah = $jumlahSul->jumlah;
+                                        }
+                                        ?>
+                                     <span class="count bg-danger"><?php if ($jumlahSul->jumlah < 0) {
+                                                                        echo '0';
+                                                                    } else {
+                                                                        echo $jumlah;
+                                                                    } ?></span>
+                                 </button>
+                                 <div class="dropdown-menu" aria-labelledby="notification">
+                                     <p class="red">kamu memiliki <b><?= $jumlah ?></b> pesan</p>
+                                     <a class="dropdown-item media bg-flat-color-1" href="<?= base_url('admin/artikel_usulan') ?>">
+                                         <p>Ada <b><?php if ($jumlahSul->jumlah > 0) {
+                                                        echo $jumlahSul->jumlah;
+                                                    } else {
+                                                        echo "0";
+                                                    } ?></b> Kader mengusulkan Artikel baru.</p>
+                                     </a>
+                                     <?php if ($this->session->userdata['jenis'] == 4) { ?>
+                                         <a class="dropdown-item media bg-flat-color-5" href="<?= base_url('admin/pesan_pengunjung') ?>">
+                                             <p>Ada <b><?php if ($jumlahPes->jumlahP > 0) {
+                                                            echo $jumlahPes->jumlahP;
+                                                        } else {
+                                                            echo "0";
+                                                        } ?></b> pengunjung mengirim pesan.</p>
+                                         </a>
+                                     <?php } ?>
+                                 </div>
                              </div>
-                         </div>
-                        <?php } ?>
+                         <?php } ?>
 
                          <div class="dropdown for-message">
                              <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -98,7 +117,7 @@
                  <div class="col-sm-5">
                      <div class="user-area dropdown float-right">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <img class="user-avatar rounded-circle" src="<?= base_url() ?>assets/backend/images/admin.jpg" alt="User Avatar">
+                             <img class="user-avatar rounded-circle" src="<?php echo base_url('upload/komisariat/') . $komisariat['foto']; ?>" alt=" User Avatar">
                          </a>
 
                          <div class="user-menu dropdown-menu">
