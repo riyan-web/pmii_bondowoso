@@ -107,8 +107,10 @@ class Berita extends CI_Controller
                 $out['status'] = 'form';
                 $out['msg'] = show_err_msg('Judul Berita tersebut sudah terdaftar');
             } else {
+                $slug = $this->input->post('judul');
                 $data = array(
-                    'judul' => $this->input->post('judul'),
+                    'judul' => $slug,
+                    'slug' => str_replace(" ", "-", "$slug"),
                     'isi_konten' => $this->input->post('isi'),
                     'jeniskonten_id' => $this->input->post('jenis'),
                     'foto_artikel' => $this->input->post('img'),
@@ -156,8 +158,10 @@ class Berita extends CI_Controller
         $this->form_validation->set_rules('jenis', 'jenis', 'required');
         $data = $this->input->post();
         if ($this->form_validation->run() == TRUE) {
+            $slug = $this->input->post('judul');
             $data = array(
-                'judul' => $this->input->post('judul'),
+                'judul' => $slug,
+                'slug' => str_replace(" ", "-", "$slug"),
                 'isi_konten' => $this->input->post('isi'),
                 'jeniskonten_id' => $this->input->post('jenis'),
                 'foto_artikel' => $this->input->post('img'),

@@ -263,9 +263,9 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function detail_artikel($id_konten)
+    public function detail_artikel($slug)
     {
-        $data['artikel'] = $this->m_artikel->detail_artikel($id_konten);
+        $data['artikel'] = $this->m_artikel->detail_artikel($slug);
         $data['title'] = "Baca Artikel";
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);
@@ -273,9 +273,9 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function detail_berita($id_konten)
+    public function detail_berita($slug)
     {
-        $data['berita'] = $this->m_berita->detail_berita($id_konten);
+        $data['berita'] = $this->m_berita->detail_berita($slug);
         $data['title'] = "Baca Berita";
         $this->load->view('template/frontend/header', $data);
         $this->load->view('template/frontend/navbar', $data);

@@ -116,7 +116,7 @@ $artikel_terbaru = $this->db->query($query_artbar)->result();
                                     <img src="" alt="" class="img-fluid">
                                     <img src="<?php echo base_url('upload/artikel/') . $artbar->foto_artikel; ?>" alt="">
                                     <h4>
-                                        <a href="<?php echo base_url('komisariat/detail_artikel/' . $artbar->id_konten) ?>" class="btn-buy"> <?php echo $artbar->judul; ?></a>
+                                        <a href="<?php echo base_url('komisariat/detail_artikel/' . $artbar->slug) ?>" class="btn-buy"> <?php echo $artbar->judul; ?></a>
                                     </h4>
                                     <time datetime="2020-01-01"><?php echo $artbar->tgl_buat; ?></time>
                                 </div>

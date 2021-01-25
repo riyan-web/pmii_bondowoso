@@ -28,12 +28,12 @@
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 <?php echo substr($art->isi_konten, 0, 150) . "..."; ?>
-                                <a href="<?php echo base_url('Detail_konten/artikel/'. $art->id_konten) ?>" class="btn-buy" >Lanjut Baca</a>
+                                <a href="<?php echo base_url('Detail_konten/artikel/' . $art->slug) ?>" class="btn-buy">Lanjut Baca</a>
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
                         </div>
                     </div>
-                <?php } ?> 
+                <?php } ?>
             </div>
         </div>
         <div class="blog-pagination">

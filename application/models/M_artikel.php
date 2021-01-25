@@ -43,25 +43,25 @@ class M_artikel extends CI_Model
         return $this->db->query($query_count)->row_array();
     }
 
-    function detail_artikel($id_konten)
+    function detail_artikel($slug)
     {
         $detail = "SELECT * FROM `tb_konten` 
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
-        WHERE`tb_konten`.`id_konten` = $id_konten ";
+        WHERE`tb_konten`.`slug` = '$slug' ";
 
         return $this->db->query($detail)->row_array();
     }
 
     public function list_komen($id)
     {
-        $sql = "SELECT tb_komentar.id, tb_komentar.parent_komentar_id, tb_komentar.komentar, tb_komentar.email, tb_komentar.date, tb_komentar.konten_id, tb_komentar.kader_id, tb_kader.nama FROM tb_komentar join tb_kader on tb_kader.id = tb_komentar.kader_id WHERE parent_komentar_id = '0' AND konten_id = " . $id ." ORDER BY tb_komentar.id DESC";
+        $sql = "SELECT tb_komentar.id, tb_komentar.parent_komentar_id, tb_komentar.komentar, tb_komentar.email, tb_komentar.date, tb_komentar.konten_id, tb_komentar.kader_id, tb_kader.nama FROM tb_komentar join tb_kader on tb_kader.id = tb_komentar.kader_id WHERE parent_komentar_id = '0' AND konten_id = " . $id . " ORDER BY tb_komentar.id DESC";
         return $this->db->query($sql)->result_array();
     }
 
     public function list_balas($parent, $id)
     {
-        $sql = "SELECT tb_komentar.id, tb_komentar.parent_komentar_id, tb_komentar.komentar, tb_komentar.email, tb_komentar.date, tb_komentar.konten_id, tb_komentar.kader_id, tb_kader.nama FROM tb_komentar join tb_kader on tb_kader.id = tb_komentar.kader_id WHERE parent_komentar_id = ".$parent." AND konten_id = " . $id ." ORDER BY tb_komentar.id DESC";
+        $sql = "SELECT tb_komentar.id, tb_komentar.parent_komentar_id, tb_komentar.komentar, tb_komentar.email, tb_komentar.date, tb_komentar.konten_id, tb_komentar.kader_id, tb_kader.nama FROM tb_komentar join tb_kader on tb_kader.id = tb_komentar.kader_id WHERE parent_komentar_id = " . $parent . " AND konten_id = " . $id . " ORDER BY tb_komentar.id DESC";
         return $this->db->query($sql);
     }
 }

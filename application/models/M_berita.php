@@ -57,12 +57,12 @@ class M_berita extends CI_Model
 
         return $this->db->query($query_count)->row_array();
     }
-    function detail_berita($id_konten)
+    function detail_berita($slug)
     {
         $detail = "SELECT * FROM `tb_konten` 
         JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
         JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
-        WHERE`tb_konten`.`id_konten` = $id_konten ";
+        WHERE`tb_konten`.`slug` = '$slug' ";
 
         return $this->db->query($detail)->row_array();
     }

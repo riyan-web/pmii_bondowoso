@@ -44,7 +44,7 @@ class M_berita extends CI_Model {
     {
         return $this->db->get_where($this->table, ["judul" => $nama])->num_rows();
     }
-
+ 
     public function berita_tambah($data)
     {
         // $sql = "INSERT INTO ".$this->table." VALUES('', '".$data['nama']."', '".$data['isi']."', '".$data['foto']."', '".$data['singkatan']."')";

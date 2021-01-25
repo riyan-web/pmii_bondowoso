@@ -4,27 +4,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Artikel extends CI_Controller
 {
     public function __construct()
-    {    
+    {
         parent::__construct();
         cek_akses();
         $this->load->model('admin/M_artikel', 'model_artikel');
         $this->load->helper('myadmin');
     }
-    
+
     public function index()
     {
         $data['user'] = $this->db->get_where('tb_user', ['username' =>
         $this->session->userdata('username')])->row_array();
         $data['title'] = 'Artikel ';
         $data['sub_judul']             = "artikel";
-        $data['sub2_judul']             = "Data Semua Artikel"; 
+        $data['sub2_judul']             = "Data Semua Artikel";
         $data['deskripsi']         = "Artikel";
         $data['pagae']        = "artikel";
-        if($this->session->userdata['jenis'] == 1) {
+        if ($this->session->userdata['jenis'] == 1) {
             $data['konten2'] = $this->db->get_where('tb_konten', ['user_id' =>
-        $this->session->userdata('user_id')])->result();
-        }  
-        
+            $this->session->userdata('user_id')])->result();
+        }
+
         $data['modal_artikel'] = show_my_modal_kustom('admin/modal/mdl_artikel', 'artikel', $data);
         $this->load->view('template/backend/header', $data);
         $this->load->view('template/backend/sidebar', $data);
@@ -48,21 +48,21 @@ class Artikel extends CI_Controller
             $datanya[]    = $row['judul'];
             $datanya[]    = $row['nama_jenis'];
 
-            if($row['status'] == 2)
+            if ($row['status'] == 2)
                 $datanya[]    = '<label class="badge badge-success">Aktif</label>';
             else
                 $datanya[]    = '<label class="badge badge-danger">Tidak Aktif</label>';
 
-            if($row['status'] == 2)
+            if ($row['status'] == 2)
                 $datanya[] = '
                     <a class="btn btn-secondary btn-sm" href="javascript:void(0)" title="List Komentar artikel" onclick="listKomen(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-comments"></i></a>
-                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel('."'".$row['id_konten']."'".')"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-info"></i></a>
                     <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="artikel_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
                     <button class="btn btn-danger btn-sm konfirmasiNonaktif-artikel" title="Nonaktifkan Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiNonaktif"><i class="fa fa-times-circle"></i></button>
                 ';
             else
                 $datanya[] = '
-                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel('."'".$row['id_konten']."'".')"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)" title="Detail Artikel" onclick="detail_artikel(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-info"></i></a>
                     <a class="btn btn-warning btn-sm" href="javascript:void(0)" title="Ubah" onclick="artikel_ubah(' . "'" . $row['id_konten'] . "'" . ')"><i class="fa fa-edit"></i></a>
                     <button class="btn btn-success btn-sm konfirmasiAktif-artikel" title="Aktif Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiAktif"><i class="fa fa-check-circle"></i></button>
                     <button class="btn btn-danger btn-sm konfirmasiHapus-artikel" title="Hapus Data" data-id="' . $row['id_konten'] . '" data-toggle="modal" data-target="#konfirmasiHapus"><i class="fa fa-trash"></i></button>
@@ -102,8 +102,10 @@ class Artikel extends CI_Controller
                 $out['status'] = 'form';
                 $out['msg'] = show_err_msg('Judul Artikel tersebut sudah terdaftar');
             } else {
+                $slug = $this->input->post('judul');
                 $data = array(
-                    'judul' => $this->input->post('judul'),
+                    'judul' => $slug,
+                    'slug' => str_replace(" ", "-", "$slug"),
                     'isi_konten' => $this->input->post('isi'),
                     'jeniskonten_id' => $this->input->post('jenis'),
                     'foto_artikel' => $this->input->post('img'),
@@ -150,52 +152,54 @@ class Artikel extends CI_Controller
         $this->form_validation->set_rules('judul', 'judul', 'required');
         $this->form_validation->set_rules('isi', 'isi', 'required');
         $this->form_validation->set_rules('jenis', 'jenis', 'required');
-		$data = $this->input->post();
-		if ($this->form_validation->run() == TRUE) {
-			$data = array('judul' => $this->input->post('judul'),
-							'isi_konten' => $this->input->post('isi'),
-							'jeniskonten_id' => $this->input->post('jenis'),
-                            'foto_artikel' => $this->input->post('img'),
-                            'status' => '2'
-						);
-			$remove_photo = $this->input->post('remove_photo');
-			if($this->input->post('remove_photo')) // jika remove photo di centang
-			{
-				if(file_exists('upload/artikel/'.$this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo !="default.jpg")){
-					unlink('upload/artikel/'.$this->input->post('remove_photo'));
-					$data['foto_artikel'] = '';
-				}
-				
-			}
+        $data = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $slug = $this->input->post('judul');
+            $data = array(
+                'judul' => $slug,
+                'slug' => str_replace(" ", "-", "$slug"),
+                'isi_konten' => $this->input->post('isi'),
+                'jeniskonten_id' => $this->input->post('jenis'),
+                'foto_artikel' => $this->input->post('img'),
+                'status' => '2'
+            );
+            $remove_photo = $this->input->post('remove_photo');
+            if ($this->input->post('remove_photo')) // jika remove photo di centang
+            {
+                if (file_exists('upload/artikel/' . $this->input->post('remove_photo')) && $this->input->post('remove_photo' && $remove_photo != "default.jpg")) {
+                    unlink('upload/artikel/' . $this->input->post('remove_photo'));
+                    $data['foto_artikel'] = '';
+                }
+            }
 
-			if(!empty($_FILES['img']['name'])){
-				$upload = $this->_do_upload();
-				
-				//delete file
-				$artikel = $this->model_artikel->artikel_by_id($this->input->post('id'));
-				if(file_exists('upload/artikel/'.$artikel->foto_artikel) && $artikel->foto_artikel)
-					unlink('upload/artikel/'.$artikel->foto_artikel);
+            if (!empty($_FILES['img']['name'])) {
+                $upload = $this->_do_upload();
 
-				$data['foto_artikel'] = $upload;
-			}else{
-				$data['foto_artikel'] = $this->input->post('foto_lama');
-			}
-			$id = $this->input->post('id');
-			$result = $this->model_artikel->artikel_ubah($data, $id);
+                //delete file
+                $artikel = $this->model_artikel->artikel_by_id($this->input->post('id'));
+                if (file_exists('upload/artikel/' . $artikel->foto_artikel) && $artikel->foto_artikel)
+                    unlink('upload/artikel/' . $artikel->foto_artikel);
 
-			if ($result > 0) {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('berita usulan berhasil ditambahkan', '20px');
-			} else {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data berita usulan Gagal diubah', '20px');
-			}
-		} else {
-			$out['status'] = 'form';
-			$out['msg'] = show_err_msg(validation_errors());
-		}
+                $data['foto_artikel'] = $upload;
+            } else {
+                $data['foto_artikel'] = $this->input->post('foto_lama');
+            }
+            $id = $this->input->post('id');
+            $result = $this->model_artikel->artikel_ubah($data, $id);
 
-		echo json_encode($out);
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('berita usulan berhasil ditambahkan', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Data berita usulan Gagal diubah', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
     }
     public function artikel_hapus()
     {
@@ -216,7 +220,8 @@ class Artikel extends CI_Controller
         }
     }
 
-    public function nonaktifkan_artikel() {
+    public function nonaktifkan_artikel()
+    {
         $id = $_POST['id'];
         $status = '3';
         $result = $this->model_artikel->change_status($status, $id);
@@ -229,7 +234,8 @@ class Artikel extends CI_Controller
             echo show_err_msg('Data Artikel Gagal Dinonaktifkan!', '20px');
         }
     }
-    public function aktifkan_artikel() {
+    public function aktifkan_artikel()
+    {
         $id = $_POST['id'];
         $status = '2';
         $result = $this->model_artikel->change_status($status, $id);
