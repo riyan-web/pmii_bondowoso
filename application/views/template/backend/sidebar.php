@@ -53,7 +53,7 @@
          <div id="main-menu" class="main-menu collapse navbar-collapse">
              <ul class="nav navbar-nav">
                  <li class="nav-item">
-                     <a href="<?= base_url('login/logout'); ?>">
+                     <a href="<?= base_url('login/logout'); ?>"> 
                          <i class="menu-icon fa fa-sign-out"></i>
                          Keluar
                      </a>

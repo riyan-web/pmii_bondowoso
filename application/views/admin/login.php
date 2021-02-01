@@ -69,6 +69,7 @@
                         <br> <br>
                         
                         <div class="register-link m-t-15 text-center">
+                        <p> <a href="<?= base_url('login/scan') ?>"> Scan QR Code</a></p>
                             <p> <a href="<?= base_url('beranda') ?>"> Kembali</a></p>
                         </div>
                     </form>

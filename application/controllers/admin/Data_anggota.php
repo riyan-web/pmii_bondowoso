@@ -125,6 +125,7 @@ class Data_anggota extends CI_Controller
 
 	public function anggota_tambah()
 	{
+		$this->load->library('ciqrcode'); //pemanggilan library QR CODE
 		$id_komisariat = $this->session->userdata['id_komisariat'];
 		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
 		$this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required');
@@ -145,8 +146,30 @@ class Data_anggota extends CI_Controller
 			}
 			$kode_kartu = $singkatan->singkatan . date("Ymd", strtotime($tgl)) . sprintf("%05s", $maxKode);
 			$tgl_lahir = date("Y-m-d", strtotime($this->input->post('tgl_lahir')));
+
+			$config['cacheable']    = true; //boolean, the default is true
+			$config['cachedir']     = './assets/'; //string, the default is application/cache/
+			$config['errorlog']     = './assets/'; //string, the default is application/logs/
+			$config['imagedir']     = './upload/qr_code/'; //direktori penyimpanan qr code
+			$config['quality']      = true; //boolean, the default is true
+			$config['size']         = '1024'; //interger, the default is 1024
+			$config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
+			$config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+			$this->ciqrcode->initialize($config);
+
+			$image_name = $kode_kartu . '.png'; //buat name dari qr code sesuai dengan nim
+
+			$params['data'] = $kode_kartu; //data yang akan di jadikan QR CODE
+			$params['level'] = 'H'; //H=High
+			$params['size'] = 10;
+			$params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
+			$this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+
+
+
 			$data = array(
 				'kode_kartu' => $kode_kartu,
+				'qr_code' => $image_name,
 				'nama' => $this->input->post('nama'),
 				'alamat' => $this->input->post('alamat'),
 				'no_hp' => $this->input->post('no_hp'),
@@ -347,59 +370,64 @@ class Data_anggota extends CI_Controller
 
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
-	
-	
+
+
 		$this->dompdf->stream("kartu_anggota.pdf", array('Attachment' => 0));
 	}
 
 	public function cetak()
 	{
 		$data = $this->model_anggota->detail_by_id($_POST['id']);
-        $pdf = new FPDF('L', 'mm',array(168, 252));
+		$pdf = new FPDF('L', 'mm', array(168, 252));
 
-        $pdf->AddPage();
+		$pdf->AddPage();
 		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/pdf.jpg', 0, 0);
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/komisariat/default.png',235,1,15);
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/'.$data->foto,25,54,70,75);
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/barcode.png',25,129,71);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/komisariat/default.png', 235, 1, 15);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/' . $data->foto, 25, 54, 70, 75);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/barcode.png', 25, 129, 71);
 		$pdf->Ln(12);
-		$pdf->SetFont('Arial','B',16);
-		$pdf->SetTextColor(225,255,255);
+		$pdf->SetFont('Arial', 'B', 16);
+		$pdf->SetTextColor(225, 255, 255);
 		$pdf->Cell(150);
-		$pdf->Cell(30,10,'No. Kartu : '.$data->kode_kartu,0,'C');
+		$pdf->Cell(30, 10, 'No. Kartu : ' . $data->kode_kartu, 0, 'C');
 		$pdf->Ln(28);
-		$pdf->SetFont('Arial','',13);
-		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial', '', 13);
+		$pdf->SetTextColor(0, 0, 0);
 		$pdf->Cell(100);
-		$pdf->Cell(30,10,'Nama       : '.$data->nama_kader,0,'1');
+		$pdf->Cell(30, 10, 'Nama       : ' . $data->nama_kader, 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30,10,'Alamat     :  '.$data->alamat,0,'1');
+		$pdf->Cell(30, 10, 'Alamat     :  ' . $data->alamat, 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30,10,'Tempat & : '.$data->tmp_lahir,0,'1');
+		$pdf->Cell(30, 10, 'Tempat & : ' . $data->tmp_lahir, 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30,10,'Tgl Lahir   : '.date("d-m-Y", strtotime($data->tgl_lahir)),0,'1');
+		$pdf->Cell(30, 10, 'Tgl Lahir   : ' . date("d-m-Y", strtotime($data->tgl_lahir)), 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30,10,'No Telp     : '.$data->no_hp,0,'1');
+		$pdf->Cell(30, 10, 'No Telp     : ' . $data->no_hp, 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30,10,'Mapaba    : '.$data->tahun_mapaba,0,'0');
+		$pdf->Cell(30, 10, 'Mapaba    : ' . $data->tahun_mapaba, 0, '0');
 		$pdf->Cell(10);
-		$pdf->Cell(30,10,'PKD    : '.$data->tahun_pkd,0,'0');
+		$pdf->Cell(30, 10, 'PKD    : ' . $data->tahun_pkd, 0, '0');
 		$pdf->Cell(10);
-		$pdf->Cell(30,10,'PKL    : '.$data->tahun_pkl,0,'0');
+		$pdf->Cell(30, 10, 'PKL    : ' . $data->tahun_pkl, 0, '0');
 		$pdf->Ln(6);
 		$pdf->Cell(125);
-		$pdf->Cell(30,10,'Bondowoso, '.date('d-m-Y'),0,'0');
+		$pdf->Cell(30, 10, 'Bondowoso, ' . date('d-m-Y'), 0, '0');
 		$pdf->Ln(5);
 		$pdf->Cell(125);
-		$pdf->Cell(30,10,'KETUA UMUM',0,'1');
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/cnt_ttd.jpg',140,120,25);
+		$pdf->Cell(30, 10, 'KETUA UMUM', 0, '1');
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/cnt_ttd.jpg', 140, 120, 25);
 		$pdf->Ln(15);
 		$pdf->Cell(125);
-		$pdf->Cell(30,10,'SAIFUL KHOIR',0,'L');
-        $pdf->Output();
+		$pdf->Cell(30, 10, 'SAIFUL KHOIR', 0, 'L');
+		$pdf->AddPage();
+		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/bg_pmii.jpg', 0, 0, 252, 168);
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/qr_code/' . $data->qr_code, 15, 105, 50, 50);
+		$pdf->SetFont('Arial', 'B', 28);
+		$pdf->SetTextColor(225, 255, 255);
+		$pdf->Cell(24);
+		$pdf->Cell(40, 10, 'Pergerakan Mahasiswa Islam Indonesia');
+
+
+		$pdf->Output();
 	}
-
-
-
-
 }

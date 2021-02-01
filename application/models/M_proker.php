@@ -31,8 +31,7 @@ class M_proker extends CI_Model
     {
         $query_count = "SELECT  COUNT(tb_proker.id) AS jumlah_proker FROM `tb_proker` 
         JOIN `tb_user` ON `tb_user`.`id` = `tb_proker`.`user_id`
-        WHERE `tb_user`.`komisariat_id` = $id_kom 
-        ORDER BY `tb_proker`.`id` DESC";
+        WHERE `tb_user`.`komisariat_id` = $id_kom ";
         return $this->db->query($query_count)->row_array();
     }
 }

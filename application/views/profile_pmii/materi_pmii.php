@@ -4,7 +4,7 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Artikel</h2>
+                <h2>Materi PMII</h2>
                 <ol>
                     <li><a href="<?= base_url('beranda') ?>">Beranda</a></li>
                     <li>Materi PMII</li>

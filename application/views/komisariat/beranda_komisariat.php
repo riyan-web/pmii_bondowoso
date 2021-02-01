@@ -44,10 +44,7 @@
                         <h3>Berita Komisariat</h3>
                         <h4>Berisi Berita Tentang Komisariat</h4>
                         <div class="btn-wrap">
-                            <form action="<?= base_url('komisariat/berita'); ?>" method="post">
-                                <input type="hidden" name="id_komisariat" value="<?= $komisariat['id']; ?>">
-                                <button type="submit" class="btn btn-light">Kunjungi</button>
-                            </form>
+                            <a href="<?= base_url('komisariat/berita/' . $komisariat['id']) ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
                 </div>
@@ -56,10 +53,7 @@
                         <h3>Program Kerja</h3>
                         <h4>Berisi Program Kerja Komisariat</h4>
                         <div class="btn-wrap">
-                            <form action="<?= base_url('komisariat/proker'); ?>" method="post">
-                                <input type="hidden" name="id_komisariat" value="<?= $komisariat['id']; ?>">
-                                <button type="submit" class="btn btn-light">Kunjungi</button>
-                            </form>
+                            <a href="<?= base_url('komisariat/proker/' . $komisariat['id']) ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
                 </div>
@@ -68,10 +62,7 @@
                         <h3>Artikel</h3>
                         <h4>Berisi Artikel Kader komisariat</h4>
                         <div class="btn-wrap">
-                            <form action="<?= base_url('komisariat/artikel'); ?>" method="post">
-                                <input type="hidden" name="id_komisariat" value="<?= $komisariat['id']; ?>">
-                                <button type="submit" class="btn btn-light">Kunjungi</button>
-                            </form>
+                            <a href="<?= base_url('komisariat/artikel/' . $komisariat['id']) ?>" class="btn-buy">Kunjungi</a>
                         </div>
                     </div>
                 </div>

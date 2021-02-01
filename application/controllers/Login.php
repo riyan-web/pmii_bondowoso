@@ -28,6 +28,41 @@ class Login extends CI_Controller
             $this->_masuk();
         }
     }
+    public function scan()
+    {
+        $data['title'] = 'Scan QR Code';
+        $this->load->view('admin/scan', $data);
+        $qrcode = $this->input->post('qrcode');
+        if (!empty($qrcode)) {
+            if (empty($this->db->get_where('tb_kader', ['kode_kartu' => $qrcode]))) {
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class="alert alert-danger" role="alert">Akun anda tidak ditemukan!</div>'
+                );
+                redirect('login/scan');
+            } else {
+                $kode_kartu = $this->db->get_where('tb_kader', ['kode_kartu' => $qrcode])->row_array();
+                $user = $this->db->get_where('tb_user', ['kader_id' =>  $kode_kartu['id']])->row_array();
+                if ($user) {
+                    $komisariat_id = $user['komisariat_id'];
+                    $nama_komcab = $this->db->get_where('tb_komisariat', ['id' => $komisariat_id])->row_array();
+                    $data = [
+                        'username' => $user['username'],
+                        'jenis' => $user['jenis'],
+                        'nama_komcab' => $nama_komcab['nama'],
+                        'id_komisariat' => $nama_komcab['id'],
+                        'user_id' => $user['id'],
+                        'kader_id' => $user['kader_id']
+                    ];
+                    $this->session->set_userdata($data);
+
+                    if ($user['jenis'] == 1) {
+                        redirect('admin/profile_anggota');
+                    }
+                }
+            }
+        }
+    }
     private function _masuk()
     {
         $username = $this->input->post('username');

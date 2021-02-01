@@ -115,13 +115,11 @@ class Beranda extends CI_Controller
 
     public function proker()
     {
-        $id_kom = 1;
-
         //konfigurasi pagination
         $config['base_url'] = site_url('beranda/proker'); //site url
         $count = $this->m_proker->get_count_proker_cabang();
         $config['total_rows'] = $count['jumlah_proker']; //total row
-        $config['per_page'] = 2;  //show record per halaman
+        $config['per_page'] = 3;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -150,7 +148,7 @@ class Beranda extends CI_Controller
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         //panggil function get_mahasiswa_list yang ada pada model m_proker
-        $data['proker'] = $this->m_proker->get_proker_list_komisariat($config["per_page"], $data['page'], $id_kom);
+        $data['proker'] = $this->m_proker->get_proker_list($config["per_page"], $data['page']);
 
         $data['pagination'] = $this->pagination->create_links();
 

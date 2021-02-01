@@ -53,11 +53,9 @@ $row_user = $this->db->query($query_user)->row_array();
                     <div class="user-menu dropdown-menu">
                         <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
 
-                        <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
+                        <a class="nav-link" href="<?= base_url('admin/Ganti_password'); ?>"><i class="fa fa-key"></i> Ganti Password</a>
 
-                        <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
-
-                        <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                        <a class="nav-link" href="<?= base_url('login/logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a>
                     </div>
                 </div>
             </div>

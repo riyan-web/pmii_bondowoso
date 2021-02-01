@@ -118,15 +118,14 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function berita()
+    public function berita($id_kom)
     {
-        $id_kom = $this->input->post('id_komisariat', true);
         //konfigurasi pagination
-        $config['base_url'] = site_url('komisariat/berita'); //site url
+        $config['base_url'] = site_url('komisariat/berita/' . $id_kom . '/'); //site url
         $count = $this->m_berita->get_count_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_berita']; //total row
         $config['per_page'] = 3;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
+        $config["uri_segment"] = 4;  // uri parameter 
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
 
@@ -166,12 +165,11 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function proker()
+    public function proker($id_kom)
     {
-        $id_kom = $this->input->post('id_komisariat', true);
         $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
         //konfigurasi pagination
-        $config['base_url'] = site_url('komisariat/proker'); //site url
+        $config['base_url'] = site_url('komisariat/proker/' . $id_kom . '/'); //site url
         $count = $this->m_proker->get_count_by_komisariat($id_kom);
         $config['total_rows'] = $count['jumlah_proker']; //total row
         $config['per_page'] = 2;  //show record per halaman
@@ -214,9 +212,8 @@ class Komisariat  extends CI_Controller
         $this->load->view('template/frontend/footer', $data);
     }
 
-    public function artikel()
+    public function artikel($id_kom)
     {
-        $id_kom = $this->input->post('id_komisariat', true);
         $data['komisariat'] = $this->db->get_where('tb_komisariat', ['id' => $id_kom])->row_array();
         //konfigurasi pagination
         $config['base_url'] = site_url('komisariat/artikel'); //site url

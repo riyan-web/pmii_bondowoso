@@ -40,7 +40,6 @@
     <div class="msg" style="display:none;">
         <?= @$this->session->flashdata('msg'); ?>
     </div>
-
     <div class="content mt-3">
         <div class="animated fadeIn">
             <div class="row">
