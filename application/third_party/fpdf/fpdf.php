@@ -1224,7 +1224,7 @@ protected function _textstring($s)
 
 protected function _dounderline($x, $y, $txt)
 {
-	// Underline text
+	// Underline text 
 	$up = $this->CurrentFont['up'];
 	$ut = $this->CurrentFont['ut'];
 	$w = $this->GetStringWidth($txt)+$this->ws*substr_count($txt,' ');

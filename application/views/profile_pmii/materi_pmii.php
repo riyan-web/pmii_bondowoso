@@ -22,7 +22,6 @@
                 foreach ($materi_pmii as $mat_pmii) { ?>
                     <div class="col-lg-6" data-aos="fade-up">
                         <div class="testimonial-item">
-                            <img src="<?php echo base_url('upload/materi_pmii/') . $mat_pmii->link_download; ?>" class="testimonial-img" alt="">
                             <h3><?php echo $mat_pmii->judul_materi ?></h3>
                             <h4>Jenis Materi : <?php echo $mat_pmii->jenis_materi ?></h4>
                             <p>

@@ -15,9 +15,19 @@ class Ganti_password extends CI_Controller
 		$data['user'] = $this->db->get_where('tb_user', ['username' =>
 		$this->session->userdata('username')])->row_array();
 
-		$this->form_validation->set_rules('password_lama', 'Password Lama', 'required|trim');
-		$this->form_validation->set_rules('password_baru1', 'Password Baru', 'required|trim|min_length[8]|matches[password_baru2]');
-		$this->form_validation->set_rules('password_baru2', 'Konfirmasi Password', 'required|trim|min_length[8]|matches[password_baru1]');
+		$this->form_validation->set_rules('password_lama', 'Password Lama', 'required|trim', [
+			'required' 	 => 'Silahkan masukkan Password anda',
+		]);
+		$this->form_validation->set_rules('password_baru1', 'Password Baru', 'required|trim|min_length[8]|matches[password_baru2]', [
+			'min_length' => 'Password harus memiliki minimal 8 karakter',
+			'required' 	 => 'Silahkan masukkan Password baru anda',
+			'matches'	 => 'Password anda tidak sesuai dengan konfirmasi password'
+		]);
+		$this->form_validation->set_rules('password_baru2', 'Konfirmasi Password', 'required|trim|min_length[8]|matches[password_baru1]', [
+			'min_length' => 'Password harus memiliki minimal 8 karakter',
+			'required' 	 => 'Silahkan masukkan konfirmasi password baru anda',
+			'matches'	 => 'Konfirmasi password anda tidak sesuai dengan password baru'
+		]);
 
 
 

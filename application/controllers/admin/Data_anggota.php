@@ -191,7 +191,7 @@ class Data_anggota extends CI_Controller
 			$id = $this->model_anggota->anggota_tambah($data);
 			if ($id > 0) {
 				$username = $singkatan->singkatan . date("Ymd", strtotime($tgl)) . sprintf("%05s", $maxKode);
-				$password = date("Ymd", strtotime($this->input->post('tgl_lahir')));
+				$password = password_hash(date("Ymd", strtotime($this->input->post('tgl_lahir'))), PASSWORD_DEFAULT);
 				$up = array(
 					'username' => $username,
 					'password' => $password,
@@ -381,28 +381,26 @@ class Data_anggota extends CI_Controller
 		$pdf = new FPDF('L', 'mm', array(168, 252));
 
 		$pdf->AddPage();
-		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/pdf.jpg', 0, 0);
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/komisariat/default.png', 235, 1, 15);
+		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/KTA_depan.jpg', 0, 0, 252, 168);
 		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/' . $data->foto, 25, 54, 70, 75);
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/barcode.png', 25, 129, 71);
-		$pdf->Ln(12);
-		$pdf->SetFont('Arial', 'B', 16);
-		$pdf->SetTextColor(225, 255, 255);
-		$pdf->Cell(150);
-		$pdf->Cell(30, 10, 'No. Kartu : ' . $data->kode_kartu, 0, 'C');
 		$pdf->Ln(28);
-		$pdf->SetFont('Arial', '', 13);
+		$pdf->SetFont('Arial', 'B', 15);
+		$pdf->SetTextColor(0, 0, 0);
+		$pdf->Cell(100);
+		$pdf->Cell(30, 10, 'No. Kartu : ' . $data->kode_kartu, 0, 'C');
+		$pdf->Ln(13);
+		$pdf->SetFont('Arial', 'B', 13);
 		$pdf->SetTextColor(0, 0, 0);
 		$pdf->Cell(100);
 		$pdf->Cell(30, 10, 'Nama       : ' . $data->nama_kader, 0, '1');
 		$pdf->Cell(100);
 		$pdf->Cell(30, 10, 'Alamat     :  ' . $data->alamat, 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30, 10, 'Tempat & : ' . $data->tmp_lahir, 0, '1');
+		$pdf->Cell(30, 10, 'Tempat     : ' . $data->tmp_lahir, 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30, 10, 'Tgl Lahir   : ' . date("d-m-Y", strtotime($data->tgl_lahir)), 0, '1');
+		$pdf->Cell(30, 10, 'Tgl Lahir  : ' . date("d-m-Y", strtotime($data->tgl_lahir)), 0, '1');
 		$pdf->Cell(100);
-		$pdf->Cell(30, 10, 'No Telp     : ' . $data->no_hp, 0, '1');
+		$pdf->Cell(30, 10, 'No Telp    : ' . $data->no_hp, 0, '1');
 		$pdf->Cell(100);
 		$pdf->Cell(30, 10, 'Mapaba    : ' . $data->tahun_mapaba, 0, '0');
 		$pdf->Cell(10);
@@ -415,18 +413,14 @@ class Data_anggota extends CI_Controller
 		$pdf->Ln(5);
 		$pdf->Cell(125);
 		$pdf->Cell(30, 10, 'KETUA UMUM', 0, '1');
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/kader/cnt_ttd.jpg', 140, 120, 25);
+		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/ttd.png', 140, 115, 25);
 		$pdf->Ln(15);
 		$pdf->Cell(125);
 		$pdf->Cell(30, 10, 'SAIFUL KHOIR', 0, 'L');
 		$pdf->AddPage();
-		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/bg_pmii.jpg', 0, 0, 252, 168);
-		$pdf->Image('http://localhost/pmii_bondowoso/upload/qr_code/' . $data->qr_code, 15, 105, 50, 50);
-		$pdf->SetFont('Arial', 'B', 28);
-		$pdf->SetTextColor(225, 255, 255);
-		$pdf->Cell(24);
-		$pdf->Cell(40, 10, 'Pergerakan Mahasiswa Islam Indonesia');
+		$pdf->Image('http://localhost/pmii_bondowoso/assets/backend/images/KTA_belakang.jpg', 0, 0, 252, 168);
 
+		$pdf->Image('http://localhost/pmii_bondowoso/upload/qr_code/' . $data->qr_code, 100.9, 111, 50, 50);
 
 		$pdf->Output();
 	}

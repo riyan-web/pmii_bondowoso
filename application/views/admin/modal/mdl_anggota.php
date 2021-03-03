@@ -136,22 +136,6 @@
               </div>
             </form> <br>_
           </div>
-
-          <!-- <script type="text/javascript">
-          $(function () {
-              $(".select2").select2();
-
-              $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                checkboxClass: 'icheckbox_flat-blue',
-                radioClass: 'iradio_flat-blue'
-              });
-          });
-          </script> -->
-
-
-
-
-
           <script>
             function tampilkanPreview(img, idpreview) { //membuat objek gambar
               var gb = img.files;

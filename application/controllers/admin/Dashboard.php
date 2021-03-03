@@ -29,10 +29,11 @@ class Dashboard extends CI_Controller
     public function ubah_struktur()
     {
         $this->form_validation->set_rules('tipe', 'Posisi', 'required|trim');
+        $this->form_validation->set_rules('id_kader', 'Nama Kader', 'required|trim');
         if ($this->form_validation->run() == true) {
             $id_struk = $this->input->post('id_struk');
-            $tipe = $this->input->post('tipe');
-            $id_kader = $this->input->post('id_kader');
+            $tipe = htmlspecialchars($this->input->post('tipe'));
+            $id_kader = htmlspecialchars($this->input->post('id_kader'));
 
             $this->db->set('tipe', $tipe);
             $this->db->set('kader_id', $id_kader);
@@ -46,9 +47,47 @@ class Dashboard extends CI_Controller
         } else {
             $this->session->set_flashdata(
                 'message',
-                '<div class="alert alert-danger" role="alert"> Data Struktur Gagal Dihapus, Data Dilarang Kosong</div>'
+                '<div class="alert alert-danger" role="alert"> Data Struktur Gagal Diubah, Data Dilarang Kosong</div>'
             );
             redirect('admin/dashboard');
         }
+    }
+    public function tambah_struktur()
+    {
+        $this->form_validation->set_rules('tipe', 'Posisi', 'required|trim');
+        $this->form_validation->set_rules('id_kader', 'Nama Kader', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            $id_kom = $this->session->userdata['id_komisariat'];
+
+            $this->db->insert(
+                'tb_strukturkom',
+                [
+                    'tipe' =>  htmlspecialchars($this->input->post('tipe', true)),
+                    'kader_id' =>  htmlspecialchars($this->input->post('id_kader', true)),
+                    'komisariat_id' => $id_kom
+                ]
+            );
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert"> Data Struktur Berhasil Ditambahkan</div>'
+            );
+            redirect('admin/dashboard');
+        } else {
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert"> Data Struktur Gagal Ditambahkan, Data Dilarang Kosong</div>'
+            );
+            redirect('admin/dashboard');
+        }
+    }
+    function hapus_struktur()
+    {
+        $id_struk = $this->input->post('id_struk');
+        $this->db->query("DELETE FROM tb_strukturkom WHERE id = $id_struk");
+        $this->session->set_flashdata(
+            'message',
+            '<div class="alert alert-success" role="alert"> Data Struktur Berhasil Dihapus</div>'
+        );
+        redirect('admin/dashboard');
     }
 }

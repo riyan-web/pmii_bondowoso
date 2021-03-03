@@ -11,7 +11,6 @@ $berita_baru = $this->db->query($query_berita)->result();
 
 ?>
 <main id="main">
-
   <!-- ======= Breadcrumbs ======= -->
   <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -30,9 +29,7 @@ $berita_baru = $this->db->query($query_berita)->result();
   <!-- ======= Blog Section ======= -->
   <section id="blog" class="blog">
     <div class="container">
-
       <div class="row">
-
         <div class="col-lg-8 entries">
           <?php foreach ($berita->result() as $ber) { ?>
             <article class="entry" data-aos="fade-up">
@@ -71,15 +68,13 @@ $berita_baru = $this->db->query($query_berita)->result();
         </div><!-- End blog entries list -->
 
         <div class="col-lg-4">
-
           <div class="sidebar" data-aos="fade-left">
-
             <h3 class="sidebar-title">Search</h3>
             <div class="sidebar-item search-form">
-              <form action="">
-                <input type="text">
-                <button type="submit"><i class="icofont-search"></i></button>
-              </form>
+              <?php echo form_open('beranda/search_berita') ?>
+              <input type="text" name="keyword">
+              <button type="submit"><i class="icofont-search"></i></button>
+              <?php echo form_close(); ?>
 
             </div><!-- End sidebar search formn-->
 

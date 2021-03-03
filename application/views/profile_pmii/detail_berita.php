@@ -102,7 +102,7 @@ $berita_terbaru = $this->db->query($query_berita)->result();
                                 <p>
                                     <button type="submit">kirim</button>
                                 </p>
-                                <legend><a href="#" class="twitter"><i class="icofont-share"></i>Share</a></legend>
+                                <legend><a href="whatsapp://send?text= <?php $_SERVER['REQUEST_URI']; ?>" class="twitter"><i class="icofont-share"></i>Share</a></legend>
                             </fieldset>
                         </form>
                     </div>

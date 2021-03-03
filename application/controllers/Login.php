@@ -34,7 +34,7 @@ class Login extends CI_Controller
         $this->load->view('admin/scan', $data);
         $qrcode = $this->input->post('qrcode');
         if (!empty($qrcode)) {
-            if (empty($this->db->get_where('tb_kader', ['kode_kartu' => $qrcode]))) {
+            if ($this->db->get_where('tb_kader', ['kode_kartu' => $qrcode]) == null) {
                 $this->session->set_flashdata(
                     'message',
                     '<div class="alert alert-danger" role="alert">Akun anda tidak ditemukan!</div>'

@@ -60,10 +60,10 @@ $row_user = $this->db->query($query_user)->row_array();
                 </div>
             </div>
         </div>
-    </header>
+    </header> 
     <div class="content mt-3">
         <div class="animated fadeIn">
-            <div class="row">
+            <div class="row"> 
                 <div class="col-lg-6">
                     <?= $this->session->flashdata('message'); ?>
                     <form action="<?= base_url('admin/Ganti_password'); ?>" method="post">

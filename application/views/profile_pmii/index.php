@@ -1,6 +1,6 @@
  <?php
     $berita_1 = $berita['id_konten'];
-    $query_berita_2 = "SELECT `tb_konten`.`id_konten`, `tb_konten`.`judul`, `tb_konten`.`isi_konten`, `tb_konten`.`foto_artikel` FROM `tb_konten` 
+    $query_berita_2 = "SELECT `tb_konten`.`id_konten`, `tb_konten`.`slug`,  `tb_konten`.`judul`, `tb_konten`.`isi_konten`, `tb_konten`.`foto_artikel` FROM `tb_konten` 
     JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
     JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
     JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
@@ -9,7 +9,7 @@
     $berita_2 = $this->db->query($query_berita_2)->row_array();
 
     $id_berita_2 = $berita_2['id_konten'];
-    $query_berita_3 = "SELECT `tb_konten`.`id_konten`, `tb_konten`.`judul`, `tb_konten`.`isi_konten`, `tb_konten`.`foto_artikel` FROM `tb_konten` 
+    $query_berita_3 = "SELECT `tb_konten`.`id_konten`, `tb_konten`.`slug`, `tb_konten`.`judul`, `tb_konten`.`isi_konten`, `tb_konten`.`foto_artikel` FROM `tb_konten` 
     JOIN `jeniskonten` ON  `tb_konten`.`jeniskonten_id` = `jeniskonten`.`id`
     JOIN `tb_user` ON  `tb_konten`.`user_id` = `tb_user`.`id`
     JOIN `subjeniskonten` ON `jeniskonten`.`id` = `subjeniskonten`.`jeniskonten_id`
@@ -24,14 +24,13 @@
      <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
 
          <div class="carousel-inner" role="listbox">
-
              <!-- Slide 1 -->
              <div class="carousel-item active" style="background-image: url(upload/berita/<?php echo $berita['foto_artikel'] ?>);">
                  <div class="carousel-container">
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2><?php echo $berita['judul']; ?></h2>
                          <p> <?php echo substr($berita['isi_konten'], 0, 200) . "..."; ?></p>
-                         <div class="text-center"><a href="<?php echo base_url('Detail_konten/berita/' . $berita['id_konten']) ?>" class="btn-get-started">Read More</a></div>
+                         <div class="text-center"><a href="<?php echo base_url('Detail_konten/berita/' . $berita['slug']) ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
@@ -42,7 +41,7 @@
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2><?php echo $berita_2['judul']; ?></h2>
                          <?php echo substr($berita_2['isi_konten'], 0, 200) . "..."; ?>
-                         <div class="text-center"><a href="<?php echo base_url('Detail_konten/berita/' . $berita_2['id_konten']) ?>" class="btn-get-started">Read More</a></div>
+                         <div class="text-center"><a href="<?php echo base_url('Detail_konten/berita/' . $berita_2['slug']) ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>
@@ -53,7 +52,7 @@
                      <div class="carousel-content animate__animated animate__fadeInUp">
                          <h2><?php echo $berita_3['judul']; ?></h2>
                          <?php echo substr($berita_3['isi_konten'], 0, 200) . "..."; ?>
-                         <div class="text-center"><a href="<?php echo base_url('Detail_konten/berita/' . $berita_3['id_konten']) ?>" class="btn-get-started">Read More</a></div>
+                         <div class="text-center"><a href="<?php echo base_url('Detail_konten/berita/' . $berita_3['slug']) ?>" class="btn-get-started">Read More</a></div>
                      </div>
                  </div>
              </div>

@@ -144,7 +144,7 @@ h6 {
 	text-decoration: none;
 }
 
-#header .logo img{
+#header .logo img {
 	padding: 0;
 	margin: 0;
 	max-width: 60px;
@@ -583,6 +583,10 @@ section {
 	color: #ded5d2;
 }
 
+.breadcrumbs li {
+	color: #f03c02;
+}
+
 .breadcrumbs ol a {
 	color: #fe825a;
 }
@@ -645,7 +649,7 @@ section {
 	transition: 0.4s;
 	margin: 10px;
 	border-radius: 4px;
-	border: 2px solid #f03c02;
+	border: 2px solid #092c1f;
 	color: #f03c02;
 	background: #fff;
 }

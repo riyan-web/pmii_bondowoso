@@ -1,14 +1,24 @@
 <body>
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-none d-lg-block">
+    <div class="container d-flex">
+      <div class="contact-info mr-auto">
+        <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@example.com</a>
+        <i class="icofont-phone"></i> +1 5589 55488 55
+      </div>
+      <div class="social-links">
+        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="#" class="skype"><i class="icofont-skype"></i></a>
+      </div>
+    </div>
+  </section>
   <!-- ======= Header ======= -->
   <header id="header">
     <div class="container d-flex">
-
-      <div class="">
-        <!-- <h1 class="text-light"><a href="#">PMII Bondowoso</a></h1> -->
-        <!-- Uncomment below if you prefer to use an image logo -->
-
-        <a href="<?= base_url('beranda') ?>"><img src="<?php echo base_url() ?>assets/frontend/img/log_pmii.png" alt="" class="img" height="52" width="200"></a>
-      </div>
+      <a href="<?= base_url('beranda') ?>"><img src="<?php echo base_url() ?>assets/frontend/img/logo_pmii.png" alt="" class="img" height="50" width="200"></a>
       &nbsp; &nbsp; &nbsp;
       <nav class="nav-menu d-none d-lg-block">
         <ul>
@@ -37,14 +47,10 @@
               <li><a href="<?= base_url('komisariat/darul_falah/'); ?>">Darul Falah</a></li>
             </ul>
           </li>
-          <li><a href="<?= base_url('beranda/struktur') ?>">Struktur Pengurus</a></li>
-          <li>
-          <li><a href="<?= base_url('login') ?>">Login</a></li>
-    </div>
-    </li>
-
-    </ul>
-    </nav><!-- .nav-menu -->
-
+          <li><a href="<?= base_url('beranda/produk_pmii') ?>">PMII Business</a></li>
+          <li><a href="<?= base_url('beranda/struktur') ?>">Struktur</a></li>
+          <li><a href="<?= base_url('login') ?>" class="linkedin"><i class="icofont-login"></i>Login</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header -->
