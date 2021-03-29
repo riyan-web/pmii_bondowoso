@@ -16,7 +16,7 @@ class M_komisariat extends CI_Model {
     }
     public function komisariat_data($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
 	{
-		$sql = "SELECT (@row:=@row+1) AS nomora, id, nama, isi, foto FROM tb_komisariat, (SELECT @row := 0) r WHERE 1=1 AND id != 1 ";
+		$sql = "SELECT (@row:=@row+1) AS nomora, id, nama, isi, foto FROM tb_komisariat, (SELECT @row := 0) r WHERE 1=1 AND id != 1 AND id NOT IN (SELECT rayon_id from tb_hubungan)";
 		
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 

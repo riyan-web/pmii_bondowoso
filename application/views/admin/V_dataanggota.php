@@ -175,7 +175,7 @@
             $("[data-dismiss=modal]").trigger({
               type: "click"
             });
-          }, 200)
+          }, 10)
           $('#imgOne').empty();
         }
       },
